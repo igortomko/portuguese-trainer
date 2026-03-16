@@ -1,11 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "api/linear-done.py", "use": "@vercel/python" }
-  ],
-  "routes": [
-    { "src": "/linear-done", "dest": "/api/linear-done.py" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/linear-done", "destination": "/api/linear-done" }
   ],
   "headers": [
     {
