@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🇧🇷 Português B2 — Игорь</title>
+<style>
+  :root {
+    --bg:#0f0f13;--surface:#1a1a22;--surface2:#22222e;--border:rgba(255,255,255,0.08);
+    --text:#f0f0f4;--muted:#8888aa;--green:#34d399;--red:#f87171;--blue:#60a5fa;
+    --yellow:#fbbf24;--purple:#a78bfa;--accent:#6366f1;--orange:#fb923c;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;font-family:-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);}
+
+  /* TOPIC SELECT SCREEN */
+  .topic-screen{padding:16px;max-width:560px;margin:0 auto;height:100vh;overflow-y:auto;}
+  .app-title{font-size:24px;font-weight:700;text-align:center;margin-bottom:4px;}
+  .app-sub{text-align:center;color:var(--muted);font-size:13px;margin-bottom:16px;}
+  
+  .overall-progress{background:var(--surface);border-radius:14px;padding:16px;margin-bottom:20px;}
+  .op-title{font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;}
+  .op-bar{height:8px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-bottom:6px;}
+  .op-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--purple));border-radius:99px;transition:width 0.4s;}
+  .op-stats{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);}
+  .op-stats .val{color:var(--text);font-weight:700;}
+
+  .section-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+  .topics-grid{display:flex;flex-direction:column;gap:8px;}
+  .topic-card{background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:14px 16px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:12px;}
+  .topic-card:hover{border-color:var(--accent);background:rgba(99,102,241,.06);}
+  .topic-card.completed{border-color:var(--green);opacity:.7;}
+  .tc-emoji{font-size:24px;flex-shrink:0;}
+  .tc-info{flex:1;}
+  .tc-title{font-size:14px;font-weight:600;margin-bottom:4px;}
+  .tc-meta{font-size:11px;color:var(--muted);}
+  .tc-bar{height:3px;background:var(--surface2);border-radius:99px;margin-top:6px;overflow:hidden;}
+  .tc-fill{height:100%;border-radius:99px;transition:width .3s;}
+  .tc-badge{font-size:10px;padding:2px 8px;border-radius:99px;flex-shrink:0;font-weight:600;}
+
+  /* TRAINER SCREEN */
+  .trainer{display:none;height:100vh;flex-direction:column;}
+  .trainer-header{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border-bottom:1px solid var(--border);}
+  .back-btn{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;padding:0 4px;}
+  .trainer-title{font-size:15px;font-weight:700;flex:1;}
+  .trainer-progress{font-size:12px;color:var(--muted);}
+  .prog-bar{height:3px;background:var(--surface2);}
+  .prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--purple));transition:width .4s;}
+
+  .mode-tabs{display:flex;gap:4px;padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);}
+  .mode-tab{flex:1;padding:7px;border-radius:8px;border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;}
+  .mode-tab.active{background:var(--accent);color:white;}
+
+  .trainer-body{flex:1;overflow-y:auto;padding:12px;}
+
+  /* FLASHCARD */
+  .card-counter{text-align:center;font-size:12px;color:var(--muted);margin-bottom:10px;}
+  .flashcard{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px 18px;min-height:270px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;}
+  .fc-ctx{font-size:11px;color:var(--orange);background:rgba(251,146,60,.1);padding:3px 10px;border-radius:99px;margin-bottom:12px;}
+  .fc-emoji{font-size:32px;margin-bottom:10px;}
+  .fc-front{font-size:20px;font-weight:700;line-height:1.4;}
+  .fc-tap{font-size:13px;color:var(--muted);margin-top:16px;}
+  .fc-back{display:none;width:100%;margin-top:16px;}
+  .fc-answer{font-size:18px;font-weight:700;color:var(--green);margin-bottom:6px;line-height:1.4;}
+  .fc-pron{font-size:12px;color:var(--purple);margin-bottom:12px;}
+  .fc-speak{background:rgba(99,102,241,.15);border:none;color:var(--accent);font-size:12px;font-weight:600;padding:5px 12px;border-radius:99px;cursor:pointer;margin-bottom:10px;}
+  .fc-extra{background:var(--surface2);border-radius:10px;padding:10px 14px;font-size:13px;text-align:left;color:var(--muted);line-height:1.5;}
+
+  .card-actions{display:flex;gap:8px;margin-top:10px;}
+  .card-actions button{flex:1;padding:12px 6px;border-radius:12px;border:none;font-size:14px;font-weight:700;cursor:pointer;}
+  .btn-wrong{background:rgba(248,113,113,.15);color:var(--red);}
+  .btn-hard{background:rgba(251,191,36,.15);color:var(--yellow);}
+  .btn-ok{background:rgba(52,211,153,.15);color:var(--green);}
+
+  /* QUIZ */
+  .quiz-q{background:var(--surface);border-radius:16px;padding:20px 16px;text-align:center;margin-bottom:10px;}
+  .quiz-ctx{font-size:11px;color:var(--orange);margin-bottom:8px;}
+  .quiz-emoji{font-size:26px;margin-bottom:8px;}
+  .quiz-phrase{font-size:18px;font-weight:700;line-height:1.4;}
+  .quiz-opts{display:grid;grid-template-columns:1fr;gap:8px;}
+  .quiz-opt{padding:12px 14px;background:var(--surface);border:2px solid var(--border);border-radius:12px;font-size:14px;cursor:pointer;text-align:left;transition:all .15s;}
+  .quiz-opt.correct{border-color:var(--green);background:rgba(52,211,153,.1);color:var(--green);}
+  .quiz-opt.wrong{border-color:var(--red);background:rgba(248,113,113,.1);color:var(--red);}
+  .quiz-opt.show-correct{border-color:var(--green);background:rgba(52,211,153,.06);}
+  .quiz-fb{text-align:center;padding:10px;font-size:13px;font-weight:600;min-height:38px;}
+  .quiz-fb.ok{color:var(--green);}
+  .quiz-fb.fail{color:var(--red);}
+
+  /* ALL LIST */
+  .verb-list{display:flex;flex-direction:column;gap:8px;}
+  .verb-item{background:var(--surface);border-radius:14px;padding:14px 16px;border-left:3px solid var(--border);}
+  .verb-item.s2{border-left-color:var(--green);}
+  .verb-item.s0{border-left-color:var(--red);}
+  .verb-item.s1{border-left-color:var(--yellow);}
+  .vi-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+  .vi-left{display:flex;align-items:center;gap:10px;}
+  .vi-emoji-sm{font-size:22px;}
+  .vi-ru{font-size:11px;color:var(--muted);}
+  .vi-pt{font-size:16px;font-weight:700;}
+  .vi-inf{font-size:12px;color:var(--purple);margin-top:1px;}
+  .vi-badge{font-size:10px;padding:2px 8px;border-radius:99px;flex-shrink:0;margin-top:2px;}
+  .vi-phrase{margin-top:10px;padding-top:10px;border-top:1px solid var(--border);}
+  .vi-phrase-pt{font-size:12px;color:var(--muted);font-weight:500;}
+
+  /* RESULTS */
+  .result-wrap{background:var(--surface);border-radius:20px;padding:24px 18px;text-align:center;}
+  .result-emoji{font-size:52px;margin-bottom:10px;}
+  .result-title{font-size:22px;font-weight:700;margin-bottom:6px;}
+  .result-sub{color:var(--muted);font-size:13px;margin-bottom:16px;}
+  .result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+  .res-stat{background:var(--surface2);border-radius:10px;padding:12px 6px;}
+  .res-val{font-size:24px;font-weight:700;}
+  .res-label{font-size:11px;color:var(--muted);margin-top:2px;}
+  .result-100{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);border-radius:10px;padding:10px;margin-bottom:14px;font-size:13px;color:var(--green);font-weight:600;}
+  .btn-next{width:100%;padding:13px;background:var(--accent);color:white;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:8px;}
+  .btn-topics{width:100%;padding:13px;background:var(--surface2);color:var(--text);border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<!-- TOPIC SELECT -->
+<div id="topicScreen" class="topic-screen">
+  <div class="app-title">🇧🇷 Português B2</div>
+  <div class="app-sub">Курс Игоря · 19 тем · до В2</div>
+
+  <div class="overall-progress">
+    <div class="op-title">Общий прогресс</div>
+    <div class="op-bar"><div class="op-fill" id="overallFill" style="width:0%"></div></div>
+    <div class="op-stats">
+      <span>✅ <span class="val" id="overallDone">0</span> тем</span>
+      <span><span class="val" id="overallCards">0</span> карточек</span>
+      <span><span class="val" id="overallPct">0%</span></span>
+    </div>
+  </div>
+
+  <div class="section-label">Темы курса</div>
+  <div class="topics-grid" id="topicsGrid"></div>
+</div>
+
+<!-- TRAINER -->
+<div id="trainerScreen" class="trainer">
+  <div class="trainer-header">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <div class="trainer-title" id="trainerTitle"></div>
+    <div class="trainer-progress" id="trainerProgress"></div>
+  </div>
+  <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="setMode('flashcard')" id="tab-flashcard">🃏 Карточки</button>
+    <button class="mode-tab" onclick="setMode('quiz')" id="tab-quiz">🎯 Квиз</button>
+    <button class="mode-tab" onclick="setMode('list')" id="tab-list">📋 Список</button>
+  </div>
+  <div class="trainer-body" id="trainerBody">
+    <!-- FLASHCARD -->
+    <div id="modeFlashcard">
+      <div class="card-counter" id="cardCounter"></div>
+      <div class="flashcard" onclick="revealCard()">
+        <div class="fc-ctx" id="fcCtx"></div>
+        <div class="fc-emoji" id="fcEmoji"></div>
+        <div class="fc-front" id="fcFront"></div>
+        <div class="fc-tap" id="fcTap">👆 Нажми чтобы увидеть</div>
+        <div class="fc-back" id="fcBack">
+          <div class="fc-answer" id="fcAnswer"></div>
+          <div class="fc-pron" id="fcPron"></div>
+          <button class="fc-speak" onclick="speakNow(event)" id="speakBtn">🔊 Произнести</button>
+          <div class="fc-extra" id="fcExtra"></div>
+        </div>
+      </div>
+      <div class="card-actions" id="cardActions" style="display:none">
+        <button class="btn-wrong" onclick="rate(0)">❌ Нет</button>
+        <button class="btn-hard" onclick="rate(1)">😅 Трудно</button>
+        <button class="btn-ok" onclick="rate(2)">✅ Знал</button>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="modeQuiz" style="display:none">
+      <div class="card-counter" id="quizCounter"></div>
+      <div class="quiz-q">
+        <div class="quiz-ctx" id="quizCtx"></div>
+        <div class="quiz-emoji" id="quizEmoji"></div>
+        <div class="quiz-phrase" id="quizPhrase"></div>
+      </div>
+      <div class="quiz-opts" id="quizOpts"></div>
+      <div class="quiz-fb" id="quizFb"></div>
+    </div>
+
+    <!-- LIST MODE -->
+    <div id="modeList" style="display:none">
+      <div style="display:flex;gap:8px;margin-bottom:12px;">
+        <button style="flex:1;padding:12px;background:var(--surface2);border:none;border-radius:10px;color:var(--text);font-weight:700;cursor:pointer;" onclick="sortModeList('default')">По порядку ⬇️</button>
+        <button style="flex:1;padding:12px;background:var(--surface2);border:none;border-radius:10px;color:var(--text);font-weight:700;cursor:pointer;" onclick="sortModeList('shuffle')">Вразнобой 🔀</button>
+      </div>
+      <div class="verb-list" id="modeListContainer"></div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="modeResults" style="display:none">
+      <div class="result-wrap">
+        <div class="result-emoji" id="resEmoji">🎉</div>
+        <div class="result-title" id="resTitle"></div>
+        <div class="result-sub" id="resSub"></div>
+        <div class="result-100" id="res100" style="display:none"></div>
+        <div class="result-grid">
+          <div class="res-stat"><div class="res-val" id="resOk" style="color:var(--green)">0</div><div class="res-label">Знал</div></div>
+          <div class="res-stat"><div class="res-val" id="resHard" style="color:var(--yellow)">0</div><div class="res-label">Трудно</div></div>
+          <div class="res-stat"><div class="res-val" id="resWrong" style="color:var(--red)">0</div><div class="res-label">Не знал</div></div>
+        </div>
+        <button class="btn-next" onclick="nextRound()">Ещё раз →</button>
+        <button class="btn-topics" onclick="goBack()">← Все темы</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// DATA
+const TOPICS = [
+  {
+    id: "verbs", linearId: "IGO-93", emoji: "🔤", title: "1. Местоимения и глаголы", desc: "112 самых употребляемых глаголов", dueDate: "20.03",
+    items: [
+      {ru:"Я немного говорю по-португальски.",pt:"Eu falo português um pouco.",pron:"Эу фа-лу пор-ту-гес ум по-ку",key:"Falar",extra:"Eu falo / Você fala / A gente fala"},
+      {ru:"Он сказал, что придет завтра.",pt:"Ele disse que vem amanhã.",pron:"Э-ли ди-си ки вэй а-ма-нья",key:"Dizer",extra:"Eu digo / Você diz / A gente diz"},
+      {ru:"Мы хотим поесть пиццу.",pt:"A gente quer comer pizza.",pron:"А жен-чи кэр ко-мер пи-ца",key:"Querer",extra:"Eu quero / Você quer / A gente quer"},
+      {ru:"Ты очень классный!",pt:"Você é muito legal!",pron:"Во-сэ э муй-ту ле-гау",key:"Ser",extra:"Eu sou / Você é / A gente é"},
+      {ru:"Она сейчас дома.",pt:"Ela está em casa agora.",pron:"Э-ла эс-та эй ка-за а-го-ра",key:"Estar",extra:"Eu estou / Você está / A gente está"},
+      {ru:"У меня сегодня много работы.",pt:"Eu tenho muito trabalho hoje.",pron:"Эу те-нью муй-ту тра-ба-лью о-жи",key:"Ter",extra:"Eu tenho / Você tem / A gente tem"},
+      {ru:"Он стал великим врачом.",pt:"Ele se tornou um grande médico.",pron:"Э-ли си тор-ноу ум гран-джи ме-ди-ку",key:"Tornar-se",extra:"Eu me torno / Você se torna / A gente se torna"},
+      {ru:"Что ты делаешь?",pt:"O que você está fazendo?",pron:"У ки во-сэ эс-та фа-зен-ду",key:"Fazer",extra:"Eu faço / Você faz / A gente faz"},
+      {ru:"Мы можем идти сейчас?",pt:"A gente pode ir agora?",pron:"А жен-чи по-джи ир а-го-ра",key:"Poder",extra:"Eu posso / Você pode / A gente pode"},
+      {ru:"Я пойду на пляж в субботу.",pt:"Eu vou para a praia no sábado.",pron:"Эу воу па-ра а пра-я ну са-ба-ду",key:"Ir",extra:"Eu vou / Você vai / A gente vai"},
+      {ru:"Я думаю/считаю, что пойдет дождь.",pt:"Eu acho que vai chover.",pron:"Эу а-шу ки вай шо-вер",key:"Achar",extra:"Eu acho / Você acha / A gente acha"},
+      {ru:"Ты можешь взять телефон?",pt:"Você pode pegar o celular?",pron:"Во-сэ по-джи пе-гар у се-лу-лар",key:"Pegar",extra:"Eu pego / Você pega / A gente pega"},
+      {ru:"Я не знаю, где он.",pt:"Eu não sei onde ele está.",pron:"Эу наун сэй он-джи э-ли эс-та",key:"Saber",extra:"Eu sei / Você sabe / A gente sabe"},
+      {ru:"Ты понял, что я сказал?",pt:"Você entendeu o que eu disse?",pron:"Во-сэ эн-тен-деу у ки эу ди-си",key:"Entender",extra:"Eu entendo / Você entende / A gente entende"},
+      {ru:"Она много думает о будущем.",pt:"Ela pensa muito no futuro.",pron:"Э-ла пен-са муй-ту ну фу-ту-ру",key:"Pensar",extra:"Eu penso / Você pensa / A gente pensa"},
+      {ru:"Мы живем здесь неподалеку.",pt:"A gente mora perto daqui.",pron:"А жен-чи мо-ра пер-ту да-ки",key:"Morar",extra:"Eu moro / Você mora / A gente mora"},
+      {ru:"Я обожаю сырные булочки!",pt:"Eu amo pão de queijo!",pron:"Эу а-му пау де кей-жу",key:"Amar",extra:"Eu amo / Você ama / A gente ama"},
+      {ru:"Тебе нравится музыка?",pt:"Você gosta de música?",pron:"Во-сэ гос-та джи му-зи-ка",key:"Gostar",extra:"Eu gosto / Você gosta / A gente gosta"},
+      {ru:"Я видел отличный фильм вчера.",pt:"Eu vi um filme ótimo ontem.",pron:"Эу ви ум фил-ми о-ти-му он-тейн",key:"Ver",extra:"Eu vejo / Você vê / A gente vê"},
+      {ru:"Мы посмотрели матч.",pt:"A gente assistiu ao jogo.",pron:"А жен-чи а-сис-чи-у ау жо-гу",key:"Assistir",extra:"Eu assisto / Você assiste / A gente assiste"},
+      {ru:"Я услышал странный шум.",pt:"Eu ouvi um barulho estranho.",pron:"Эу оу-ви ум ба-ру-лью эс-тра-нью",key:"Ouvir",extra:"Eu ouço / Você ouve / A gente ouve"},
+      {ru:"Ему нравится слушать музыку.",pt:"Ele gosta de escutar música.",pron:"Э-ли гос-та джи эс-ку-тар му-зи-ка",key:"Escutar",extra:"Eu escuto / Você escuta / A gente escuta"},
+      {ru:"Что ты хочешь поесть?",pt:"O que você quer comer?",pron:"У ки во-сэ кэр ко-мер",key:"Comer",extra:"Eu como / Você come / A gente come"},
+      {ru:"Мы пойдем пить пиво?",pt:"A gente vai beber cerveja?",pron:"А жен-чи вай бе-бер сер-ве-жа",key:"Beber",extra:"Eu bebo / Você bebe / A gente bebe"},
+      {ru:"Ты мне поможешь здесь?",pt:"Você me dá uma ajuda aqui?",pron:"Во-сэ ми да у-ма а-жу-да а-ки",key:"Dar",extra:"Eu dou / Você dá / A gente dá"},
+      {ru:"Он придет на вечеринку сегодня.",pt:"Ele vem para a festa hoje.",pron:"Э-ли вейн па-ра а фес-та о-жи",key:"Vir",extra:"Eu venho / Você vem / A gente vem"},
+      {ru:"Я работаю в школе.",pt:"Eu trabalho em uma escola.",pron:"Эу тра-ба-лью эйн у-ма эс-ко-ла",key:"Trabalhar",extra:"Eu trabalho / Você trabalha / A gente trabalha"},
+      {ru:"Она всегда помогает друзьям.",pt:"Ela sempre ajuda os amigos.",pron:"Э-ла сейм-при а-жу-да уз а-ми-гуз",key:"Ajudar",extra:"Eu ajudo / Você ajuda / A gente ajuda"},
+      {ru:"Мы только что приехали.",pt:"A gente acabou de chegar.",pron:"А жен-чи а-ка-боу джи ше-гар",key:"Chegar",extra:"Eu chego / Você chega / A gente chega"},
+      {ru:"Я отвезу тебя домой.",pt:"Eu te levo para casa.",pron:"Эу чи ле-ву па-ра ка-за",key:"Levar",extra:"Eu levo / Você leva / A gente leva"},
+      {ru:"Ты принес то, что я просил?",pt:"Você trouxe o que eu pedi?",pron:"Во-сэ троу-си у ки эу пе-джи",key:"Trazer",extra:"Eu trago / Você traz / A gente traz"},
+      {ru:"Подожди немного, пожалуйста.",pt:"Espera um pouco, por favor.",pron:"Эс-пе-ра ум по-ку пор фа-вор",key:"Esperar",extra:"Eu espero / Você espera / A gente espera"},
+      {ru:"Я куплю рубашку.",pt:"Eu vou comprar uma camisa.",pron:"Эу воу ком-прар у-ма ка-ми-за",key:"Comprar",extra:"Eu compro / Você compra / A gente compra"},
+      {ru:"Он продал свою машину.",pt:"Ele vendeu o carro dele.",pron:"Э-ли вен-деу у ка-ху де-ли",key:"Vender",extra:"Eu vendo / Você vende / A gente vende"},
+      {ru:"Мы оплатим счет сейчас.",pt:"A gente paga a conta agora.",pron:"А жен-чи па-га а кон-та а-го-ра",key:"Pagar",extra:"Eu pago / Você paga / A gente paga"},
+      {ru:"Я пользуюсь этим каждый день.",pt:"Eu uso isso todo dia.",pron:"Эу у-зу и-су то-ду джи-а",key:"Usar",extra:"Eu uso / Você usa / A gente usa"},
+      {ru:"Она поедет в Европу.",pt:"Ela vai viajar para a Europa.",pron:"Э-ла вай виа-жар па-ра а Эу-ро-па",key:"Viajar",extra:"Eu viajo / Você viaja / A gente viaja"},
+      {ru:"Я ищу ключ.",pt:"Eu estou procurando a chave.",pron:"Эу эс-тоу про-ку-ран-ду а ша-ви",key:"Procurar",extra:"Eu procuro / Você procura / A gente procura"},
+      {ru:"Мы встретимся там.",pt:"A gente se encontra lá.",pron:"А жен-чи си эн-кон-тра ла",key:"Encontrar",extra:"Eu encontro / Você encontra / A gente encontra"},
+      {ru:"Ты спросил цену?",pt:"Você perguntou o preço?",pron:"Во-сэ пер-гун-тоу у пре-су",key:"Perguntar",extra:"Eu pergunto / Você pergunta / A gente pergunta"},
+      {ru:"Он мне не ответил.",pt:"Ele não me respondeu.",pron:"Э-ли наун ми рес-пон-деу",key:"Responder",extra:"Eu respondo / Você responde / A gente responde"},
+      {ru:"Я попробую это сделать.",pt:"Eu vou tentar fazer isso.",pron:"Эу воу тен-тар фа-зер и-су",key:"Tentar",extra:"Eu tento / Você tenta / A gente tenta"},
+      {ru:"Тебе нужно это попробовать!",pt:"Você precisa provar isso!",pron:"Во-сэ пре-си-за про-вар и-су",key:"Provar",extra:"Eu provo / Você prova / A gente prova"},
+      {ru:"Урок начинается в восемь.",pt:"A aula começa às oito.",pron:"А ау-ла ко-ме-са аз ой-ту",key:"Começar",extra:"Eu começo / Você começa / A gente começa"},
+      {ru:"Я закончил работу.",pt:"Eu terminei o trabalho.",pron:"Эу тер-ми-ней у тра-ба-лью",key:"Terminar",extra:"Eu termino / Você termina / A gente termina"},
+      {ru:"Она читает много книг.",pt:"Ela lê muitos livros.",pron:"Э-ла ле муй-туз ли-вруз",key:"Ler",extra:"Eu leio / Você lê / A gente lê"},
+      {ru:"Мы написали письмо.",pt:"A gente escreveu um e-mail.",pron:"А жен-чи эс-кре-веу ум и-мэйл",key:"Escrever",extra:"Eu escrevo / Você escreve / A gente escreve"},
+      {ru:"Ты откроешь дверь?",pt:"Você abre a porta?",pron:"Во-сэ а-бри а пор-та",key:"Abrir",extra:"Eu abro / Você abre / A gente abre"},
+      {ru:"Я закрыл окно.",pt:"Eu fechei a janela.",pron:"Эу фе-шей а жа-не-ла",key:"Fechar",extra:"Eu fecho / Você fecha / A gente fecha"},
+      {ru:"Я позвоню тебе попозже.",pt:"Eu te ligo mais tarde.",pron:"Эу чи ли-гу майш тар-джи",key:"Ligar",extra:"Eu ligo / Você liga / A gente liga"},
+      {ru:"Нам нужно поговорить.",pt:"A gente precisa conversar.",pron:"А жен-чи пре-си-за кон-вер-сар",key:"Precisar",extra:"Eu preciso / Você precisa / A gente precisa"},
+      {ru:"Я чувствую себя хорошо сегодня.",pt:"Eu me sinto bem hoje.",pron:"Эу ми син-ту бейн о-жи",key:"Sentir",extra:"Eu sinto / Você sente / A gente sente"},
+      {ru:"Что случилось?",pt:"O que aconteceu?",pron:"У ки а-кон-те-сеу",key:"Acontecer",extra:"Eu aconteço / Você acontece / A gente acontece"},
+      {ru:"Наша команда выиграла!",pt:"Nosso time ganhou!",pron:"Но-су чи-ми га-нью",key:"Ganhar",extra:"Eu ganho / Você ganha / A gente ganha"},
+      {ru:"Он проиграл матч.",pt:"Ele perdeu o jogo.",pron:"Э-ли пер-деу у жо-гу",key:"Perder",extra:"Eu perco / Você perde / A gente perde"},
+      {ru:"Я отправил файл.",pt:"Eu enviei o arquivo.",pron:"Эу эн-ви-эй у ар-ки-ву",key:"Enviar",extra:"Eu envio / Você envia / A gente envia"},
+      {ru:"Они что-то строят.",pt:"Eles estão construindo algo.",pron:"Э-лис эс-таун кон-стру-ин-ду ал-гу",key:"Construir",extra:"Eu construo / Você constrói / A gente constrói"},
+      {ru:"Ветер всё разрушил.",pt:"O vento destruiu tudo.",pron:"У вен-ту де-стру-и-у ту-ду",key:"Destruir",extra:"Eu — / Você — / A gente —"},
+      {ru:"Осторожно, не упади!",pt:"Cuidado para não cair!",pron:"Куй-да-ду па-ра наун ка-ир",key:"Cair",extra:"Eu caio / Você cai / A gente cai"},
+      {ru:"Я встаю рано.",pt:"Eu levanto cedo.",pron:"Эу ле-ван-ту се-ду",key:"Levantar",extra:"Eu levanto / Você levanta / A gente levanta"},
+      {ru:"Мы сейчас поднимемся.",pt:"A gente vai subir agora.",pron:"А жен-чи вай су-бир а-го-ра",key:"Subir",extra:"Eu subo / Você sobe / A gente sobe"},
+      {ru:"Она уже спускается.",pt:"Ela já está descendo.",pron:"Э-ла жа эс-та де-сен-ду",key:"Descer",extra:"Eu desço / Você desce / A gente desce"},
+      {ru:"Я останусь здесь.",pt:"Eu vou ficar aqui.",pron:"Эу воу фи-кар а-ки",key:"Ficar",extra:"Eu fico / Você fica / A gente fica"},
+      {ru:"Подержи это, пожалуйста.",pt:"Segura isso, por favor.",pron:"Се-гу-ра и-су пор фа-вор",key:"Segurar",extra:"Eu seguro / Você segura / A gente segura"},
+      {ru:"Ты починил телевизор?",pt:"Você consertou a TV?",pron:"Во-сэ кон-сер-тоу а те-ве",key:"Consertar",extra:"Eu conserto / Você conserta / A gente conserta"},
+      {ru:"Я исправил ошибку.",pt:"Eu corrigi o erro.",pron:"Эу ко-ри-жи у э-ху",key:"Corrigir",extra:"Eu — / Você — / A gente —"},
+      {ru:"Он спас кота.",pt:"Ele salvou o gato.",pron:"Э-ли сал-воу у га-ту",key:"Salvar",extra:"Eu salvo / Você salva / A gente salva"},
+      {ru:"Я убью это насекомое.",pt:"Eu vou matar esse bicho.",pron:"Эу воу ма-тар э-си би-шу",key:"Matar",extra:"Eu — / Você — / A gente —"},
+      {ru:"Ты уже выбрал?",pt:"Você já escolheu?",pron:"Во-сэ жа эс-ко-льеу",key:"Escolher",extra:"Eu escolho / Você escolhe / A gente escolhe"},
+      {ru:"Они поймали рыбу.",pt:"Eles capturaram o peixe.",pron:"Э-лис кап-ту-ра-раун у пей-ши",key:"Capturar",extra:"Eu — / Você — / A gente —"},
+      {ru:"Я хочу тебя обнять.",pt:"Eu quero te abraçar.",pron:"Эу кэ-ру чи а-бра-сар",key:"Abraçar",extra:"Eu abraço / Você abraça / A gente abraça"},
+      {ru:"Он поцеловал жену.",pt:"Ele beijou a esposa.",pron:"Э-ли бей-жоу а эс-по-за",key:"Beijar",extra:"Eu beijo / Você beija / A gente beija"},
+      {ru:"Не трогай стекло.",pt:"Não toque no vidro.",pron:"Наун то-ки ну ви-дру",key:"Tocar",extra:"Eu — / Você — / A gente —"},
+      {ru:"Она понюхала духи.",pt:"Ela cheirou o perfume.",pron:"Э-ла шей-роу у пер-фу-ми",key:"Cheirar",extra:"Eu — / Você — / A gente —"},
+      {ru:"Мы заказали пиццу.",pt:"A gente pediu a pizza.",pron:"А жен-чи пе-джи-у а пи-ца",key:"Pedir",extra:"Eu peço / Você pede / A gente pede"},
+      {ru:"Я просыпаюсь в шесть.",pt:"Eu acordo às seis.",pron:"Эу а-кор-ду ас сейш",key:"Acordar",extra:"Eu acordo / Você acorda / A gente acorda"},
+      {ru:"Он много спит.",pt:"Ele dorme muito.",pron:"Э-ли дор-ми муй-ту",key:"Dormir",extra:"Eu durmo / Você dorme / A gente dorme"},
+      {ru:"Я тебя поздравляю!",pt:"Eu te parabenizo!",pron:"Эу чи па-ра-бе-ни-зу",key:"Parabenizar",extra:"Eu — / Você — / A gente —"},
+      {ru:"Она мечтает о многом",pt:"Ela sonha alto.",pron:"Э-ла со-нья ал-ту",key:"Sonhar",extra:"Eu sonho / Você sonha / A gente sonha"},
+      {ru:"Хочешь потанцевать?",pt:"Você quer dançar?",pron:"Во-сэ кэр дан-сар",key:"Dançar",extra:"Eu danço / Você dança / A gente dança"},
+      {ru:"Мы плаваем каждый день.",pt:"A gente nada todo dia.",pron:"А жен-чи на-да то-ду джи-а",key:"Nadar",extra:"Eu nado / Você nada / A gente nada"},
+      {ru:"Я тренируюсь утром.",pt:"Eu treino de manhã.",pron:"Эу трей-ну джи ма-нья",key:"Treinar",extra:"Eu treino / Você treina / A gente treina"},
+      {ru:"Мы много общались.",pt:"A gente conversou muito.",pron:"А жен-чи кон-вер-соу муй-ту",key:"Conversar",extra:"Eu converso / Você conversa / A gente conversa"},
+      {ru:"Она пошла гулять.",pt:"Ela foi passear.",pron:"Э-ла фой па-се-ар",key:"Passear",extra:"Eu passeio / Você passeia / A gente passeia"},
+      {ru:"Я вернусь завтра.",pt:"Eu volto amanhã.",pron:"Эу вол-ту а-ма-нья",key:"Voltar",extra:"Eu volto / Você volta / A gente volta"},
+      {ru:"Ты получил письмо?",pt:"Você recebeu o e-mail?",pron:"Во-сэ ре-се-беу у и-мэйл",key:"Receber",extra:"Eu recebo / Você recebe / A gente recebe"},
+      {ru:"Я ненавижу вставать рано.",pt:"Eu odeio acordar cedo.",pron:"Эу о-джи-у а-кор-дар се-ду",key:"Odiar",extra:"Eu odeio / Você odeia / A gente odeia"},
+      {ru:"Я надеюсь, что да.",pt:"Eu espero que sim.",pron:"Эу эс-пе-ру ки син",key:"Esperar",extra:"Eu espero / Você espera / A gente espera"},
+      {ru:"Ты в это веришь?",pt:"Você acredita nisso?",pron:"Во-сэ а-кре-джи-та ни-су",key:"Acreditar",extra:"Eu acredito / Você acredita / A gente acredita"},
+      {ru:"Мы спланировали поездку.",pt:"A gente planejou a viagem.",pron:"А жен-чи пла-не-жоу а ви-а-жейн",key:"Planejar",extra:"Eu planejo / Você planeja / A gente planeja"},
+      {ru:"Мы поболтали.",pt:"A gente bateu papo.",pron:"А жен-чи ба-теу па-пу",key:"Bater papo",extra:"Eu — / Você — / A gente —"},
+      {ru:"Это иногда происходит.",pt:"Isso ocorre às vezes.",pron:"И-су о-ко-хи аз ве-зис",key:"Ocorrer",extra:"Eu — / Você — / A gente —"},
+      {ru:"Я забыл его имя.",pt:"Eu esqueci o nome dele.",pron:"Эу эс-ке-си у но-ми де-ли",key:"Esquecer",extra:"Eu esqueço / Você esquece / A gente esquece"},
+      {ru:"Ты меня помнишь?",pt:"Você lembra de mim?",pron:"Во-сэ лейн-бра джи мин",key:"Lembrar",extra:"Eu lembro / Você lembra / A gente lembra"},
+      {ru:"Он передумал.",pt:"Ele mudou de ideia.",pron:"Э-ли му-доу джи и-дей-я",key:"Mudar",extra:"Eu mudo / Você muda / A gente muda"},
+      {ru:"Мы много смеялись.",pt:"A gente riu muito.",pron:"А жен-чи хи-у муй-ту",key:"Rir",extra:"Eu rio / Você ri / A gente ri"},
+      {ru:"Она плакала от радости.",pt:"Ela chorou de alegria.",pron:"Э-ла шо-роу джи а-ле-гри-а",key:"Chorar",extra:"Eu choro / Você chora / A gente chora"},
+      {ru:"Я его знаю.",pt:"Eu conheço ele.",pron:"Эу ко-нье-су э-ли",key:"Conhecer",extra:"Eu conheço / Você conhece / A gente conhece"},
+      {ru:"Я вытру стол.",pt:"Vou limpar a mesa.",pron:"Воу лим-пар а ме-за",key:"Limpar",extra:"Eu limpo / Você limpa / A gente limpa"},
+      {ru:"Она моет руку.",pt:"Ela está lavando a mão.",pron:"Э-ла эс-та ла-ван-ду а маун",key:"Lavar",extra:"Eu lavo / Você lava / A gente lava"},
+      {ru:"Он хорошо готовит.",pt:"Ele cozinha bem.",pron:"Э-ли ко-зи-нья бейн",key:"Cozinhar",extra:"Eu cozinho / Você cozinha / A gente cozinha"},
+      {ru:"Я бегаю в парке.",pt:"Eu corro no parque.",pron:"Эу ко-ху ну пар-ки",key:"Correr",extra:"Eu corro / Você corre / A gente corre"},
+      {ru:"Мы перепрыгнули стену.",pt:"A gente pulou o muro.",pron:"А жен-чи пу-лоу у му-ру",key:"Pular",extra:"Eu — / Você — / A gente —"},
+      {ru:"Ты поешь в душе?",pt:"Você canta no chuveiro?",pron:"Во-сэ кан-та ну шу-вей-ру",key:"Cantar",extra:"Eu canto / Você canta / A gente canta"},
+      {ru:"Она рисует цветы.",pt:"Ela desenha flores.",pron:"Э-ла де-зе-нья фло-рис",key:"Desenhar",extra:"Eu — / Você — / A gente —"},
+      {ru:"Мы играем в волейбол.",pt:"A gente joga vôlei.",pron:"А жен-чи жо-га во-лей",key:"Jogar",extra:"Eu jogo / Você joga / A gente joga"},
+      {ru:"Он играет на пианино.",pt:"Ele toca piano.",pron:"Э-ли то-ка пи-а-ну",key:"Tocar",extra:"Eu — / Você — / A gente —"},
+      {ru:"Я шучу!",pt:"Eu estou brincando!",pron:"Эу эс-тоу брин-кан-ду",key:"Brincar",extra:"Eu brinco / Você brinca / A gente brinca"},
+      {ru:"Я опоздал / пропустил время.",pt:"Eu perdi a hora.",pron:"Эу пер-джи а о-ра",key:"Perder",extra:"Eu perco / Você perde / A gente perde"},
+      {ru:"Я проспал.",pt:"Eu perdi a hora.",pron:"Эу пер-джи а о-ра",key:"Perder a hora",extra:"Eu — / Você — / A gente —"},
+      {ru:"Я наполню бутылку.",pt:"Vou encher a garrafa.",pron:"Воу эн-шер а га-ха-фа",key:"Encher",extra:"Eu encho / Você enche / A gente enche"},
+      {ru:"Стакан опустел.",pt:"O copo esvaziou.",pron:"У ко-пу эс-ва-зи-оу",key:"Esvaziar",extra:"Eu — / Você — / A gente —"}
+    ]
+  },
+  {
+    id: "accusative", linearId: "IGO-94", emoji: "🫵", title: "2. Местоимения в вин. падеже", desc: "Кого? Что? — прямые объекты", dueDate: "24.03",
+    items: [
+      {ru:"Я – меня",pt:"Eu – me / mim",pron:"Эу – ми / мин",key:"me/mim",extra:"me перед глаголом: me ajuda. mim после предлога: para mim"},
+      {ru:"Ты – тебя",pt:"Você – te / você",pron:"Во-сэ – чи",key:"te",extra:"te стоит перед глаголом: te amo"},
+      {ru:"Он – его",pt:"Ele – o / ele",pron:"Э-ли – у",key:"o",extra:"o перед глаголом: eu o vejo"},
+      {ru:"Она – её",pt:"Ela – a / ela",pron:"Э-ла – а",key:"a",extra:"a перед глаголом: eu a vejo"},
+      {ru:"Мы – нас",pt:"Nós – nos",pron:"Нош – нуш",key:"nos",extra:"nos перед глаголом: ele nos ajuda"},
+      {ru:"Они (муж.) – их",pt:"Eles – os",pron:"Э-лис – уш",key:"os",extra:"os перед глаголом: eu os conheço"},
+      {ru:"Они (жен.) – их",pt:"Elas – as",pron:"Э-лас – аш",key:"as",extra:"as перед глаголом: eu as vejo"},
+      {ru:"Я знаю тебя.",pt:"Eu te conheço.",pron:"Эу чи ко-нье-су",key:"te",extra:"Местоимение перед глаголом"},
+      {ru:"Я вижу её.",pt:"Eu a vejo.",pron:"Эу а ве-жу",key:"a",extra:"Вин. пад. жен. рода"},
+      {ru:"Я жду вас.",pt:"Eu os espero.",pron:"Эу уш эс-пе-ру",key:"os",extra:"os = вас (мн.ч.)"},
+      {ru:"Мы их ждём.",pt:"Nós os esperamos.",pron:"Нош уш эс-пе-ра-муш",key:"os",extra:"Мн.ч. объекта"},
+      {ru:"Я не видел их.",pt:"Eu não os vi.",pron:"Эу наун уш ви",key:"não os",extra:"Отрицание: não + мест. + глагол"},
+      {ru:"Это для меня.",pt:"Isso é para mim.",pron:"И-су э па-ра мин",key:"para mim",extra:"После предлога — mim (не me)"},
+      {ru:"Он думает о ней.",pt:"Ele pensa nela.",pron:"Э-ли пен-са не-ла",key:"nela",extra:"em + ela = nela; em + ele = nele"}
+    ,
+      {ru:"Сделай это.",pt:"Faz isso.",pron:"Фаз иссу",key:"isso",extra:"isso = это (неодушевлённое)"},
+      {ru:"Ты это видишь?",pt:"Você vê isso?",pron:"Восэ вэ иссу?",key:"isso",extra:"Прямой объект: isso"},
+      {ru:"Она нас слышит.",pt:"Ela ouve a gente.",pron:"Эла оуви а женчи",key:"a gente",extra:"В разговорном BR a gente часто = нас/мы"},
+      {ru:"Я жду вас.",pt:"Eu espero vocês.",pron:"Эу эсперу восэйс",key:"vocês",extra:"vocês = вас / вы (мн.ч.)"}]
+  },
+  {
+    id: "questions", linearId: "IGO-95", emoji: "❓", title: "3. Вопросительные слова", desc: "Что, кто, где, когда, почему, как", dueDate: "27.03",
+    items: [
+      {ru:"Что?",pt:"O que?",pron:"У ки",key:"O que",extra:"O que você quer? — Что ты хочешь?"},
+      {ru:"Кто?",pt:"Quem?",pron:"Кейн",key:"Quem",extra:"Quem é você? — Кто ты?"},
+      {ru:"Где?",pt:"Onde?",pron:"Он-джи",key:"Onde",extra:"Onde você mora? — Где ты живёшь?"},
+      {ru:"Когда?",pt:"Quando?",pron:"Куан-ду",key:"Quando",extra:"Quando você chega? — Когда ты придёшь?"},
+      {ru:"Почему?",pt:"Por que?",pron:"Пор ки",key:"Por que",extra:"Por que você está triste? — Почему ты грустишь?"},
+      {ru:"Как?",pt:"Como?",pron:"Ко-му",key:"Como",extra:"Como você está? — Как ты?"},
+      {ru:"Сколько?",pt:"Quanto?",pron:"Куан-ту",key:"Quanto",extra:"Quanto custa? — Сколько стоит?"},
+      {ru:"Который час?",pt:"Que horas são?",pron:"Ки о-рас саун",key:"Que horas",extra:"São duas horas — Два часа"},
+      {ru:"Откуда ты?",pt:"De onde você é?",pron:"Джи он-джи во-сэ э",key:"De onde",extra:"Sou da Rússia — Я из России"},
+      {ru:"Как тебя зовут?",pt:"Como você se chama?",pron:"Ко-му во-сэ си ша-ма",key:"Como se chama",extra:"Me chamo Igor — Меня зовут Игорь"},
+      {ru:"Когда ты работаешь?",pt:"Quando você trabalha?",pron:"Куан-ду во-сэ тра-ба-лья",key:"Quando",extra:"Trabalho de manhã — Работаю утром"},
+      {ru:"Где ты живёшь?",pt:"Onde você mora?",pron:"Он-джи во-сэ мо-ра",key:"Onde",extra:"Moro em Floripa — Живу во Флорипе"}
+    ,
+      {ru:"Где туалет?",pt:"Onde fica o banheiro?",pron:"Онжи фика у баньейру?",key:"Onde",extra:"Частый бытовой вопрос"},
+      {ru:"Сколько это стоит?",pt:"Quanto custa isso?",pron:"Куанту куста иссу?",key:"Quanto",extra:"Для магазинов и ресторанов"},
+      {ru:"Что случилось?",pt:"O que aconteceu?",pron:"У ки аконтесеу?",key:"O que",extra:"Полезно при проблемах"},
+      {ru:"Как это сказать?",pt:"Como se diz isso?",pron:"Кому си дис иссу?",key:"Como",extra:"Как это говорится?"},
+      {ru:"Во сколько?",pt:"A que horas?",pron:"А ки орас?",key:"A que horas",extra:"Спрашивать время встречи"}]
+  },
+  {
+    id: "directions", linearId: "IGO-96", emoji: "🧭", title: "4. Предлоги, направления, падежи", desc: "Куда? Где? Откуда? Предлоги движения", dueDate: "01.04",
+    items: [
+      {ru:"Я в Бразилии.",pt:"Eu estou no Brasil.",pron:"Эу эс-тоу ну Бра-зил",key:"em + o = no",extra:"em (в/на) + o = no, em + a = na"},
+      {ru:"Я иду в магазин.",pt:"Eu vou para o mercado.",pron:"Эу воу па-ра у мер-ка-ду",key:"para",extra:"para = в/для (направление движения)"},
+      {ru:"Я из России.",pt:"Eu sou da Rússia.",pron:"Эу соу да Ху-си-а",key:"de + a = da",extra:"de (из/от) + a = da, de + o = do"},
+      {ru:"Откуда ты?",pt:"De onde você é?",pron:"Джи он-джи во-сэ э",key:"de onde",extra:"de onde = откуда"},
+      {ru:"Рядом с банком.",pt:"Perto do banco.",pron:"Пер-ту ду бан-ку",key:"perto de",extra:"perto de + o = perto do"},
+      {ru:"Налево / направо.",pt:"À esquerda / à direita.",pron:"А эс-кер-да / а джи-рей-та",key:"esquerda/direita",extra:"Vire à esquerda — поверните налево"},
+      {ru:"Прямо.",pt:"Em frente / Reto.",pron:"Эйн френ-чи / Хе-ту",key:"em frente",extra:"Vai reto — иди прямо"},
+      {ru:"Между банком и аптекой.",pt:"Entre o banco e a farmácia.",pron:"Эн-три у бан-ку и а фар-ма-сиа",key:"entre",extra:"entre = между"},
+      {ru:"Напротив.",pt:"Em frente / Do lado oposto.",pron:"Эйн френ-чи",key:"em frente de",extra:"em frente do banco — напротив банка"},
+      {ru:"Мне (дательный).",pt:"Para mim / Me dá.",pron:"Па-ра мин",key:"para mim",extra:"Кому? — para mim/você/ele"},
+      {ru:"Из-за тебя.",pt:"Por sua causa.",pron:"Пор суа кау-за",key:"por causa de",extra:"por causa de = из-за"},
+      {ru:"Для меня.",pt:"Para mim.",pron:"Па-ра мин",key:"para mim",extra:"para = для/в (цель)"},
+      {ru:"Без тебя.",pt:"Sem você.",pron:"Сейн во-сэ",key:"sem",extra:"sem = без"},
+      {ru:"С тобой.",pt:"Com você.",pron:"Кон во-сэ",key:"com",extra:"com = с"},
+      {ru:"После работы.",pt:"Depois do trabalho.",pron:"Де-пойш ду тра-ба-лью",key:"depois de",extra:"depois de = после"},
+      {ru:"Перед домом.",pt:"Na frente da casa.",pron:"На френ-чи да ка-за",key:"na frente de",extra:"Или: antes da casa = перед домом"}
+    ,
+      {ru:"Поверни направо.",pt:"Vire à direita.",pron:"Вири а жирейта",key:"à direita",extra:"Направление: направо"},
+      {ru:"Поверни налево.",pt:"Vire à esquerda.",pron:"Вири а эскерда",key:"à esquerda",extra:"Направление: налево"},
+      {ru:"Иди прямо.",pt:"Vá direto.",pron:"Ва жирету",key:"direto",extra:"direto = прямо"},
+      {ru:"Это его телефон.",pt:"É o celular dele.",pron:"Э у селулар дели",key:"dele",extra:"de + ele = dele"}]
+  },
+  {
+    id: "phrases", linearId: "IGO-97", emoji: "💬", title: "5. Популярные фразы", desc: "Must-have фразы для разговора", dueDate: "04.04",
+    items: [
+      {ru:"Привет! Как дела?",pt:"Oi! Tudo bem?",pron:"Ой! Ту-ду бейн",key:"Tudo bem",extra:"Tudo bem, e você? — Всё хорошо, а ты?"},
+      {ru:"Приятно познакомиться.",pt:"Prazer em conhecer.",pron:"Пра-зер эйн ко-нье-сер",key:"Prazer",extra:"Igualmente — Взаимно"},
+      {ru:"Пожалуйста.",pt:"Por favor.",pron:"Пор фа-вор",key:"Por favor",extra:"Também = obrigado após serviço"},
+      {ru:"Спасибо большое.",pt:"Muito obrigado.",pron:"Муй-ту о-бри-га-ду",key:"Obrigado",extra:"Mulher: obrigada (без -o)"},
+      {ru:"Извините.",pt:"Com licença / Desculpe.",pron:"Кон ли-сен-са / Дэс-кул-пи",key:"Com licença",extra:"Com licença = excuse me; Desculpe = sorry"},
+      {ru:"Я не понимаю.",pt:"Não entendo.",pron:"Наун эн-тен-ду",key:"Não entendo",extra:"Pode repetir? — Можете повторить?"},
+      {ru:"Говорите медленнее.",pt:"Fala mais devagar.",pron:"Фа-ла майш де-ва-гар",key:"devagar",extra:"Fala mais alto — говорите громче"},
+      {ru:"Сколько это стоит?",pt:"Quanto custa isso?",pron:"Куан-ту кус-та и-су",key:"Quanto custa",extra:"É muito caro — это очень дорого"},
+      {ru:"Где туалет?",pt:"Onde é o banheiro?",pron:"Он-джи э у ба-ньей-ру",key:"banheiro",extra:"Pode indicar? — Можете показать?"},
+      {ru:"Я не говорю по-португальски.",pt:"Não falo português.",pron:"Наун фа-лу пор-ту-гес",key:"Não falo",extra:"Falo um pouco — говорю немного"},
+      {ru:"До свидания!",pt:"Tchau! / Até logo!",pron:"Чау / А-те ло-гу",key:"Tchau",extra:"Até amanhã — до завтра"},
+      {ru:"Удачи!",pt:"Boa sorte!",pron:"Боа сор-чи",key:"Boa sorte",extra:"Obrigado — спасибо"}
+    ,
+      {ru:"Меня зовут Игорь.",pt:"Meu nome é Igor.",pron:"Мэу номи э Игор",key:"Meu nome é",extra:"Базовое знакомство"},
+      {ru:"Пока / до скорого.",pt:"Tchau / Até logo.",pron:"Чау / Атэ логу",key:"Tchau",extra:"Прощание"},
+      {ru:"Где-то здесь.",pt:"Por aqui.",pron:"Пор аки",key:"Por aqui",extra:"Ориентация в пространстве"},
+      {ru:"На самом деле.",pt:"Na verdade.",pron:"На вердаджи",key:"Na verdade",extra:"Вводная фраза / коннектор"}]
+  },
+  {
+    id: "adverbs", linearId: "IGO-98", emoji: "⚡", title: "6. Наречия", desc: "Тоже, очень, уже, ещё, почти...", dueDate: "08.04",
+    items: [
+      {ru:"Тоже / тоже самое",pt:"Também",pron:"Тан-бейн",key:"Também",extra:"Eu também gosto — Мне тоже нравится"},
+      {ru:"Сначала / сперва",pt:"Primeiro",pron:"При-мей-ру",key:"Primeiro",extra:"Primeiro vamos comer — Сначала поедим"},
+      {ru:"Очень",pt:"Muito",pron:"Муй-ту",key:"Muito",extra:"Muito bom — очень хорошо"},
+      {ru:"Только",pt:"Só / Apenas",pron:"Со / А-пе-нас",key:"Só",extra:"Só um pouco — только немного"},
+      {ru:"Уже",pt:"Já",pron:"Жа",key:"Já",extra:"Já fiz — уже сделал"},
+      {ru:"Ещё",pt:"Ainda",pron:"А-ин-да",key:"Ainda",extra:"Ainda estou aqui — я всё ещё здесь"},
+      {ru:"Ещё нет / Пока нет",pt:"Ainda não",pron:"А-ин-да наун",key:"Ainda não",extra:"Ainda não terminei — ещё не закончил"},
+      {ru:"До сих пор / По-прежнему",pt:"Ainda / Até agora",pron:"А-ин-да",key:"até agora",extra:"Até agora não sei — до сих пор не знаю"},
+      {ru:"Слишком (дорого)",pt:"Demais / Muito",pron:"Де-майш",key:"demais",extra:"É caro demais — слишком дорого"},
+      {ru:"Чересчур",pt:"Excessivamente / Demais",pron:"Де-майш",key:"demais",extra:"Você trabalha demais — ты работаешь чересчур"},
+      {ru:"Почти",pt:"Quase",pron:"Куа-зи",key:"Quase",extra:"Quase pronto — почти готово"},
+      {ru:"Практически / Примерно",pt:"Praticamente / Mais ou menos",pron:"Пра-чи-ка-мен-чи",key:"mais ou menos",extra:"Mais ou menos — более или менее"},
+      {ru:"Достаточно",pt:"Suficiente / Basta",pron:"Су-фи-си-эн-чи / Бас-та",key:"basta",extra:"Basta! — Хватит! Достаточно!"},
+      {ru:"Возможно",pt:"Talvez / Possivelmente",pron:"Тал-вес",key:"Talvez",extra:"Talvez amanhã — возможно завтра"},
+      {ru:"Невозможно",pt:"Impossível",pron:"Им-по-си-вел",key:"Impossível",extra:"Isso é impossível — это невозможно"},
+      {ru:"Нереально / Невероятно",pt:"Incrível / Absurdo",pron:"Ин-кри-вел",key:"Incrível",extra:"Que incrível! — нереально!"},
+      {ru:"Всегда",pt:"Sempre",pron:"Сейм-при",key:"Sempre",extra:"Sempre trabalho cedo — всегда работаю рано"},
+      {ru:"Никогда",pt:"Nunca / Jamais",pron:"Нун-ка",key:"Nunca",extra:"Nunca fui ao Japão — никогда не был в Японии"},
+      {ru:"Сейчас",pt:"Agora",pron:"А-го-ра",key:"Agora",extra:"Agora mesmo — прямо сейчас"}
+    ,
+      {ru:"Ещё нет.",pt:"Ainda não.",pron:"Аинда нау",key:"Ainda não",extra:"ещё нет / пока нет"},
+      {ru:"До сих пор.",pt:"Até agora.",pron:"Атэ агора",key:"Até agora",extra:"до сих пор / вплоть до сейчас"},
+      {ru:"Более-менее.",pt:"Mais ou menos.",pron:"Майс оу менус",key:"Mais ou menos",extra:"примерно / так себе"},
+      {ru:"Возможно.",pt:"Talvez.",pron:"Талвес",key:"Talvez",extra:"возможно / может быть"}]
+  },
+  {
+    id: "ser_estar", linearId: "IGO-99", emoji: "🔄", title: "7. Глагол БЫТЬ (Ser vs Estar)", desc: "Постоянное vs временное состояние", dueDate: "12.04",
+    items: [
+      {ru:"Я русский (по национальности).",pt:"Eu sou russo.",pron:"Эу соу Ху-су",key:"Ser",extra:"SER: постоянные характеристики"},
+      {ru:"Я сейчас устал.",pt:"Eu estou cansado agora.",pron:"Эу эс-тоу кан-са-ду а-го-ра",key:"Estar",extra:"ESTAR: временное состояние"},
+      {ru:"Она врач.",pt:"Ela é médica.",pron:"Э-ла э ме-джи-ка",key:"Ser (профессия)",extra:"Профессия = ser"},
+      {ru:"Она на работе.",pt:"Ela está no trabalho.",pron:"Э-ла эс-та ну тра-ба-лью",key:"Estar (место)",extra:"Местонахождение = estar"},
+      {ru:"Это вкусно!",pt:"Está gostoso!",pron:"Эс-та гос-то-зу",key:"Estar (вкус)",extra:"Вкус еды = estar"},
+      {ru:"Он добрый человек.",pt:"Ele é uma pessoa boa.",pron:"Э-ли э у-ма пе-со-а боа",key:"Ser (характер)",extra:"Постоянный характер = ser"},
+      {ru:"Он счастлив сегодня.",pt:"Ele está feliz hoje.",pron:"Э-ли эс-та фе-лис о-жи",key:"Estar (настроение)",extra:"Эмоции = estar"},
+      {ru:"Флорипа красивая.",pt:"Floripa é linda.",pron:"Фло-ри-па э лин-да",key:"Ser (место)",extra:"Описание места = ser"},
+      {ru:"Вода холодная.",pt:"A água está fria.",pron:"А а-гуа эс-та фри-а",key:"Estar (температура)",extra:"Температура = estar"},
+      {ru:"Я бразилец.",pt:"Eu sou brasileiro.",pron:"Эу соу бра-зи-лей-ру",key:"Ser",extra:"Гражданство = ser"}
+    ,
+      {ru:"Я был учителем.",pt:"Eu fui professor.",pron:"Эу фуи професор",key:"fui",extra:"Прошедшее от ser/ir: fui"},
+      {ru:"Я буду учителем.",pt:"Eu vou ser professor.",pron:"Эу воу сер професор",key:"vou ser",extra:"Будущее через ir + infinitivo"},
+      {ru:"Почему вы не были здесь?",pt:"Por que vocês não estavam aqui?",pron:"Пор кэ восэйс нау эставам аки?",key:"estavam",extra:"Прошедшее состояние / местонахождение"}]
+  },
+  {
+    id: "verbs_all", linearId: "IGO-100", emoji: "🏋️", title: "8. Всё о глаголах", desc: "Времена, сочетания, повелительное", dueDate: "19.04",
+    items: [
+      {ru:"Я хочу поесть пиццу.",pt:"Eu quero comer pizza.",pron:"Эу кэ-ру ко-мер пи-ца",key:"querer + инфинитив",extra:"Два глагола: хотеть + делать"},
+      {ru:"Мне нужно идти.",pt:"Preciso ir.",pron:"Пре-си-зу ир",key:"precisar + инфинитив",extra:"Нужно + действие"},
+      {ru:"Пойдём есть!",pt:"Vamos comer!",pron:"Ва-муш ко-мер",key:"Vamos + инфинитив",extra:"Давайте + действие"},
+      {ru:"Сделай это! (команда)",pt:"Faz isso!",pron:"Фаш и-су",key:"Повелительное",extra:"2 л. ед.ч.: основа без -r"},
+      {ru:"Подожди!",pt:"Espera!",pron:"Эс-пе-ра",key:"Повелительное",extra:"Espera = жди (ты); Esperem = ждите"},
+      {ru:"Я хочу чтобы ты пришёл.",pt:"Eu quero que você venha.",pron:"Эу кэ-ру ки во-сэ ве-нья",key:"quero que + subjuntivo",extra:"que + subjuntivo = чтобы"},
+      {ru:"Я мою руки (возвратный).",pt:"Eu me lavo as mãos.",pron:"Эу ми ла-ву аз маунш",key:"Возвратный глагол",extra:"me/se/nos перед глаголом"},
+      {ru:"Я уже поел.",pt:"Eu já comi.",pron:"Эу жа ко-ми",key:"Прошедшее -i",extra:"Pretérito perfeito: -ar→-ei, -er→-i"},
+      {ru:"Завтра я буду работать.",pt:"Amanhã vou trabalhar.",pron:"А-ма-нья воу тра-ба-льяр",key:"Будущее",extra:"ir + infinitivo = ближайшее будущее"},
+      {ru:"Я работал весь день.",pt:"Trabalhei o dia todo.",pron:"Тра-ба-льей у джи-а то-ду",key:"Прошедшее -ei",extra:"-ar глаголы: -ei (eu), -ou (você)"}
+    ,
+      {ru:"Мне нравится играть.",pt:"Eu gosto de jogar.",pron:"Эу госто джи жогар",key:"gostar de",extra:"Сочетание двух глаголов"},
+      {ru:"Я хочу, чтобы ты купил еду.",pt:"Quero que você compre comida.",pron:"Кэру ки восэ компри комида",key:"Quero que",extra:"Структура 'хочу, чтобы'"},
+      {ru:"Если ты пойдёшь в магазин, я приготовлю еду.",pt:"Se você for ao mercado, eu preparo a comida.",pron:"Си восэ фор ау меркаду, эу препару а комида",key:"Se",extra:"Условие: если"},
+      {ru:"Не приходи!",pt:"Não venha!",pron:"Нау веня!",key:"Não venha",extra:"Отрицательный императив"},
+      {ru:"Давай потанцуем.",pt:"Vamos dançar.",pron:"Вамус дансар",key:"Vamos",extra:"Призыв / давай"}]
+  },
+  {
+    id: "nouns", linearId: "IGO-101", emoji: "📦", title: "9. Существительные", desc: "Род, число, артикли", dueDate: "23.04",
+    items: [
+      {ru:"Мальчик / девочка",pt:"O menino / A menina",pron:"У ме-ни-ну / А ме-ни-на",key:"o/a",extra:"O = муж. род, A = жен. род"},
+      {ru:"Дом",pt:"A casa",pron:"А ка-за",key:"a casa",extra:"Всегда женский род"},
+      {ru:"Автомобиль",pt:"O carro",pron:"У ка-ху",key:"o carro",extra:"Всегда мужской род"},
+      {ru:"Книга",pt:"O livro",pron:"У ли-вру",key:"o livro",extra:"Слова на -o чаще мужские"},
+      {ru:"Дома (мн.ч.)",pt:"As casas",pron:"Аз ка-зас",key:"as casas",extra:"Мн.ч.: + s. A→as, O→os"},
+      {ru:"Мужчина",pt:"O homem",pron:"У о-мейн",key:"o homem",extra:"Исключение: не на -o"},
+      {ru:"Женщина",pt:"A mulher",pron:"А му-льер",key:"a mulher",extra:"Исключение: не на -a"},
+      {ru:"Город",pt:"A cidade",pron:"А си-да-джи",key:"a cidade",extra:"Слова на -ade = жен. род"},
+      {ru:"Этот дом / та машина",pt:"Esta casa / Aquele carro",pron:"Эс-та ка-за / А-ке-li ка-ху",key:"este/aquele",extra:"este/esta = этот/эта (близко)"},
+      {ru:"Мой / моя",pt:"Meu / Minha",pron:"Меу / Ми-нья",key:"meu/minha",extra:"Зависит от рода объекта"}
+    ,
+      {ru:"Этот компьютер не работает.",pt:"Este computador não funciona.",pron:"Эсти компьютадор нау фунсьона",key:"este",extra:"Этот / эта / это"},
+      {ru:"У меня есть книга.",pt:"Eu tenho um livro.",pron:"Эу тэнью ум ливру",key:"um livro",extra:"Неопределённый артикль"},
+      {ru:"У меня нет машины.",pt:"Eu não tenho carro.",pron:"Эу нау тэнью карру",key:"não tenho",extra:"Отрицание с существительным"},
+      {ru:"Много времени.",pt:"Muito tempo.",pron:"Муйту тэмпу",key:"muito",extra:"Много + неисчисляемое"},
+      {ru:"Мало денег.",pt:"Pouco dinheiro.",pron:"Поуку диньейру",key:"pouco",extra:"Мало + существительное"}]
+  },
+  {
+    id: "possessives", linearId: "IGO-102", emoji: "🤝", title: "10. Притяжательные местоимения", desc: "Мой, твой, его, наш...", dueDate: "26.04",
+    items: [
+      {ru:"Мой телефон.",pt:"Meu celular.",pron:"Меу се-лу-лар",key:"meu",extra:"meu/minha — зависит от рода слова"},
+      {ru:"Моя машина.",pt:"Minha casa.",pron:"Ми-нья ка-за",key:"minha",extra:"casa = женский → minha"},
+      {ru:"Твой брат.",pt:"Seu irmão.",pron:"Сеу ир-маун",key:"seu",extra:"seu/sua = твой/его/её/ваш"},
+      {ru:"Его работа.",pt:"O trabalho dele.",pron:"У тра-ба-лью де-ли",key:"dele",extra:"dele = его, dela = её (яснее)"},
+      {ru:"Её сумка.",pt:"A bolsa dela.",pron:"А бол-са де-ла",key:"dela",extra:"dela избегает путаницы с seu"},
+      {ru:"Наш дом.",pt:"Nossa casa.",pron:"Но-са ка-за",key:"nossa",extra:"nosso/nossa — наш/наша"},
+      {ru:"Ваши документы.",pt:"Os seus documentos.",pron:"Уш сеуш до-ку-мен-туш",key:"seus",extra:"Мн.ч.: meus/minhas, seus/suas"},
+      {ru:"Это твоё?",pt:"É seu?",pron:"Э сеу",key:"seu",extra:"É seu? / É sua? — в зависимости от рода"},
+      {ru:"Это моё.",pt:"É meu.",pron:"Э меу",key:"meu",extra:"Без существительного"},
+      {ru:"Их планы.",pt:"Os planos deles.",pron:"Уш пла-нуш де-лис",key:"deles",extra:"deles (муж.) / delas (жен.)"}
+    ,
+      {ru:"Это моя машина.",pt:"Este é o meu carro.",pron:"Эсти э у мэу карру",key:"meu",extra:"мой / моя / мои зависят от рода предмета"},
+      {ru:"Это наш дом.",pt:"Esta é a nossa casa.",pron:"Эста э а носса каза",key:"nossa",extra:"наш / наша"},
+      {ru:"Это твой компьютер?",pt:"Este é o seu computador?",pron:"Эсти э у сэу компьютадор?",key:"seu",extra:"твой / ваш"},
+      {ru:"Это их планы.",pt:"Estes são os planos deles.",pron:"Эстис саун уш планус делис",key:"deles",extra:"их (муж./смеш.)"}]
+  },
+  {
+    id: "numbers", linearId: "IGO-103", emoji: "🔢", title: "11. Числительные, возраст, даты", desc: "Числа, дни рождения, время", dueDate: "30.04",
+    items: [
+      {ru:"Сколько тебе лет?",pt:"Quantos anos você tem?",pron:"Куан-туш а-нуш во-сэ тейн",key:"Quantos anos",extra:"Tenho 36 anos — мне 36 лет"},
+      {ru:"Мне 36 лет.",pt:"Tenho trinta e seis anos.",pron:"Те-нью трин-та и сейш а-нуш",key:"trinta e seis",extra:"e = и (соединяет десятки с единицами)"},
+      {ru:"Сегодня 14 марта.",pt:"Hoje é quatorze de março.",pron:"О-жи э ка-тор-зи джи мар-су",key:"quatorze de março",extra:"Дата: число + de + месяц"},
+      {ru:"Который час? Два часа.",pt:"São duas horas.",pron:"Саун ду-аз о-рас",key:"São... horas",extra:"É uma hora — один час (ед.ч.)"},
+      {ru:"Половина третьего.",pt:"São duas e meia.",pron:"Саун ду-аз и мей-а",key:"meia",extra:"e meia = и половина"},
+      {ru:"В три часа дня.",pt:"Às três da tarde.",pron:"Аш трейш да тар-джи",key:"às + horas",extra:"de manhã/tarde/noite = утра/дня/вечера"},
+      {ru:"Один, два, три.",pt:"Um, dois, três.",pron:"Ун, дойш, трейш",key:"1,2,3",extra:"Uma, duas (жен.): uma casa"},
+      {ru:"Сто, тысяча, миллион.",pt:"Cem, mil, um milhão.",pron:"Сейн, мил, ун ми-льяун",key:"cem/mil",extra:"200 = duzentos, 300 = trezentos"},
+      {ru:"Первый, второй, третий.",pt:"Primeiro, segundo, terceiro.",pron:"При-мей-ру, се-гун-ду, тер-сей-ру",key:"ordinals",extra:"1º/1ª — согласуются с родом"},
+      {ru:"Когда твой день рождения?",pt:"Quando é seu aniversário?",pron:"Куан-ду э сеу а-ни-вер-са-ри-у",key:"aniversário",extra:"É em dezembro — в декабре"}
+    ,
+      {ru:"Первый / второй / третий.",pt:"Primeiro / segundo / terceiro.",pron:"Примейру / сегунду / терсейру",key:"ordinais",extra:"Порядковые числительные"},
+      {ru:"Мне тридцать лет.",pt:"Tenho trinta anos.",pron:"Тэнью тринта анус",key:"trinta anos",extra:"Возраст"},
+      {ru:"Я родился в 1988 году.",pt:"Nasci em 1988.",pron:"Наси эм мил новесентус и ойтента и ойту",key:"nasci",extra:"Когда родился"},
+      {ru:"Пятнадцатое сентября.",pt:"Quinze de setembro.",pron:"Кинзи джи сетэмбру",key:"datas",extra:"Формат дат"}]
+  },
+  {
+    id: "time", linearId: "IGO-104", emoji: "⏰", title: "12. Всё о времени", desc: "Дни, месяцы, прошлое, будущее", dueDate: "04.05",
+    items: [
+      {ru:"Сегодня / вчера / завтра",pt:"Hoje / Ontem / Amanhã",pron:"О-жи / Он-тейн / А-ма-нья",key:"hoje",extra:"Базовые наречия времени"},
+      {ru:"Понедельник",pt:"Segunda-feira",pron:"Се-гун-да фей-ра",key:"Segunda",extra:"Дни: 2ª-6ª feira, Sábado, Domingo"},
+      {ru:"На следующей неделе.",pt:"Na semana que vem.",pron:"На се-ма-на ки вейн",key:"semana que vem",extra:"na semana passada — на прошлой неделе"},
+      {ru:"В прошлом году.",pt:"No ano passado.",pron:"Ну а-ну па-са-ду",key:"ano passado",extra:"este ano — в этом году"},
+      {ru:"Через два часа.",pt:"Daqui a duas horas.",pron:"Да-ки а ду-аз о-рас",key:"Daqui a...",extra:"Daqui a pouco — скоро"},
+      {ru:"Давно.",pt:"Faz tempo / Há muito tempo.",pron:"Фаш тен-пу",key:"Faz tempo",extra:"Não nos vemos faz tempo — давно не виделись"},
+      {ru:"Скоро.",pt:"Em breve / Logo.",pron:"Эйн бре-ви / Ло-гу",key:"Em breve",extra:"Logo depois — вскоре после"},
+      {ru:"Иногда.",pt:"Às vezes.",pron:"Аш ве-зис",key:"Às vezes",extra:"De vez em quando — время от времени"},
+      {ru:"Всегда / Никогда",pt:"Sempre / Nunca",pron:"Сейм-при / Нун-ка",key:"Sempre/Nunca",extra:"Nunca + verb без não"},
+      {ru:"Утром / Вечером",pt:"De manhã / À noite",pron:"Джи ма-нья / А ной-чи",key:"de manhã",extra:"À tarde = днём, de madrugada = ночью"}
+    ,
+      {ru:"Позавчера / послезавтра.",pt:"Anteontem / depois de amanhã.",pron:"Антионтэн / депойс джи аманья",key:"anteontem",extra:"Расширение диапазона дней"},
+      {ru:"В понедельник.",pt:"Na segunda-feira.",pron:"На сегунда-фейра",key:"segunda-feira",extra:"Дни недели"},
+      {ru:"В январе / в феврале.",pt:"Em janeiro / em fevereiro.",pron:"Эм жанейру / эм феверейру",key:"janeiro",extra:"Месяцы"},
+      {ru:"Сколько времени?",pt:"Que horas são?",pron:"Ки орас саун?",key:"Que horas são",extra:"Спросить текущее время"},
+      {ru:"Полшестого.",pt:"Cinco e meia.",pron:"Синку и мейя",key:"e meia",extra:"Половина часа"}]
+  },
+  {
+    id: "adjectives", linearId: "IGO-105", emoji: "🎨", title: "13. Прилагательные и цвета", desc: "Описание, сравнение, антонимы", dueDate: "08.05",
+    items: [
+      {ru:"Большой / маленький",pt:"Grande / Pequeno",pron:"Гран-джи / Пе-ке-ну",key:"grande/pequeno",extra:"Grande идёт до или после сущ."},
+      {ru:"Красивый / некрасивый",pt:"Bonito / Feio",pron:"Бо-ни-ту / Фей-у",key:"bonito/feio",extra:"Bonita (жен.): bonita mulher"},
+      {ru:"Дорогой / дешёвый",pt:"Caro / Barato",pron:"Ка-ру / Ба-ра-ту",key:"caro/barato",extra:"Isso é caro demais — слишком дорого"},
+      {ru:"Быстрый / медленный",pt:"Rápido / Devagar",pron:"Ха-пи-ду / Де-ва-гар",key:"rápido",extra:"Fala mais devagar — говори медленнее"},
+      {ru:"Красный / синий / зелёный",pt:"Vermelho / Azul / Verde",pron:"Вер-ме-лью / А-зул / Вер-джи",key:"cores",extra:"Preto = чёрный, Branco = белый"},
+      {ru:"Жёлтый / оранжевый",pt:"Amarelo / Laranja",pron:"А-ма-ре-лу / Ла-ран-жа",key:"amarelo",extra:"Rosa = розовый, Roxo = фиолетовый"},
+      {ru:"Лучше / хуже",pt:"Melhor / Pior",pron:"Ме-льор / Пи-ор",key:"melhor/pior",extra:"Нерегулярные сравнительные"},
+      {ru:"Больше / меньше",pt:"Maior / Menor",pron:"Ма-йор / Ме-нор",key:"maior/menor",extra:"Нерегулярные сравнительные"},
+      {ru:"Более интересный чем",pt:"Mais interessante do que",pron:"Майш ин-те-рес-сан-чи ду ки",key:"mais... do que",extra:"Сравнение: mais + adj + do que"},
+      {ru:"Самый красивый",pt:"O mais bonito",pron:"У майш бо-ни-ту",key:"o mais",extra:"Превосходная степень: o/a mais"}
+    ,
+      {ru:"Хороший / плохой.",pt:"Bom / ruim.",pron:"Бон / хуим",key:"bom/ruim",extra:"Антонимы"},
+      {ru:"Дорогой / дешёвый.",pt:"Caro / barato.",pron:"Кару / барату",key:"caro/barato",extra:"Цена"},
+      {ru:"Белый / чёрный.",pt:"Branco / preto.",pron:"Бранку / прету",key:"branco/preto",extra:"Цвета"},
+      {ru:"Красный / синий / зелёный.",pt:"Vermelho / azul / verde.",pron:"Вермелью / азул / верджи",key:"cores",extra:"Базовые цвета"},
+      {ru:"Эта машина красивее, чем та.",pt:"Este carro é mais bonito que aquele.",pron:"Эсти карру э майс бониту ки акели",key:"mais ... que",extra:"Сравнительная степень"}]
+  },
+  {
+    id: "states", linearId: "IGO-106", emoji: "😊", title: "14. Состояния и эмоции", desc: "Как ты себя чувствуешь?", dueDate: "11.05",
+    items: [
+      {ru:"Я устал.",pt:"Estou cansado.",pron:"Эс-тоу кан-са-ду",key:"cansado",extra:"cansada (жен.)"},
+      {ru:"Я голоден.",pt:"Estou com fome.",pron:"Эс-тоу кон фо-ми",key:"com fome",extra:"com sede = хочу пить"},
+      {ru:"Мне холодно / жарко.",pt:"Estou com frio / calor.",pron:"Эс-тоу кон фри-у / ка-лор",key:"com frio/calor",extra:"Тело: estou com; Погода: está frio"},
+      {ru:"Я счастлив.",pt:"Estou feliz.",pron:"Эс-тоу фе-лис",key:"feliz",extra:"alegre = весёлый"},
+      {ru:"Я грустный.",pt:"Estou triste.",pron:"Эс-тоу трис-чи",key:"triste",extra:"Não estou bem — мне нехорошо"},
+      {ru:"Я нервничаю.",pt:"Estou nervoso.",pron:"Эс-тоу нер-во-зу",key:"nervoso",extra:"nervosa (жен.)"},
+      {ru:"Я спокоен.",pt:"Estou tranquilo.",pron:"Эс-тоу тран-ки-лу",key:"tranquilo",extra:"Fica tranquilo — успокойся"},
+      {ru:"Мне скучно.",pt:"Estou entediado.",pron:"Эс-тоу эн-те-джи-а-ду",key:"entediado",extra:"Que saudade! — как я соскучился!"},
+      {ru:"Я влюблён.",pt:"Estou apaixonado.",pron:"Эс-тоу а-пай-шо-на-ду",key:"apaixonado",extra:"apaixonada (жен.)"},
+      {ru:"Как ты себя чувствуешь?",pt:"Como você está se sentindo?",pron:"Ко-му во-сэ эс-та си сен-тин-ду",key:"se sentindo",extra:"Estou me sentindo bem — чувствую себя хорошо"}
+    ,
+      {ru:"Я боюсь.",pt:"Estou com medo.",pron:"Эстоу ком меду",key:"com medo",extra:"страх"},
+      {ru:"Я сонный.",pt:"Estou com sono.",pron:"Эстоу ком сону",key:"com sono",extra:"сонный / хочется спать"}]
+  },
+  {
+    id: "mesmo", linearId: "IGO-107", emoji: "🪞", title: "15. Сам / Mesmo / Próprio", desc: "Сам, именно, самый, сам по себе", dueDate: "13.05",
+    items: [
+      {ru:"Я сам это сделал.",pt:"Eu mesmo fiz isso.",pron:"Эу мес-му физ и-су",key:"mesmo",extra:"mesma (жен.): ela mesma"},
+      {ru:"Именно это!",pt:"Exatamente isso!",pron:"Е-за-та-мен-чи и-су",key:"Exatamente",extra:"Isso mesmo! — Именно так!"},
+      {ru:"Прямо сейчас.",pt:"Agora mesmo.",pron:"А-го-ра мес-му",key:"mesmo",extra:"mesmo усиливает слово"},
+      {ru:"Он сам по себе разберётся.",pt:"Ele resolve por conta própria.",pron:"Э-ли ре-зол-ви пор кон-та про-при-а",key:"por conta própria",extra:"por conta própria = самостоятельно"},
+      {ru:"Это одно и то же.",pt:"É a mesma coisa.",pron:"Э а мес-ма кой-за",key:"mesma coisa",extra:"coisa = вещь/то"},
+      {ru:"Мы с тобой.",pt:"Nós mesmos.",pron:"Нош мес-муш",key:"nós mesmos",extra:"mesmos (мн.ч.)"},
+      {ru:"Лично я считаю...",pt:"Eu mesmo acho que...",pron:"Эу мес-му а-шу ки",key:"eu mesmo",extra:"Для усиления личного мнения"},
+      {ru:"Тем не менее.",pt:"Mesmo assim.",pron:"Мес-му а-сим",key:"Mesmo assim",extra:"Mesmo assim, obrigado — Тем не менее, спасибо"}
+    ,
+      {ru:"Сделай сам.",pt:"Faça você mesmo.",pron:"Фаса восэ мезму",key:"você mesmo",extra:"DIY / сделай сам"},
+      {ru:"Я сам приготовлю.",pt:"Eu mesmo vou cozinhar.",pron:"Эу мезму воу козиньяр",key:"eu mesmo",extra:"сам сделаю"},
+      {ru:"Она хочет поехать сама.",pt:"Ela quer viajar sozinha.",pron:"Эла кэр виажар созинья",key:"sozinha",extra:"сама / в одиночку"}]
+  },
+  {
+    id: "everything", linearId: "IGO-108", emoji: "🌐", title: "16. Всё, что-то, ничего", desc: "Неопределённые местоимения", dueDate: "16.05",
+    items: [
+      {ru:"Всё хорошо.",pt:"Tudo bem.",pron:"Ту-ду бейн",key:"Tudo",extra:"Tudo = всё"},
+      {ru:"Ничего.",pt:"Nada.",pron:"На-да",key:"Nada",extra:"Não tem nada — ничего нет"},
+      {ru:"Что-то не так.",pt:"Algo está errado.",pron:"Ал-гу эс-та э-ха-ду",key:"Algo",extra:"algo = что-то (положит.); nada = ничего"},
+      {ru:"Никто не пришёл.",pt:"Ninguém veio.",pron:"Нин-гейн вей-у",key:"Ninguém",extra:"ninguém = никто"},
+      {ru:"Кто-то звонил.",pt:"Alguém ligou.",pron:"Ал-гейн ли-гоу",key:"Alguém",extra:"alguém = кто-то"},
+      {ru:"Каждый знает это.",pt:"Todo mundo sabe isso.",pron:"То-ду мун-ду са-би и-су",key:"Todo mundo",extra:"todo mundo = все, каждый"},
+      {ru:"Некоторые люди.",pt:"Algumas pessoas.",pron:"Ал-гу-мас пе-со-аш",key:"Algumas",extra:"alguns/algumas = некоторые"},
+      {ru:"Другой / ещё один",pt:"Outro / Mais um",pron:"О-тру / Майш ун",key:"outro",extra:"outro copo — ещё один стакан"}
+    ,
+      {ru:"Кто-то здесь.",pt:"Alguém está aqui.",pron:"Алгейн эста аки",key:"alguém",extra:"кто-то"},
+      {ru:"Никто не знает.",pt:"Ninguém sabe.",pron:"Нингейн саби",key:"ninguém",extra:"никто"},
+      {ru:"Нигде нет места.",pt:"Não há lugar em lugar nenhum.",pron:"Нау а лугар эм лугар ненюн",key:"lugar nenhum",extra:"нигде"},
+      {ru:"Иногда я работаю дома.",pt:"Às vezes eu trabalho em casa.",pron:"Ас везис эу трабалью эм каза",key:"às vezes",extra:"иногда"}]
+  },
+  {
+    id: "location", linearId: "IGO-109", emoji: "📍", title: "17. Направления и расстояния", desc: "Как добраться, описать путь", dueDate: "20.05",
+    items: [
+      {ru:"Как добраться до центра?",pt:"Como chego ao centro?",pron:"Ко-му ше-гу ау сен-тру",key:"Como chego",extra:"chego = я доберусь/дойду"},
+      {ru:"Рядом с банком.",pt:"Perto do banco.",pron:"Пер-ту ду бан-ку",key:"perto de",extra:"longe de = далеко от"},
+      {ru:"На углу.",pt:"Na esquina.",pron:"На эс-ки-на",key:"na esquina",extra:"na esquina da rua — на углу улицы"},
+      {ru:"Второй поворот направо.",pt:"A segunda à direita.",pron:"А се-гун-да а джи-рей-та",key:"à direita",extra:"а primeira = первый поворот"},
+      {ru:"Перейди дорогу.",pt:"Atravesse a rua.",pron:"А-тра-вес-си а Ху-а",key:"atravessar",extra:"faixa de pedestres = пешеходный переход"},
+      {ru:"Это далеко?",pt:"É longe daqui?",pron:"Э лон-жи да-ки",key:"longe daqui",extra:"Não, são 5 minutos — нет, 5 минут"},
+      {ru:"На автобусе / пешком",pt:"De ônibus / A pé",pron:"Джи о-ни-бус / А пе",key:"de ônibus / a pé",extra:"de carro = на машине, de Uber = на Убере"},
+      {ru:"Остановка рядом.",pt:"O ponto está perto.",pron:"У пон-ту эс-та пер-ту",key:"ponto",extra:"ponto de ônibus = автобусная остановка"},
+      {ru:"Налево перед светофором.",pt:"À esquerda antes do semáforo.",pron:"А эс-кер-да ан-чис ду се-ма-фо-ру",key:"antes de",extra:"depois de = после"},
+      {ru:"Я заблудился.",pt:"Estou perdido.",pron:"Эс-тоу пер-джи-ду",key:"perdido",extra:"perdida (жен.) — Me ajuda? Мне помочь?"}
+    ,
+      {ru:"Далеко / близко.",pt:"Longe / perto.",pron:"Лонжи / перту",key:"longe/perto",extra:"расстояние"},
+      {ru:"Север / юг / запад / восток.",pt:"Norte / sul / oeste / leste.",pron:"Норти / сул / оэсти / лести",key:"pontos cardeais",extra:"стороны света"},
+      {ru:"Спереди / сзади / сбоку.",pt:"Na frente / atrás / ao lado.",pron:"На фрэнчи / атрас / ау ладу",key:"posição",extra:"пространственное положение"},
+      {ru:"Поверни налево на следующем углу.",pt:"Vire à esquerda na próxima esquina.",pron:"Вири а эскерда на просима эскина",key:"esquina",extra:"угол улицы"}]
+  },
+  {
+    id: "weather", linearId: "IGO-110", emoji: "🌤️", title: "18. Погода", desc: "Как описать погоду", dueDate: "23.05",
+    items: [
+      {ru:"Какая погода сегодня?",pt:"Como está o tempo hoje?",pron:"Ко-му эс-та у тен-пу о-жи",key:"Como está o tempo",extra:"o tempo = погода"},
+      {ru:"Жарко.",pt:"Está quente.",pron:"Эс-та кен-чи",key:"quente",extra:"frio = холодно, fresco = прохладно"},
+      {ru:"Идёт дождь.",pt:"Está chovendo.",pron:"Эс-та шо-вен-ду",key:"chovendo",extra:"vai chover = будет дождь"},
+      {ru:"Солнечно.",pt:"Está ensolarado.",pron:"Эс-та эн-со-ла-ра-ду",key:"ensolarado",extra:"tem sol = есть солнце"},
+      {ru:"Облачно.",pt:"Está nublado.",pron:"Эс-та ну-бла-ду",key:"nublado",extra:"parcialmente nublado = переменная облачность"},
+      {ru:"Гроза.",pt:"Tempestade.",pron:"Тен-пес-та-джи",key:"tempestade",extra:"raio = молния, trovão = гром"},
+      {ru:"Влажно.",pt:"Está úmido.",pron:"Эс-та у-ми-ду",key:"úmido",extra:"Floripa tem muito calor e umidade"},
+      {ru:"Ветрено.",pt:"Está ventando.",pron:"Эс-та вен-тан-ду",key:"ventando",extra:"vento forte = сильный ветер"},
+      {ru:"Какая температура?",pt:"Qual é a temperatura?",pron:"Куал э а тен-пе-ра-ту-ра",key:"temperatura",extra:"Estão 30 graus — 30 градусов"},
+      {ru:"Прогноз на завтра?",pt:"Qual é a previsão para amanhã?",pron:"Куал э а пре-ви-заун па-ра а-ма-нья",key:"previsão",extra:"previsão do tempo = прогноз погоды"}
+    ,
+      {ru:"Сколько градусов?",pt:"Quantos graus?",pron:"Куантус граус?",key:"graus",extra:"спросить температуру"}]
+  },
+  {
+    id: "vocabulary", linearId: "IGO-111", emoji: "📖", title: "19. Спектр новых слов", desc: "Тематический словарный запас", dueDate: "27.05",
+    items: [
+      {ru:"Еда / ресторан",pt:"Comida / Restaurante",pron:"Ко-ми-да / Хес-тау-ран-чи",key:"comida",extra:"cardápio = меню, garçom = официант"},
+      {ru:"Работа / офис",pt:"Trabalho / Escritório",pron:"Тра-ба-лью / Эс-кри-то-ри-у",key:"trabalho",extra:"reunião = встреча, prazo = дедлайн"},
+      {ru:"Семья",pt:"Família",pron:"Фа-ми-ли-а",key:"família",extra:"filho = сын, filha = дочь, esposa = жена"},
+      {ru:"Здоровье",pt:"Saúde",pron:"Са-у-джи",key:"saúde",extra:"médico = врач, remédio = лекарство"},
+      {ru:"Технологии",pt:"Tecnologia",pron:"Тек-но-ло-жи-а",key:"tecnologia",extra:"aplicativo = приложение, senha = пароль"},
+      {ru:"Деньги / банк",pt:"Dinheiro / Banco",pron:"Джи-ньей-ру / Бан-ку",key:"dinheiro",extra:"pagar = платить, receber = получать"},
+      {ru:"Путешествие",pt:"Viagem",pron:"Виа-жейн",key:"viagem",extra:"passaporte = паспорт, voo = рейс"},
+      {ru:"Спорт",pt:"Esporte",pron:"Эс-пор-чи",key:"esporte",extra:"treinar = тренироваться, correr = бегать"},
+      {ru:"Природа / пляж",pt:"Natureza / Praia",pron:"На-ту-ре-за / Пра-я",key:"praia",extra:"mar = море, areia = песок, onda = волна"},
+      {ru:"Дом / квартира",pt:"Casa / Apartamento",pron:"Ка-за / А-пар-та-мен-ту",key:"casa",extra:"aluguel = аренда, condomínio = ТСЖ"},
+      {ru:"Эмоции / чувства",pt:"Emoções / Sentimentos",pron:"Е-мо-соинш / Сен-чи-мен-туш",key:"emoções",extra:"amor = любовь, saudade = тоска по кому-то"},
+      {ru:"Время / расписание",pt:"Tempo / Horário",pron:"Тен-пу / О-ра-ри-у",key:"horário",extra:"horário de funcionamento = часы работы"}
+    ,
+      {ru:"Квартира / стена / пол / потолок.",pt:"Apartamento / parede / chão / teto.",pron:"Апартамэнту / пареди / шау / тету",key:"apartamento",extra:"Тема: квартира"},
+      {ru:"Чемодан / самолёт / билет.",pt:"Mala / avião / passagem.",pron:"Мала / авиан / пассажен",key:"viagem",extra:"Тема: путешествие"},
+      {ru:"Улица / машина / тротуар.",pt:"Rua / carro / calçada.",pron:"Хуа / карру / калсада",key:"cidade",extra:"Тема: город"},
+      {ru:"Фрукты / овощи / мясо.",pt:"Frutas / legumes / carne.",pron:"Фрутас / легумис / карни",key:"comida",extra:"Тема: еда"},
+      {ru:"Семья / работа / учёба / спорт.",pt:"Família / trabalho / estudo / esporte.",pron:"Фамилия / трабалью / эстуду / эспорчи",key:"temas",extra:"Базовые тематические слова"},
+      {ru:"Одежда / электроника / телефон.",pt:"Roupa / eletrônicos / telefone.",pron:"Хоупа / электроникус / телефони",key:"objetos",extra:"Повседневные категории"}]
+  }
+];
+
+// Linear issue IDs for marking done
+const LINEAR_ISSUE_IDS = {
+  "IGO-93": "f075f797-bb1b-4f03-830e-0e3a219d52f3",
+  "IGO-94": "e16448ba-8394-453c-89a9-3a8de3a5dd6e",
+  "IGO-95": "ed1ea57a-a3a8-434e-ae47-3305ff35a320",
+  "IGO-96": "28e680d2-473f-4493-8239-45f2e8584e67",
+  "IGO-97": "b8327025-5d35-41ce-98e6-14786e5071a5",
+  "IGO-98": "9254ae35-8131-42a9-aee8-bfeb97dee5b5",
+  "IGO-99": "3650cea7-280c-4c2a-9d5c-6b64f18768b5",
+  "IGO-100": "b7449464-4ff4-47a5-80e0-6b8ef8e22eb7",
+  "IGO-101": "576c1629-7a99-4223-a1a8-600c7c653a14",
+  "IGO-102": "edc2c863-741f-4c91-b4d6-d3433db2d6e4",
+  "IGO-103": "936035a9-c1b3-4d25-823d-9ab9cfe91cca",
+  "IGO-104": "7510306a-6096-471b-8691-fcf516a42d26",
+  "IGO-105": "7aab783c-5d0c-4bd3-9587-8aebc131ae28",
+  "IGO-106": "6c6c95a1-2754-4b12-939d-be6ab8ef13c4",
+  "IGO-107": "a4205b16-11a4-489e-9e45-07fad1200686",
+  "IGO-108": "3ff561ed-a13d-4184-84d3-277c047aad0d",
+  "IGO-109": "84a866f6-fffa-437a-ab21-eeb8f6ebeb21",
+  "IGO-110": "f8cafb68-5690-4850-a974-cb547b860453",
+  "IGO-111": "c3dc5e70-f188-4322-a500-ae6b68776100"
+};
+
+const DONE_STATE = "0eea563b-99b9-4aee-a076-9ff9f47b3a8f";
+
+// ===================== STATE =====================
+let S = { currentTopic: null, mode: 'flashcard', queue: [], cur: 0, revealed: false, scores: {}, streak: 0, rOk: 0, rHard: 0, rWrong: 0, currentPt: '' };
+
+// ===================== STORAGE =====================
+const STORAGE_KEY = 'pt_b2_scores';
+const BACKUP_KEY = 'pt_b2_scores_backup';
+const VERSION_KEY = 'pt_b2_version';
+const APP_VERSION = '2.1'; // bump this when items change
+
+function save() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(S.scores));
+  } catch(e) { console.warn('Save failed', e); }
+}
+
+function load() {
+  try {
+    // Version check: if version changed, backup old progress before loading
+    const savedVersion = localStorage.getItem(VERSION_KEY);
+    if (savedVersion !== APP_VERSION) {
+      const existing = localStorage.getItem(STORAGE_KEY);
+      if (existing) {
+        // Backup previous progress under a dated key
+        const backupKey = BACKUP_KEY + '_' + (savedVersion || 'legacy') + '_' + Date.now();
+        localStorage.setItem(backupKey, existing);
+        console.log('Progress backed up as', backupKey);
+      }
+      localStorage.setItem(VERSION_KEY, APP_VERSION);
+    }
+
+    const s = localStorage.getItem(STORAGE_KEY);
+    if (s) {
+      const parsed = JSON.parse(s);
+      // Merge: keep existing progress, don't wipe unknown keys
+      S.scores = parsed;
+    }
+  } catch(e) {
+    console.warn('Load failed, starting fresh', e);
+    S.scores = {};
+  }
+}
+
+// Emergency export: call exportProgress() in console to get JSON
+window.exportProgress = function() {
+  const data = localStorage.getItem(STORAGE_KEY);
+  console.log('=== PROGRESS EXPORT ===\n' + data);
+  return data;
+};
+
+// Emergency import: call importProgress('...json...') in console
+window.importProgress = function(json) {
+  try {
+    const parsed = JSON.parse(json);
+    S.scores = parsed;
+    save();
+    renderTopics();
+    console.log('Progress imported successfully');
+  } catch(e) { console.error('Import failed', e); }
+};
+
+function getTopicProgress(topicId) {
+  const sc = S.scores[topicId] || {};
+  const topic = TOPICS.find(t => t.id === topicId);
+  if (!topic) return 0;
+  const learned = topic.items.filter(item => sc[item.pt] === 2).length;
+  return Math.round(learned / topic.items.length * 100);
+}
+
+function getTotalStats() {
+  let totalItems = 0, learnedItems = 0, doneTopic = 0;
+  TOPICS.forEach(t => {
+    totalItems += t.items.length;
+    const sc = S.scores[t.id] || {};
+    const learned = t.items.filter(item => sc[item.pt] === 2).length;
+    learnedItems += learned;
+    if (learned === t.items.length) doneTopic++;
+  });
+  return { totalItems, learnedItems, doneTopic, pct: Math.round(learnedItems/totalItems*100) };
+}
+
+// ===================== TOPIC SCREEN =====================
+function renderTopics() {
+  const stats = getTotalStats();
+  document.getElementById('overallFill').style.width = stats.pct + '%';
+  document.getElementById('overallDone').textContent = stats.doneTopic;
+  document.getElementById('overallCards').textContent = stats.learnedItems;
+  document.getElementById('overallPct').textContent = stats.pct + '%';
+
+  const grid = document.getElementById('topicsGrid');
+  grid.innerHTML = '';
+  TOPICS.forEach(t => {
+    const pct = getTopicProgress(t.id);
+    const done = pct === 100;
+    
+    const card = document.createElement('div');
+    card.className = 'topic-card' + (done ? ' completed' : '');
+    card.onclick = () => openTopic(t.id);
+
+    const fillColor = done ? 'var(--green)' : pct > 0 ? 'var(--accent)' : 'var(--surface2)';
+    const badge = done ? '✅' : pct > 0 ? `${pct}%` : t.dueDate;
+    const badgeStyle = done ? 'background:rgba(52,211,153,.15);color:var(--green)' :
+                       pct > 0 ? 'background:rgba(99,102,241,.15);color:var(--accent)' :
+                       'background:var(--surface2);color:var(--muted)';
+
+    card.innerHTML = `
+      <div class="tc-emoji">${t.emoji}</div>
+      <div class="tc-info">
+        <div class="tc-title">${t.title}</div>
+        <div class="tc-meta">${t.desc} · ${t.items.length} карточек</div>
+        <div class="tc-bar"><div class="tc-fill" style="width:${pct}%;background:${fillColor}"></div></div>
+      </div>
+      <div class="tc-badge" style="${badgeStyle}">${badge}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function openTopic(topicId) {
+  const topic = TOPICS.find(t => t.id === topicId);
+  if (!topic) return;
+  S.currentTopic = topicId;
+  if (!S.scores[topicId]) S.scores[topicId] = {};
+
+  document.getElementById('topicScreen').style.display = 'none';
+  const trainer = document.getElementById('trainerScreen');
+  trainer.style.display = 'flex';
+  document.getElementById('trainerTitle').textContent = topic.emoji + ' ' + topic.title.split('. ')[1];
+
+  startRound();
+}
+
+function goBack() {
+  document.getElementById('trainerScreen').style.display = 'none';
+  document.getElementById('topicScreen').style.display = 'block';
+  renderTopics();
+  window.history.pushState({}, '', window.location.pathname);
+}
+
+// ===================== ROUND =====================
+function startRound() {
+  const topic = TOPICS.find(t => t.id === S.currentTopic);
+  const sc = S.scores[S.currentTopic];
+  // Prioritize unknown/hard items
+  const weak = topic.items.map((v,i)=>i).filter(i=>(sc[topic.items[i].pt]||0)<2);
+  S.queue = shuffle(weak.length > 0 ? weak : topic.items.map((_, i) => i));
+  S.cur = 0; S.rOk = S.rHard = S.rWrong = 0;
+  setMode(S.mode);
+}
+
+function setMode(mode) {
+  S.mode = mode;
+  ['flashcard','quiz','list'].forEach(m => {
+    document.getElementById('tab-'+m).classList.toggle('active', m === mode);
+  });
+  showModeUI(mode);
+  S.cur = 0;
+  loadCard();
+}
+
+function showModeUI(m) {
+  ['modeFlashcard','modeQuiz','modeList','modeResults'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+  const map = {flashcard:'modeFlashcard',quiz:'modeQuiz',list:'modeList',results:'modeResults'};
+  document.getElementById(map[m] || 'modeFlashcard').style.display = 'block';
+}
+
+function loadCard() {
+  if (S.cur >= S.queue.length) { showResults(); return; }
+  updateTrainerProgress();
+  if (S.mode === 'flashcard') loadFlash();
+  else if (S.mode === 'quiz') loadQuiz();
+  else if (S.mode === 'list') loadListMode();
+}
+
+function updateTrainerProgress() {
+  const topic = TOPICS.find(t => t.id === S.currentTopic);
+  const sc = S.scores[S.currentTopic];
+  const learned = topic.items.filter(item => sc[item.pt] === 2).length;
+  const pct = Math.round(learned / topic.items.length * 100);
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('trainerProgress').textContent = `${learned}/${topic.items.length}`;
+  document.getElementById('cardCounter').textContent = `${S.cur+1} / ${S.queue.length}`;
+  document.getElementById('quizCounter').textContent = `${S.cur+1} / ${S.queue.length}`;
+}
+
+// ===================== FLASHCARD =====================
+function loadFlash() {
+  showModeUI('flashcard');
+  const topic = TOPICS.find(t => t.id === S.currentTopic);
+  const item = topic.items[S.queue[S.cur]];
+  S.revealed = false; S.currentPt = item.pt;
+
+  document.getElementById('fcCtx').textContent = topic.emoji + ' ' + topic.title.split('. ')[1];
+  document.getElementById('fcEmoji').textContent = item.key ? '🔑' : '💬';
+  document.getElementById('fcFront').textContent = item.ru;
+  document.getElementById('fcTap').style.display = 'block';
+  document.getElementById('fcBack').style.display = 'none';
+  document.getElementById('cardActions').style.display = 'none';
+  document.getElementById('fcAnswer').textContent = item.pt;
+  document.getElementById('fcPron').textContent = item.pron ? '[' + item.pron + ']' : '';
+  document.getElementById('fcExtra').innerHTML = item.extra ? item.extra.replace(/\//g, '<br>') : '';
+}
+
+function revealCard() {
+  if (S.revealed) return;
+  S.revealed = true;
+  document.getElementById('fcTap').style.display = 'none';
+  document.getElementById('fcBack').style.display = 'block';
+  document.getElementById('cardActions').style.display = 'flex';
+  speak(S.currentPt);
+}
+
+function speakNow(e) { e.stopPropagation(); speak(S.currentPt); }
+
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'pt-BR'; u.rate = 0.85;
+  window.speechSynthesis.speak(u);
+}
+
+function rate(score) {
+  const topic = TOPICS.find(t => t.id === S.currentTopic);
+  const idx = S.queue[S.cur]; const item = TOPICS.find(t => t.id === S.currentTopic).items[idx];
+  S.scores[S.currentTopic][item.pt] = score;
+  
+  if (score === 2) { S.rOk++; S.streak++; }
+  else if (score === 1) { S.rHard++; S.streak = 0; }
+  else { S.rWrong++; S.streak = 0; }
+  
+  if (score < 2 && S.cur < S.queue.length - 1) {
+    const pos = Math.min(S.cur + 3 + Math.floor(Math.random()*3), S.queue.length);
+    S.queue.splice(pos, 0, S.queue[S.cur]);
+  }
+  S.cur++;
+  save();
+  checkTopicComplete();
+  loadCard();
+}
+
+// ===================== QUIZ =====================
+function loadQuiz() {
+  showModeUI('quiz');
+  const topic = TOPICS.find(t => t.id === S.currentTopic);
+  const item = topic.items[S.queue[S.cur]];
+  S.currentPt = item.pt;
+
+  document.getElementById('quizCtx').textContent = topic.emoji + ' ' + topic.title.split('. ')[1];
+  document.getElementById('quizEmoji').textContent = '🔤';
+  document.getElementById('quizPhrase').textContent = item.ru;
+  document.getElementById('quizFb').textContent = '';
+  document.getElementById('quizFb').className = 'quiz-fb';
+
+  const correct = item.pt;
+  const others = shuffle(topic.items.filter(v => v.pt !== item.pt)).slice(0,3).map(i => i.pt);
+  const opts = shuffle([correct, ...others]);
+
+  const c = document.getElementById('quizOpts');
+  c.innerHTML = '';
+  opts.forEach(opt => {
+    const btn = document.createElement('div');
+    btn.className = 'quiz-opt';
+    btn.textContent = opt;
+    btn.onclick = () => checkQuiz(btn, opt, correct, item);
+    c.appendChild(btn);
+  });
+}
+
+function checkQuiz(btn, sel, correct, item) {
+  document.querySelectorAll('.quiz-opt').forEach(b => b.onclick = null);
+  const ok = sel === correct;
+  btn.classList.add(ok ? 'correct' : 'wrong');
+  if (!ok) document.querySelectorAll('.quiz-opt').forEach(b => { if(b.textContent === correct) b.classList.add('show-correct'); });
+  
+  S.scores[S.currentTopic][item.pt] = ok ? 2 : 0;
+  
+  if(ok){ S.rOk++; S.streak++; speak(correct); } else { S.rWrong++; S.streak=0; }
+  
+  const fb = document.getElementById('quizFb');
+  fb.textContent = ok ? `✅ Верно!` : `❌ ${item.pt} [${item.pron||''}]`;
+  fb.className = 'quiz-fb ' + (ok ? 'ok' : 'fail');
+  save(); checkTopicComplete();
+  setTimeout(() => { S.cur++; loadCard(); }, 1500);
+}
+
+// ===================== LIST MODE =====================
+let currentModeList = [];
+
+function loadListMode() {
+  showModeUI('list');
+  const topic = TOPICS.find(t => t.id === S.currentTopic);
+  if (!currentModeList.length || currentModeList.length !== topic.items.length) {
+    currentModeList = topic.items.map((_, i) => i);
+  }
+  renderModeList();
+}
+
+function sortModeList(type) {
+  const topic = TOPICS.find(t => t.id === S.currentTopic);
+  if (type === 'shuffle') {
+    currentModeList = shuffle(topic.items.map((_, i) => i));
+  } else {
+    currentModeList = topic.items.map((_, i) => i);
+  }
+  renderModeList();
+}
+
+function renderModeList() {
+  const topic = TOPICS.find(t => t.id === S.currentTopic);
+  const sc = S.scores[S.currentTopic] || {};
+  
+  document.getElementById('modeListContainer').innerHTML = currentModeList.map(i => {
+    const v = topic.items[i];
+    const s = sc[v.pt];
+    const cls = s===2?'s2':s===0?'s0':s===1?'s1':'';
+    const bc = s===2?'background:rgba(52,211,153,.15);color:var(--green)':s===0?'background:rgba(248,113,113,.15);color:var(--red)':s===1?'background:rgba(251,191,36,.15);color:var(--yellow)':'background:var(--surface2);color:var(--muted)';
+    const bl = s===2?'✅ Знаю':s===0?'❌ Сложно':s===1?'😅 Трудно':'🆕 Новый';
+    
+    return `<div class="verb-item ${cls}">
+      <div class="vi-top">
+        <div class="vi-left">
+          <div class="vi-emoji-sm" onclick="speak('${v.pt.replace(/'/g,"\\'")}')" style="cursor:pointer">🔊</div>
+          <div><div class="vi-ru">${v.ru}</div><div class="vi-pt">${v.pt}</div><div class="vi-inf">[${v.pron||''}]</div></div>
+        </div>
+        <div class="vi-badge" style="${bc}">${bl}</div>
+      </div>
+      ${v.extra ? `<div class="vi-phrase"><div class="vi-phrase-pt" style="color:var(--muted);font-size:12px">${v.extra.replace(/\//g, '<br>')}</div></div>` : ''}
+      <div style="display:flex; gap:6px; margin-top:12px;">
+        <button onclick="rateInList('${v.pt.replace(/'/g,"\\'")}', 2)" style="flex:1;padding:8px;border:none;border-radius:8px;background:rgba(52,211,153,.15);color:var(--green);font-weight:700;cursor:pointer">✅</button>
+        <button onclick="rateInList('${v.pt.replace(/'/g,"\\'")}', 1)" style="flex:1;padding:8px;border:none;border-radius:8px;background:rgba(251,191,36,.15);color:var(--yellow);font-weight:700;cursor:pointer">😅</button>
+        <button onclick="rateInList('${v.pt.replace(/'/g,"\\'")}', 0)" style="flex:1;padding:8px;border:none;border-radius:8px;background:rgba(248,113,113,.15);color:var(--red);font-weight:700;cursor:pointer">❌</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+window.rateInList = function(ptKey, score) {
+  if (!S.scores[S.currentTopic]) S.scores[S.currentTopic] = {};
+  S.scores[S.currentTopic][ptKey] = score;
+  save();
+  updateTrainerProgress();
+  checkTopicComplete();
+  renderModeList();
+};
+
+// ===================== RESULTS =====================
+function showResults() {
+  showModeUI('results');
+  const total = S.rOk + S.rHard + S.rWrong;
+  const pct = total ? Math.round(S.rOk/total*100) : 0;
+  document.getElementById('resOk').textContent = S.rOk;
+  document.getElementById('resHard').textContent = S.rHard;
+  document.getElementById('resWrong').textContent = S.rWrong;
+  document.getElementById('resEmoji').textContent = pct>=80?'🔥':pct>=60?'💪':'📚';
+  document.getElementById('resTitle').textContent = pct>=80?'Отлично!':pct>=60?'Хороший прогресс!':'Продолжай!';
+  document.getElementById('resSub').textContent = `${pct}% из ${total} карточек`;
+
+  const topicPct = getTopicProgress(S.currentTopic);
+  const r100 = document.getElementById('res100');
+  if (topicPct === 100) {
+    r100.style.display = 'block';
+    r100.textContent = '🎉 Тема выучена на 100%! Задача в Linear отмечена как Done.';
+  } else {
+    r100.style.display = 'none';
+  }
+}
+
+function nextRound() {
+  startRound();
+}
+
+// ===================== LINEAR INTEGRATION =====================
+function checkTopicComplete() {
+  const topic = TOPICS.find(t => t.id === S.currentTopic);
+  const sc = S.scores[S.currentTopic];
+  const learned = topic.items.filter(item => sc[item.pt] === 2).length;
+  if (learned === topic.items.length && topic.linearId) {
+    markLinearDone(topic.linearId);
+  }
+}
+
+function markLinearDone(linearId) {
+  const issueId = LINEAR_ISSUE_IDS[linearId];
+  if (!issueId) return;
+  fetch('/linear-done', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({issueId, stateId: DONE_STATE})
+  }).catch(() => {});
+}
+
+// ===================== UTILS =====================
+function shuffle(a) {
+  const arr = [...a];
+  for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  return arr;
+}
+
+// ===================== URL ROUTING =====================
+function checkUrlTopic() {
+  const params = new URLSearchParams(window.location.search);
+  const topic = params.get('topic');
+  if (topic) {
+    const found = TOPICS.find(t => t.id === topic);
+    if (found) openTopic(found.id);
+  }
+}
+
+// ===================== INIT =====================
+load();
+renderTopics();
+checkUrlTopic();
+</script>
+</body>
+</html>
