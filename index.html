@@ -133,6 +133,10 @@
     </div>
   </div>
 
+  <div id="restoreNotice" style="display:none;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);border-radius:12px;padding:12px 14px;margin-bottom:12px;font-size:13px;">
+    ⚠️ Найден бекап прогресса. <span style="color:var(--yellow);font-weight:700;cursor:pointer;text-decoration:underline;" onclick="restoreFromBackup()">Восстановить →</span>
+  </div>
+
   <div class="section-label">Темы курса</div>
   <div class="topics-grid" id="topicsGrid"></div>
 </div>
@@ -1032,7 +1036,19 @@ const TOPICS = [
       {ru:"Первый / второй / третий.",pt:"Primeiro / segundo / terceiro.",pron:"Примейру / сегунду / терсейру",key:"ordinais",extra:"Порядковые числительные"},
       {ru:"Мне тридцать лет.",pt:"Tenho trinta anos.",pron:"Тэнью тринта анус",key:"trinta anos",extra:"Возраст"},
       {ru:"Я родился в 1988 году.",pt:"Nasci em 1988.",pron:"Наси эм мил новесентус и ойтента и ойту",key:"nasci",extra:"Когда родился"},
-      {ru:"Пятнадцатое сентября.",pt:"Quinze de setembro.",pron:"Кинзи джи сетэмбру",key:"datas",extra:"Формат дат"}]
+      {ru:"Пятнадцатое сентября.",pt:"Quinze de setembro.",pron:"Кинзи джи сетэмбру",key:"datas",extra:"Формат дат"}
+      ,
+      {ru:"Четыре / пять / шесть.",pt:"Quatro / cinco / seis.",pron:"Куатру / синку / сейс",key:"4/5/6",extra:""},
+      {ru:"Семь / восемь / девять / десять.",pt:"Sete / oito / nove / dez.",pron:"Сечи / ойту / нови / дес",key:"7/8/9/10",extra:""},
+      {ru:"Одиннадцать / двенадцать.",pt:"Onze / doze.",pron:"Онзи / дози",key:"11/12",extra:""},
+      {ru:"Двадцать / тридцать.",pt:"Vinte / trinta.",pron:"Винчи / тринта",key:"20/30",extra:""},
+      {ru:"Сорок / пятьдесят / шестьдесят.",pt:"Quarenta / cinquenta / sessenta.",pron:"Куарента / синкуента / сесента",key:"40/50/60",extra:""},
+      {ru:"Семьдесят / восемьдесят / девяносто.",pt:"Setenta / oitenta / noventa.",pron:"Сетента / ойтента / новента",key:"70/80/90",extra:""},
+      {ru:"Четвёртый / пятый.",pt:"Quarto / quinto.",pron:"Куарту / кинту",key:"4o/5o",extra:""},
+      {ru:"Десятый / сотый.",pt:"Décimo / centésimo.",pron:"Десиму / сентезиму",key:"10o/100o",extra:""},
+      {ru:"Сколько тебе лет?",pt:"Quantos anos você tem?",pron:"Куантус анус восэ тэй?",key:"anos",extra:"Уже есть, повторение"},
+      {ru:"Когда ты родился?",pt:"Quando você nasceu?",pron:"Куанду восэ наceu?",key:"nasceu",extra:""},
+      {ru:"Ты какого года рождения?",pt:"Em que ano você nasceu?",pron:"Эм ки ану восэ наceu?",key:"que ano",extra:""}]
   },
   {
     id: "time", linearId: "IGO-104", emoji: "⏰", title: "12. Всё о времени", desc: "Дни, месяцы, прошлое, будущее", dueDate: "04.05",
@@ -1052,7 +1068,21 @@ const TOPICS = [
       {ru:"В понедельник.",pt:"Na segunda-feira.",pron:"На сегунда-фейра",key:"segunda-feira",extra:"Дни недели"},
       {ru:"В январе / в феврале.",pt:"Em janeiro / em fevereiro.",pron:"Эм жанейру / эм феверейру",key:"janeiro",extra:"Месяцы"},
       {ru:"Сколько времени?",pt:"Que horas são?",pron:"Ки орас саун?",key:"Que horas são",extra:"Спросить текущее время"},
-      {ru:"Полшестого.",pt:"Cinco e meia.",pron:"Синку и мейя",key:"e meia",extra:"Половина часа"}]
+      {ru:"Полшестого.",pt:"Cinco e meia.",pron:"Синку и мейя",key:"e meia",extra:"Половина часа"}
+      ,
+      {ru:"Потом.",pt:"Depois.",pron:"Депойс",key:"depois",extra:"depois de = после чего-то"},
+      {ru:"Позже.",pt:"Mais tarde.",pron:"Майс тарди",key:"mais tarde",extra:""},
+      {ru:"Обычно.",pt:"Normalmente / Geralmente.",pron:"Нормалменти / Жерalment",key:"normalmente",extra:""},
+      {ru:"Секунда / Минута.",pt:"Segundo / Minuto.",pron:"Сегунду / Минуту",key:"segundo/minuto",extra:""},
+      {ru:"Неделя.",pt:"Semana.",pron:"Семана",key:"semana",extra:"esta semana = эта неделя"},
+      {ru:"Месяц.",pt:"Mês.",pron:"Мес",key:"mês",extra:"este mês = этот месяц"},
+      {ru:"Год.",pt:"Ano.",pron:"Ану",key:"ano",extra:"este ano = в этом году"},
+      {ru:"Рано.",pt:"Cedo.",pron:"Седу",key:"cedo",extra:"acordar cedo = вставать рано"},
+      {ru:"Поздно.",pt:"Tarde.",pron:"Тарди",key:"tarde",extra:"chegar tarde = приходить поздно"},
+      {ru:"Вовремя.",pt:"Na hora / Pontualmente.",pron:"На ора / Понтуалменти",key:"na hora",extra:"Chegou na hora! = Пришёл вовремя!"},
+      {ru:"Редко.",pt:"Raramente.",pron:"Харарменти",key:"raramente",extra:""},
+      {ru:"Недавно.",pt:"Recentemente.",pron:"Ресентементи",key:"recentemente",extra:"Há pouco tempo — совсем недавно"},
+      {ru:"В последнее время.",pt:"Ultimamente.",pron:"Улчиматаменти",key:"ultimamente",extra:""}]
   },
   {
     id: "adjectives", linearId: "IGO-105", emoji: "🎨", title: "13. Прилагательные и цвета", desc: "Описание, сравнение, антонимы", dueDate: "08.05",
@@ -1072,7 +1102,23 @@ const TOPICS = [
       {ru:"Дорогой / дешёвый.",pt:"Caro / barato.",pron:"Кару / барату",key:"caro/barato",extra:"Цена"},
       {ru:"Белый / чёрный.",pt:"Branco / preto.",pron:"Бранку / прету",key:"branco/preto",extra:"Цвета"},
       {ru:"Красный / синий / зелёный.",pt:"Vermelho / azul / verde.",pron:"Вермелью / азул / верджи",key:"cores",extra:"Базовые цвета"},
-      {ru:"Эта машина красивее, чем та.",pt:"Este carro é mais bonito que aquele.",pron:"Эсти карру э майс бониту ки акели",key:"mais ... que",extra:"Сравнительная степень"}]
+      {ru:"Эта машина красивее, чем та.",pt:"Este carro é mais bonito que aquele.",pron:"Эсти карру э майс бониту ки акели",key:"mais ... que",extra:"Сравнительная степень"}
+      ,
+      {ru:"Толстый / худой.",pt:"Gordo / Magro.",pron:"Горду / Магру",key:"gordo/magro",extra:""},
+      {ru:"Новый / старый.",pt:"Novo / Velho.",pron:"Нову / Велью",key:"novo/velho",extra:""},
+      {ru:"Длинный / короткий.",pt:"Comprido / Curto.",pron:"Компридо / Курту",key:"comprido/curto",extra:""},
+      {ru:"Высокий / низкий.",pt:"Alto / Baixo.",pron:"Алту / Байшу",key:"alto/baixo",extra:""},
+      {ru:"Умный / глупый.",pt:"Inteligente / Burro.",pron:"Интелижэнти / Буру",key:"inteligente/burro",extra:""},
+      {ru:"Вкусный / невкусный.",pt:"Gostoso / Ruim.",pron:"Гостозу / Хуин",key:"gostoso/ruim",extra:"Que gostoso! — Как вкусно!"},
+      {ru:"Серый.",pt:"Cinza.",pron:"Синза",key:"cinza",extra:""},
+      {ru:"Розовый / фиолетовый.",pt:"Rosa / Roxo.",pron:"Хоза / Хошу",key:"rosa/roxo",extra:""},
+      {ru:"Коричневый.",pt:"Marrom.",pron:"Маром",key:"marrom",extra:""},
+      {ru:"Отличный / классный.",pt:"Ótimo / Legal.",pron:"Отиму / Легал",key:"ótimo/legal",extra:"Que legal! — Как классно!"},
+      {ru:"Смешной / серьёзный.",pt:"Engraçado / Sério.",pron:"Энграсаду / Сэриу",key:"engraçado/sério",extra:""},
+      {ru:"Богатый / бедный.",pt:"Rico / Pobre.",pron:"Хику / Побри",key:"rico/pobre",extra:""},
+      {ru:"Чистый / грязный.",pt:"Limpo / Sujo.",pron:"Лимпу / Сужу",key:"limpo/sujo",extra:""},
+      {ru:"Лёгкий / тяжёлый.",pt:"Leve / Pesado.",pron:"Леви / Пезаду",key:"leve/pesado",extra:""},
+      {ru:"Простой / сложный.",pt:"Simples / Difícil.",pron:"Симплис / Дифисил",key:"simples/difícil",extra:""}]
   },
   {
     id: "states", linearId: "IGO-106", emoji: "😊", title: "14. Состояния и эмоции", desc: "Как ты себя чувствуешь?", dueDate: "11.05",
@@ -1089,7 +1135,13 @@ const TOPICS = [
       {ru:"Как ты себя чувствуешь?",pt:"Como você está se sentindo?",pron:"Ко-му во-сэ эс-та си сен-тин-ду",key:"se sentindo",extra:"Estou me sentindo bem — чувствую себя хорошо"}
     ,
       {ru:"Я боюсь.",pt:"Estou com medo.",pron:"Эстоу ком меду",key:"com medo",extra:"страх"},
-      {ru:"Я сонный.",pt:"Estou com sono.",pron:"Эстоу ком сону",key:"com sono",extra:"сонный / хочется спать"}]
+      {ru:"Я сонный.",pt:"Estou com sono.",pron:"Эстоу ком сону",key:"com sono",extra:"сонный / хочется спать"}
+      ,
+      {ru:"Я несчастен.",pt:"Estou infeliz.",pron:"Эстоу инфелис",key:"infeliz",extra:"несчастлив / плохо"},
+      {ru:"Я встревожен / беспокоюсь.",pt:"Estou preocupado.",pron:"Эстоу преокупаду",key:"preocupado",extra:"preocupada (жен.)"},
+      {ru:"Я злой / в гневе.",pt:"Estou com raiva.",pron:"Эстоу ком хайва",key:"com raiva",extra:"bravo(a) = злой"},
+      {ru:"Я стесняюсь.",pt:"Estou com vergonha.",pron:"Эстоу ком вергонья",key:"com vergonha",extra:""},
+      {ru:"Мне тепло.",pt:"Estou com calor.",pron:"Эстоу ком калор",key:"com calor",extra:""}]
   },
   {
     id: "mesmo", linearId: "IGO-107", emoji: "🪞", title: "15. Сам / Mesmo / Próprio", desc: "Сам, именно, самый, сам по себе", dueDate: "13.05",
@@ -1105,7 +1157,12 @@ const TOPICS = [
     ,
       {ru:"Сделай сам.",pt:"Faça você mesmo.",pron:"Фаса восэ мезму",key:"você mesmo",extra:"DIY / сделай сам"},
       {ru:"Я сам приготовлю.",pt:"Eu mesmo vou cozinhar.",pron:"Эу мезму воу козиньяр",key:"eu mesmo",extra:"сам сделаю"},
-      {ru:"Она хочет поехать сама.",pt:"Ela quer viajar sozinha.",pron:"Эла кэр виажар созинья",key:"sozinha",extra:"сама / в одиночку"}]
+      {ru:"Она хочет поехать сама.",pt:"Ela quer viajar sozinha.",pron:"Эла кэр виажар созинья",key:"sozinha",extra:"сама / в одиночку"}
+      ,
+      {ru:"Он сам.",pt:"Ele mesmo.",pron:"Эли мезму",key:"ele mesmo",extra:"ele mesma для жен.: ela mesma"},
+      {ru:"Мы сами.",pt:"Nós mesmos.",pron:"Нос мезмус",key:"nós mesmos",extra:""},
+      {ru:"Вы сами.",pt:"Vocês mesmos.",pron:"Восэйс мезмус",key:"vocês mesmos",extra:""},
+      {ru:"Они сами.",pt:"Eles mesmos.",pron:"Элис мезмус",key:"eles mesmos",extra:"elas mesmas (жен.)"}]
   },
   {
     id: "everything", linearId: "IGO-108", emoji: "🌐", title: "16. Всё, что-то, ничего", desc: "Неопределённые местоимения", dueDate: "16.05",
@@ -1141,7 +1198,11 @@ const TOPICS = [
       {ru:"Далеко / близко.",pt:"Longe / perto.",pron:"Лонжи / перту",key:"longe/perto",extra:"расстояние"},
       {ru:"Север / юг / запад / восток.",pt:"Norte / sul / oeste / leste.",pron:"Норти / сул / оэсти / лести",key:"pontos cardeais",extra:"стороны света"},
       {ru:"Спереди / сзади / сбоку.",pt:"Na frente / atrás / ao lado.",pron:"На фрэнчи / атрас / ау ладу",key:"posição",extra:"пространственное положение"},
-      {ru:"Поверни налево на следующем углу.",pt:"Vire à esquerda na próxima esquina.",pron:"Вири а эскерда на просима эскина",key:"esquina",extra:"угол улицы"}]
+      {ru:"Поверни налево на следующем углу.",pt:"Vire à esquerda na próxima esquina.",pron:"Вири а эскерда на просима эскина",key:"esquina",extra:"угол улицы"}
+      ,
+      {ru:"Назад / обратно.",pt:"Para trás / De volta.",pron:"Пара трас / Джи вол-та",key:"para trás",extra:""},
+      {ru:"На юге / на севере.",pt:"No sul / no norte.",pron:"Ну сул / ну нор-чи",key:"no sul/no norte",extra:""},
+      {ru:"На западе / на востоке.",pt:"No oeste / no leste.",pron:"Ну оэсти / ну лести",key:"no oeste/no leste",extra:""}]
   },
   {
     id: "weather", linearId: "IGO-110", emoji: "🌤️", title: "18. Погода", desc: "Как описать погоду", dueDate: "23.05",
@@ -1157,7 +1218,17 @@ const TOPICS = [
       {ru:"Какая температура?",pt:"Qual é a temperatura?",pron:"Куал э а тен-пе-ра-ту-ра",key:"temperatura",extra:"Estão 30 graus — 30 градусов"},
       {ru:"Прогноз на завтра?",pt:"Qual é a previsão para amanhã?",pron:"Куал э а пре-ви-заун па-ра а-ма-нья",key:"previsão",extra:"previsão do tempo = прогноз погоды"}
     ,
-      {ru:"Сколько градусов?",pt:"Quantos graus?",pron:"Куантус граус?",key:"graus",extra:"спросить температуру"}]
+      {ru:"Сколько градусов?",pt:"Quantos graus?",pron:"Куантус граус?",key:"graus",extra:"спросить температуру"}
+      ,
+      {ru:"Холодно.",pt:"Está frio.",pron:"Эста фриу",key:"frio",extra:""},
+      {ru:"Пасмурно / Хмуро.",pt:"Está encoberto / nublado.",pron:"Эста энкобэрту",key:"encoberto",extra:""},
+      {ru:"Дождливо.",pt:"Está chuvoso.",pron:"Эста шувозу",key:"chuvoso",extra:"Chuvoso = дождливый"},
+      {ru:"Снег.",pt:"Neve.",pron:"Неви",key:"neve",extra:"Está nevando = идёт снег"},
+      {ru:"Мороз.",pt:"Geada / Frio intenso.",pron:"Жеада / фриу интенсу",key:"geada",extra:""},
+      {ru:"Солнце (сущ.).",pt:"Sol.",pron:"Сол",key:"sol",extra:"Tem sol hoje — сегодня солнечно"},
+      {ru:"Дождь (сущ.).",pt:"Chuva.",pron:"Шува",key:"chuva",extra:"Vai ter chuva — будет дождь"},
+      {ru:"Жара.",pt:"Calor.",pron:"Калор",key:"calor",extra:"Que calor! — Какая жара!"},
+      {ru:"Холод.",pt:"Frio.",pron:"Фриу",key:"frio",extra:"Que frio! — Как холодно!"}]
   },
   {
     id: "vocabulary", linearId: "IGO-111", emoji: "📖", title: "19. Спектр новых слов", desc: "Тематический словарный запас", dueDate: "27.05",
@@ -1180,7 +1251,15 @@ const TOPICS = [
       {ru:"Улица / машина / тротуар.",pt:"Rua / carro / calçada.",pron:"Хуа / карру / калсада",key:"cidade",extra:"Тема: город"},
       {ru:"Фрукты / овощи / мясо.",pt:"Frutas / legumes / carne.",pron:"Фрутас / легумис / карни",key:"comida",extra:"Тема: еда"},
       {ru:"Семья / работа / учёба / спорт.",pt:"Família / trabalho / estudo / esporte.",pron:"Фамилия / трабалью / эстуду / эспорчи",key:"temas",extra:"Базовые тематические слова"},
-      {ru:"Одежда / электроника / телефон.",pt:"Roupa / eletrônicos / telefone.",pron:"Хоупа / электроникус / телефони",key:"objetos",extra:"Повседневные категории"}]
+      {ru:"Одежда / электроника / телефон.",pt:"Roupa / eletrônicos / telefone.",pron:"Хоупа / электроникус / телефони",key:"objetos",extra:"Повседневные категории"}
+      ,
+      {ru:"Стул / стол.",pt:"Cadeira / Mesa.",pron:"Кадейра / Меза",key:"cadeira/mesa",extra:"Мебель"},
+      {ru:"Телевизор.",pt:"Televisão / TV.",pron:"Телевизаун / Тевэ",key:"televisão",extra:""},
+      {ru:"Носки.",pt:"Meias.",pron:"Мейас",key:"meias",extra:"Одежда"},
+      {ru:"Мотоцикл.",pt:"Moto / Motocicleta.",pron:"Моту / Мотосиклета",key:"moto",extra:"Транспорт"},
+      {ru:"Воздух.",pt:"Ar.",pron:"Ар",key:"ar",extra:"ar fresco = свежий воздух"},
+      {ru:"Деревья.",pt:"Árvores.",pron:"Арворис",key:"árvores",extra:"Природа"},
+      {ru:"Люди.",pt:"Pessoas.",pron:"Пессоас",key:"pessoas",extra:"todo mundo = все люди"}]
   }
 ];
 
@@ -1267,6 +1346,30 @@ window.importProgress = function(json) {
     renderTopics();
     console.log('Progress imported successfully');
   } catch(e) { console.error('Import failed', e); }
+};
+
+// Restore from backup
+window.restoreFromBackup = function() {
+  const keys = Object.keys(localStorage).filter(k => k.startsWith(BACKUP_KEY));
+  if (!keys.length) {
+    alert('Бекапы не найдены');
+    return;
+  }
+  // Sort by timestamp - take latest
+  keys.sort();
+  const latestKey = keys[keys.length - 1];
+  const data = localStorage.getItem(latestKey);
+  if (!data) { alert('Бекап пуст'); return; }
+  try {
+    const parsed = JSON.parse(data);
+    const count = Object.values(parsed).reduce((sum, topic) => sum + Object.keys(topic).length, 0);
+    if (confirm(`Найден бекап: ${count} оценок карточек. Восстановить?`)) {
+      S.scores = parsed;
+      save();
+      renderTopics();
+      alert('✅ Прогресс восстановлен!');
+    }
+  } catch(e) { alert('Ошибка восстановления: ' + e.message); }
 };
 
 function getTopicProgress(topicId) {
@@ -1623,6 +1726,16 @@ function checkUrlTopic() {
 load();
 renderTopics();
 checkUrlTopic();
+
+// Show restore notice if backup exists and current progress is empty
+(function() {
+  const backups = Object.keys(localStorage).filter(k => k.startsWith(BACKUP_KEY));
+  const currentEmpty = Object.keys(S.scores).length === 0 || 
+    Object.values(S.scores).every(t => Object.keys(t).length === 0);
+  if (backups.length > 0 && currentEmpty) {
+    document.getElementById('restoreNotice').style.display = 'block';
+  }
+})();
 </script>
 </body>
 </html>
