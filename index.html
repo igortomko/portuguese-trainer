@@ -380,7 +380,7 @@ const TOPICS = [
       {ru:"Он играет на пианино.",pt:"Ele toca piano.",pron:"Э-ли то-ка пи-а-ну",key:"Tocar",extra:"Eu — / Você — / A gente —"},
       {ru:"Я шучу!",pt:"Eu estou brincando!",pron:"Эу эс-тоу брин-кан-ду",key:"Brincar",extra:"Eu brinco / Você brinca / A gente brinca"},
       {ru:"Я опоздал / пропустил время.",pt:"Eu perdi a hora.",pron:"Эу пер-джи а о-ра",key:"Perder",extra:"Eu perco / Você perde / A gente perde"},
-      {ru:"Я проспал.",pt:"Eu perdi a hora.",pron:"Эу пер-джи а о-ра",key:"Perder a hora",extra:"Eu — / Você — / A gente —"},
+      
       {ru:"Я наполню бутылку.",pt:"Vou encher a garrafa.",pron:"Воу эн-шер а га-ха-фа",key:"Encher",extra:"Eu encho / Você enche / A gente enche"},
       {ru:"Стакан опустел.",pt:"O copo esvaziou.",pron:"У ко-пу эс-ва-зи-оу",key:"Esvaziar",extra:"Eu — / Você — / A gente —"}
     ,
@@ -496,6 +496,14 @@ const TOPICS = [
       {ru:"8. Делать",pt:"Fazer (Фа-зер)",pron:"Faço. Eu faço o almoço. (Эу фасу у алмосу)",key:"Fazer",extra:""},
       {ru:"9. Мочь",pt:"Poder (По-дер)",pron:"Posso. Eu posso ajudar. (Эу поссу ажудар)",key:"Poder",extra:""},
       {ru:"10. Идти/Ехать",pt:"Ir (Ир)",pron:"Vou. Eu vou ao banco. (Эу воу ау банку)",key:"Ir",extra:""}
+    ,
+      {ru:"Чувствовать себя",pt:"Sentir-se (Сен-тир-си)",pron:"Сен-тир-си",key:"sentir-se",extra:"Como você se sente? = как ты себя чувствуешь?"},
+      {ru:"Объяснять",pt:"Explicar (Эк-спли-кар)",pron:"Эк-спли-кар",key:"explicar",extra:""},
+      {ru:"Смеяться",pt:"Rir (Хир)",pron:"Хир",key:"rir",extra:"Que engraçado! = как смешно!"},
+      {ru:"Плакать",pt:"Chorar (Шо-рар)",pron:"Шо-рар",key:"chorar",extra:""},
+      {ru:"Доверять",pt:"Confiar (Кон-фи-ар)",pron:"Кон-фи-ар",key:"confiar",extra:""},
+      {ru:"Забывать",pt:"Esquecer (Эс-ке-сер)",pron:"Эс-ке-сер",key:"esquecer",extra:"Esqueci! = забыл!"},
+      {ru:"Помнить",pt:"Lembrar (Лем-брар)",pron:"Лем-брар",key:"lembrar",extra:"Lembro! = помню!"}
     ]
   },
   {
@@ -654,18 +662,24 @@ const TOPICS = [
       {ru:"Можешь говорить медленнее?",pt:"Pode falar mais devagar?",pron:"Пожи фалар майс девагар?",key:"Pode",extra:""},
       {ru:"Как это пишется?",pt:"Como se escreve?",pron:"Кому си эскреви?",key:"Como",extra:""},
       {ru:"Ты меня слышишь?",pt:"Você me ouve?",pron:"Восэ ми оуви?",key:"Você",extra:""},
-      {ru:"Quem é ele?",pt:"Кто он?",pron:"Кей э эли?",key:"Кто",extra:""},
-      {ru:"Onde fica o banheiro?",pt:"Где находится туалет?",pron:"Онжи фика у баньейру?",key:"Где",extra:""},
-      {ru:"Quanto custa isso?",pt:"Сколько это стоит?",pron:"Куанту куста иссу?",key:"Сколько",extra:""},
-      {ru:"Que horas são?",pt:"Который час?",pron:"Ки орас сау?",key:"Который",extra:""},
-      {ru:"O que aconteceu?",pt:"Что случилось?",pron:"У ки аконтесеу?",key:"Что",extra:""},
-      {ru:"Qual é o seu telefone?",pt:"Какой твой телефон?",pron:"Куал э у сэу телефoни?",key:"Какой",extra:""},
-      {ru:"Como se diz isso?",pt:"Как это говорится?",pron:"Кому си дис иссу?",key:"Как",extra:""},
-      {ru:"Por que não?",pt:"Почему нет?",pron:"Пор кэ нэу?",key:"Почему",extra:""},
-      {ru:"Quando a gente vai?",pt:"Когда мы пойдем?",pron:"Куанду а женчи вай?",key:"Когда",extra:""},
-      {ru:"O que você faz?",pt:"Чем ты занимаешься? (кем работаешь)",pron:"У ки восэ фас?",key:"Чем",extra:""},
+      {ru:"Кто он?",pt:"Quem é ele?",pron:"Кей э эли?",key:"Кто",extra:""},
+      {ru:"Где находится туалет?",pt:"Onde fica o banheiro?",pron:"Онжи фика у баньейру?",key:"Где",extra:""},
+      {ru:"Сколько это стоит?",pt:"Quanto custa isso?",pron:"Куанту куста иссу?",key:"Сколько",extra:""},
+      {ru:"Который час?",pt:"Que horas são?",pron:"Ки орас сау?",key:"Который",extra:""},
+      {ru:"Что случилось?",pt:"O que aconteceu?",pron:"У ки аконтесеу?",key:"Что",extra:""},
+      {ru:"Какой твой телефон?",pt:"Qual é o seu telefone?",pron:"Куал э у сэу телефoни?",key:"Какой",extra:""},
+      {ru:"Как это говорится?",pt:"Como se diz isso?",pron:"Кому си дис иссу?",key:"Как",extra:""},
+      {ru:"Почему нет?",pt:"Por que não?",pron:"Пор кэ нэу?",key:"Почему",extra:""},
+      {ru:"Когда мы пойдем?",pt:"Quando a gente vai?",pron:"Куанду а женчи вай?",key:"Когда",extra:""},
+      {ru:"Чем ты занимаешься? (кем работаешь)",pt:"O que você faz?",pron:"У ки восэ фас?",key:"Чем",extra:""},
       {ru:"Что? / Какой?",pt:"O que? (или просто Que?)",pron:"У ки? / Ки?",key:"O",extra:""},
       {ru:"Который? (Выбор)",pt:"Qual?",pron:"Куал?",key:"Qual",extra:""}
+    ,
+      {ru:"Сколько времени?",pt:"Quanto tempo?",pron:"Куан-ту тем-пу",key:"Quanto tempo",extra:"Quanto tempo você tem? = сколько у тебя времени?"},
+      {ru:"Что происходит?",pt:"O que está acontecendo?",pron:"У ки эс-та а-кон-те-сен-ду",key:"acontecendo",extra:""},
+      {ru:"Как давно?",pt:"Há quanto tempo?",pron:"А куан-ту тем-пу",key:"Há quanto tempo",extra:"Há 3 anos = 3 года назад"},
+      {ru:"Правда ли что...?",pt:"É verdade que...?",pron:"Э вер-да-джи ки",key:"É verdade",extra:""},
+      {ru:"Как дела на самом деле?",pt:"Como você realmente está?",pron:"Ко-му во-сэ хе-ал-мен-чи эс-та",key:"realmente",extra:""}
     ]
   },
   {
@@ -960,6 +974,17 @@ const TOPICS = [
       {ru:"Я тоже / у меня тоже",pt:"Eu também",pron:"Эу тамбей",key:"Eu",extra:""},
       {ru:"Более-менее",pt:"Mais ou menos",pron:"Майс оу менус",key:"Mais",extra:""},
       {ru:"Да / Нет",pt:"Sim / Não",pron:"Си / Нэу",key:"Sim",extra:""}
+    ,
+      {ru:"Не может быть!",pt:"Não acredito!",pron:"Наун а-кре-джи-ту",key:"Não acredito",extra:"Буквально: не верю! Как русское 'серьёзно?!'"},
+      {ru:"Всё понятно!",pt:"Entendido! / Tá bom!",pron:"Эн-тен-джи-ду / Та бон",key:"Entendido",extra:""},
+      {ru:"Расслабься / Спокойно",pt:"Relaxa! / Fica tranquilo!",pron:"Хе-лак-са",key:"Relaxa",extra:"Очень по-бразильски — расслабленный стиль жизни"},
+      {ru:"Серьёзно? / Правда?",pt:"Sério? / É mesmo?",pron:"Се-ри-у / Э мес-му",key:"Sério",extra:""},
+      {ru:"Дай пять!",pt:"Dá um toque!",pron:"Да ун то-ки",key:"toque",extra:"Бразильское приветствие — кулак к кулаку"},
+      {ru:"Давай! / Вперёд!",pt:"Vamos! / Bora!",pron:"Ва-муш / Бо-ра",key:"Bora",extra:"Bora! — очень разговорное, укороченное vamos embora"},
+      {ru:"Без проблем",pt:"Sem problema / Tranquilo",pron:"Сейн про-бле-ма",key:"Sem problema",extra:""},
+      {ru:"Мне плохо / Нехорошо",pt:"Estou passando mal",pron:"Эс-тоу па-сан-ду мал",key:"passando mal",extra:""},
+      {ru:"Не знаю",pt:"Não sei",pron:"Наун сей",key:"Não sei",extra:""},
+      {ru:"Посмотрим",pt:"A gente vê",pron:"А жен-чи ве",key:"A gente vê",extra:""}
     ]
   },
   {
@@ -988,7 +1013,19 @@ const TOPICS = [
       {ru:"Ещё нет.",pt:"Ainda não.",pron:"Аинда нау",key:"Ainda não",extra:"ещё нет / пока нет"},
       {ru:"До сих пор.",pt:"Até agora.",pron:"Атэ агора",key:"Até agora",extra:"до сих пор / вплоть до сейчас"},
       {ru:"Более-менее.",pt:"Mais ou menos.",pron:"Майс оу менус",key:"Mais ou menos",extra:"примерно / так себе"},
-      {ru:"Возможно.",pt:"Talvez.",pron:"Талвес",key:"Talvez",extra:"возможно / может быть"}]
+      {ru:"Возможно.",pt:"Talvez.",pron:"Талвес",key:"Talvez",extra:"возможно / может быть"},
+      {ru:"Быстро",pt:"Rápido / Depressa",pron:"Ха-пи-ду / Де-пре-са",key:"rápido",extra:""},
+      {ru:"Медленно",pt:"Devagar",pron:"Де-ва-гар",key:"devagar",extra:"Fala mais devagar = говори медленнее"},
+      {ru:"Вместе",pt:"Juntos",pron:"Жун-туш",key:"juntos",extra:""},
+      {ru:"Отдельно",pt:"Separado",pron:"Се-па-ра-ду",key:"separado",extra:""},
+      {ru:"Наконец-то",pt:"Finalmente",pron:"Фи-нал-мен-чи",key:"finalmente",extra:""},
+      {ru:"Снова / Опять",pt:"De novo",pron:"Джи но-ву",key:"de novo",extra:"Outra vez тоже = ещё раз"},
+      {ru:"Скоро",pt:"Em breve / Logo",pron:"Эй бре-ви / Ло-гу",key:"em breve",extra:""},
+      {ru:"Ещё раз",pt:"Mais uma vez",pron:"Майш у-ма вес",key:"mais uma vez",extra:""},
+      {ru:"Навсегда",pt:"Para sempre",pron:"Па-ра сейм-при",key:"para sempre",extra:""},
+      {ru:"Сразу",pt:"Logo",pron:"Ло-гу",key:"logo",extra:"Logo logo = скоро-скоро"},
+      {ru:"Время от времени",pt:"De vez em quando",pron:"Джи вес эй куан-ду",key:"de vez em quando",extra:""}
+    ]
   },
   {
     id: "ser_estar", linearId: "IGO-99", emoji: "🔄", title: "7. Глагол БЫТЬ (Ser vs Estar)", desc: "Постоянное vs временное состояние", dueDate: "12.04",
