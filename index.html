@@ -514,9 +514,6 @@ const TOPICS = [
     ,
       {ru:"Лицо",pt:"-AR (Falar)",pron:"-ER (Comer)",key:"-AR",extra:""},
       {ru:"--",pt:"--",pron:"--",key:"--",extra:""},
-      {ru:"Eu (Я)",pt:"Fal-o",pron:"Com-o",key:"Fal-o",extra:""},
-      {ru:"Você/Ele/Ela (Ты/Он/Она)",pt:"Fal-a",pron:"Com-e",key:"Fal-a",extra:""},
-      {ru:"~~Nós (Мы)~~",pt:"~~Fal-amos~~",pron:"~~Com-emos~~",key:"~~Fal-amos~~",extra:""},
       {ru:"Местоимение",pt:"Конец глагола",pron:"Настоящее (Сейчас)",key:"Конец",extra:""},
       {ru:"Eu (Я)",pt:"-AR-ER-IR",pron:"-o (falo)-o (como)-o (abro)",key:"-AR-ER-IR",extra:""},
       {ru:"93. Трогать",pt:"Tocar (То-кар)",pron:"Toco. Toco violão. (Току виолау)",key:"Tocar",extra:""},
@@ -1600,7 +1597,30 @@ let S = { currentTopic: null, mode: 'flashcard', queue: [], cur: 0, revealed: fa
 const STORAGE_KEY = 'pt_b2_scores';
 const BACKUP_KEY = 'pt_b2_scores_backup';
 const VERSION_KEY = 'pt_b2_version';
-const APP_VERSION = '2.1'; // bump this when items change
+const APP_VERSION = '2.2';
+
+// SRS intervals (days) by review count for score=2 (knew it)
+const SRS_INTERVALS = [1, 3, 7, 14, 30, 60, 120];
+const MS_DAY = 86400000;
+
+function getSRS(topicId, pt) {
+  const d = S.scores[topicId]?.[pt];
+  if (!d) return {s: -1, n: 0, c: 0};
+  if (typeof d === 'number') return {s: d, n: 0, c: 0}; // legacy
+  return d;
+}
+
+function isDue(topicId, pt) {
+  const d = getSRS(topicId, pt);
+  if (d.s < 2) return true; // не знал — всегда показываем
+  if (d.n === 0) return true; // никогда не проверяли SRS
+  return Date.now() >= d.n; // пора повторить
+}
+
+function getScore(topicId, pt) {
+  const d = getSRS(topicId, pt);
+  return d.s === undefined ? d : d.s;
+}
 
 function save() {
   try {
@@ -1610,25 +1630,17 @@ function save() {
 
 function load() {
   try {
-    // Version check: if version changed, backup old progress before loading
     const savedVersion = localStorage.getItem(VERSION_KEY);
     if (savedVersion !== APP_VERSION) {
       const existing = localStorage.getItem(STORAGE_KEY);
       if (existing) {
-        // Backup previous progress under a dated key
         const backupKey = BACKUP_KEY + '_' + (savedVersion || 'legacy') + '_' + Date.now();
         localStorage.setItem(backupKey, existing);
-        console.log('Progress backed up as', backupKey);
       }
       localStorage.setItem(VERSION_KEY, APP_VERSION);
     }
-
     const s = localStorage.getItem(STORAGE_KEY);
-    if (s) {
-      const parsed = JSON.parse(s);
-      // Merge: keep existing progress, don't wipe unknown keys
-      S.scores = parsed;
-    }
+    if (s) S.scores = JSON.parse(s);
   } catch(e) {
     console.warn('Load failed, starting fresh', e);
     S.scores = {};
@@ -1681,7 +1693,7 @@ function getTopicProgress(topicId) {
   const sc = S.scores[topicId] || {};
   const topic = TOPICS.find(t => t.id === topicId);
   if (!topic) return 0;
-  const learned = topic.items.filter(item => sc[item.pt] === 2).length;
+  const learned = topic.items.filter(item => getScore(topicId, item.pt) === 2).length;
   return Math.round(learned / topic.items.length * 100);
 }
 
@@ -1690,7 +1702,7 @@ function getTotalStats() {
   TOPICS.forEach(t => {
     totalItems += t.items.length;
     const sc = S.scores[t.id] || {};
-    const learned = t.items.filter(item => sc[item.pt] === 2).length;
+    const learned = t.items.filter(item => getScore(t.id, item.pt) === 2).length;
     learnedItems += learned;
     if (learned === t.items.length) doneTopic++;
   });
@@ -1716,10 +1728,13 @@ function renderTopics() {
     card.onclick = () => openTopic(t.id);
 
     const fillColor = done ? 'var(--green)' : pct > 0 ? 'var(--accent)' : 'var(--surface2)';
-    const badge = done ? '✅' : pct > 0 ? `${pct}%` : t.dueDate;
-    const badgeStyle = done ? 'background:rgba(52,211,153,.15);color:var(--green)' :
+    const dueCnt = t.items.filter(item => isDue(t.id, item.pt)).length;
+    const badge = done ? '✅' : dueCnt > 0 ? `${dueCnt} due` : pct > 0 ? `${pct}%` : t.dueDate;
+    const badgeExtra = done ? '' : dueCnt > 0 ? ';font-weight:800' : '';
+    const badgeStyle = (done ? 'background:rgba(52,211,153,.15);color:var(--green)' :
+                       dueCnt > 0 ? 'background:rgba(251,191,36,.2);color:var(--yellow)' :
                        pct > 0 ? 'background:rgba(99,102,241,.15);color:var(--accent)' :
-                       'background:var(--surface2);color:var(--muted)';
+                       'background:var(--surface2);color:var(--muted)') + (badgeExtra||'');
 
     card.innerHTML = `
       <div class="tc-emoji">${t.emoji}</div>
@@ -1759,9 +1774,11 @@ function goBack() {
 function startRound() {
   const topic = TOPICS.find(t => t.id === S.currentTopic);
   const sc = S.scores[S.currentTopic];
-  // Prioritize unknown/hard items
-  const weak = topic.items.map((v,i)=>i).filter(i=>(sc[topic.items[i].pt]||0)<2);
-  S.queue = shuffle(weak.length > 0 ? weak : topic.items.map((_, i) => i));
+  // SRS: сначала due cards (пора повторить), потом новые/слабые
+  const now = Date.now();
+  const dueCards = topic.items.map((v,i)=>i).filter(i => isDue(S.currentTopic, topic.items[i].pt));
+  // Если нет due cards — показываем все (для первого прохода)
+  S.queue = shuffle(dueCards.length > 0 ? dueCards : topic.items.map((_,i)=>i));
   S.cur = 0; S.rOk = S.rHard = S.rWrong = 0;
   setMode(S.mode);
 }
@@ -1796,7 +1813,7 @@ function loadCard() {
 function updateTrainerProgress() {
   const topic = TOPICS.find(t => t.id === S.currentTopic);
   const sc = S.scores[S.currentTopic];
-  const learned = topic.items.filter(item => sc[item.pt] === 2).length;
+  const learned = topic.items.filter(item => getScore(topicId || S.currentTopic, item.pt) === 2).length;
   const pct = Math.round(learned / topic.items.length * 100);
   document.getElementById('progFill').style.width = pct + '%';
   document.getElementById('trainerProgress').textContent = `${learned}/${topic.items.length}`;
@@ -1844,8 +1861,24 @@ function speak(text) {
 function rate(score) {
   const topic = TOPICS.find(t => t.id === S.currentTopic);
   const idx = S.queue[S.cur]; const item = TOPICS.find(t => t.id === S.currentTopic).items[idx];
-  S.scores[S.currentTopic][item.pt] = score;
-  
+  // SRS: вычисляем следующий интервал повторения
+  const prev = getSRS(S.currentTopic, item.pt);
+  const prevCount = prev.c || 0;
+  let nextMs = 0;
+  if (score === 2) {
+    const interval = SRS_INTERVALS[Math.min(prevCount, SRS_INTERVALS.length - 1)];
+    nextMs = Date.now() + interval * MS_DAY;
+  } else if (score === 1) {
+    nextMs = Date.now() + MS_DAY; // через день
+  } else {
+    nextMs = Date.now(); // сразу снова
+  }
+  S.scores[S.currentTopic][item.pt] = {
+    s: score,
+    n: nextMs,
+    c: score === 2 ? prevCount + 1 : Math.max(0, prevCount - 1)
+  };
+
   if (score === 2) { S.rOk++; S.streak++; }
   else if (score === 1) { S.rHard++; S.streak = 0; }
   else { S.rWrong++; S.streak = 0; }
@@ -1894,7 +1927,14 @@ function checkQuiz(btn, sel, correct, item) {
   btn.classList.add(ok ? 'correct' : 'wrong');
   if (!ok) document.querySelectorAll('.quiz-opt').forEach(b => { if(b.textContent === correct) b.classList.add('show-correct'); });
   
-  S.scores[S.currentTopic][item.pt] = ok ? 2 : 0;
+  const qprev = getSRS(S.currentTopic, item.pt);
+  const qcount = qprev.c || 0;
+  const qscore = ok ? 2 : 0;
+  S.scores[S.currentTopic][item.pt] = {
+    s: qscore,
+    n: ok ? Date.now() + SRS_INTERVALS[Math.min(qcount, SRS_INTERVALS.length-1)] * MS_DAY : Date.now(),
+    c: ok ? qcount + 1 : Math.max(0, qcount - 1)
+  };
   
   if(ok){ S.rOk++; S.streak++; speak(correct); } else { S.rWrong++; S.streak=0; }
   
@@ -1933,10 +1973,13 @@ function renderModeList() {
   
   document.getElementById('modeListContainer').innerHTML = currentModeList.map(i => {
     const v = topic.items[i];
-    const s = sc[v.pt];
+    const s = getScore(S.currentTopic, v.pt);
     const cls = s===2?'s2':s===0?'s0':s===1?'s1':'';
     const bc = s===2?'background:rgba(52,211,153,.15);color:var(--green)':s===0?'background:rgba(248,113,113,.15);color:var(--red)':s===1?'background:rgba(251,191,36,.15);color:var(--yellow)':'background:var(--surface2);color:var(--muted)';
-    const bl = s===2?'✅ Знаю':s===0?'❌ Сложно':s===1?'😅 Трудно':'🆕 Новый';
+    const srsData = getSRS(S.currentTopic, v.pt);
+    const daysLeft = srsData.n ? Math.max(0, Math.ceil((srsData.n - Date.now()) / 86400000)) : 0;
+    const srsLabel = s===2 && daysLeft > 0 ? ` (${daysLeft}д)` : '';
+    const bl = (s===2?'✅ Знаю':s===0?'❌ Сложно':s===1?'😅 Трудно':'🆕 Новый') + srsLabel;
     
     return `<div class="verb-item ${cls}">
       <div class="vi-top">
@@ -1958,7 +2001,13 @@ function renderModeList() {
 
 window.rateInList = function(ptKey, score) {
   if (!S.scores[S.currentTopic]) S.scores[S.currentTopic] = {};
-  S.scores[S.currentTopic][ptKey] = score;
+  const lprev = getSRS(S.currentTopic, ptKey);
+  const lcount = lprev.c || 0;
+  S.scores[S.currentTopic][ptKey] = {
+    s: score,
+    n: score === 2 ? Date.now() + SRS_INTERVALS[Math.min(lcount, SRS_INTERVALS.length-1)] * MS_DAY : Date.now(),
+    c: score === 2 ? lcount + 1 : Math.max(0, lcount - 1)
+  };
   save();
   updateTrainerProgress();
   checkTopicComplete();
@@ -1995,7 +2044,7 @@ function nextRound() {
 function checkTopicComplete() {
   const topic = TOPICS.find(t => t.id === S.currentTopic);
   const sc = S.scores[S.currentTopic];
-  const learned = topic.items.filter(item => sc[item.pt] === 2).length;
+  const learned = topic.items.filter(item => getScore(topicId || S.currentTopic, item.pt) === 2).length;
   if (learned === topic.items.length && topic.linearId) {
     markLinearDone(topic.linearId);
   }
@@ -2020,9 +2069,6 @@ function loadTheory() {
     container.innerHTML = dataEl.innerHTML;
   } else {
     container.innerHTML = '<div class="th-empty">Для этой темы теоретических объяснений пока нет.<br><br>Карточки и квиз доступны в других режимах.</div>';
-  }
-} else {
-    container.innerHTML = '<div class="th-empty">📝 Для этой темы теоретических объяснений пока нет.<br><br>Карточки и квиз доступны в других режимах.</div>';
   }
 }
 
