@@ -811,7 +811,26 @@ const TOPICS = [
       {ru:"У меня есть книга.",pt:"Eu tenho um livro.",pron:"Эу тэнью ум ливру",key:"um livro",extra:"Неопределённый артикль"},
       {ru:"У меня нет машины.",pt:"Eu não tenho carro.",pron:"Эу нау тэнью карру",key:"não tenho",extra:"Отрицание с существительным"},
       {ru:"Много времени.",pt:"Muito tempo.",pron:"Муйту тэмпу",key:"muito",extra:"Много + неисчисляемое"},
-      {ru:"Мало денег.",pt:"Pouco dinheiro.",pron:"Поуку диньейру",key:"pouco",extra:"Мало + существительное"}]
+      {ru:"Мало денег.",pt:"Pouco dinheiro.",pron:"Поуку диньейру",key:"pouco",extra:"Мало + существительное"}
+      ,
+      {ru:"Язык / Речь.",pt:"A língua / O idioma.",pron:"А лингуа / У идиома",key:"língua",extra:"Língua portuguesa = португальский язык"}
+      ,
+      {ru:"Страна.",pt:"O país.",pron:"У пайс",key:"país",extra:"Que país? = какая страна?"}
+      ,
+      {ru:"Друг / Подруга.",pt:"O amigo / A amiga.",pron:"У амигу / А амига",key:"amigo",extra:"meu amigo = мой друг"}
+      ,
+      {ru:"Человек.",pt:"A pessoa.",pron:"А пессоа",key:"pessoa",extra:"Uma boa pessoa = хороший человек"}
+      ,
+      {ru:"Вода.",pt:"A água.",pron:"А агуа",key:"água",extra:"Um copo de água = стакан воды"}
+      ,
+      {ru:"Еда / Пища.",pt:"A comida.",pron:"А комида",key:"comida",extra:"Boa comida = вкусная еда"}
+      ,
+      {ru:"Телефон / Мобильный.",pt:"O telefone / O celular.",pron:"У телефони / У селулар",key:"celular",extra:"Qual é o seu celular? = какой твой номер?"}
+      ,
+      {ru:"Путешествие.",pt:"A viagem.",pron:"А виажей",key:"viagem",extra:"Boa viagem! = хорошей поездки!"}
+      ,
+      {ru:"Ключи.",pt:"As chaves.",pron:"Ас шавис",key:"chaves",extra:"Cadê as chaves? = где ключи?"}
+    ]
   },
   {
     id: "possessives", linearId: "IGO-102", emoji: "🤝", title: "10. Притяжательные местоимения", desc: "Мой, твой, его, наш...", dueDate: "26.04",
@@ -861,7 +880,16 @@ const TOPICS = [
       {ru:"Десятый / сотый.",pt:"Décimo / centésimo.",pron:"Десиму / сентезиму",key:"10o/100o",extra:""},
       {ru:"Сколько тебе лет?",pt:"Quantos anos você tem?",pron:"Куантус анус восэ тэй?",key:"anos",extra:"Уже есть, повторение"},
       {ru:"Когда ты родился?",pt:"Quando você nasceu?",pron:"Куанду восэ наceu?",key:"nasceu",extra:""},
-      {ru:"Ты какого года рождения?",pt:"Em que ano você nasceu?",pron:"Эм ки ану восэ наceu?",key:"que ano",extra:""}]
+      {ru:"Ты какого года рождения?",pt:"Em que ano você nasceu?",pron:"Эм ки ану восэ наceu?",key:"que ano",extra:""}
+      ,
+      {ru:"Ноль.",pt:"Zero.",pron:"Зэру",key:"zero",extra:"Zero graus = ноль градусов"}
+      ,
+      {ru:"Двести / Триста.",pt:"Duzentos / Trezentos.",pron:"Дузентус / Трезентус",key:"duzentos",extra:"Изменяются по роду: duzentas casas"}
+      ,
+      {ru:"Десять тысяч.",pt:"Dez mil.",pron:"Дэс мил",key:"dez mil",extra:""}
+      ,
+      {ru:"Миллион.",pt:"Um milhão.",pron:"Ун мильяун",key:"milhão",extra:"dois milhões = два миллиона"}
+    ]
   },
   {
     id: "time", linearId: "IGO-104", emoji: "⏰", title: "12. Всё о времени", desc: "Дни, месяцы, прошлое, будущее", dueDate: "04.05",
@@ -895,7 +923,28 @@ const TOPICS = [
       {ru:"Вовремя.",pt:"Na hora / Pontualmente.",pron:"На ора / Понтуалменти",key:"na hora",extra:"Chegou na hora! = Пришёл вовремя!"},
       {ru:"Редко.",pt:"Raramente.",pron:"Харарменти",key:"raramente",extra:""},
       {ru:"Недавно.",pt:"Recentemente.",pron:"Ресентементи",key:"recentemente",extra:"Há pouco tempo — совсем недавно"},
-      {ru:"В последнее время.",pt:"Ultimamente.",pron:"Улчиматаменти",key:"ultimamente",extra:""}]
+      {ru:"В последнее время.",pt:"Ultimamente.",pron:"Улчиматаменти",key:"ultimamente",extra:""}
+      ,
+      {ru:"Лето.",pt:"O verão.",pron:"У вэрау",key:"verão",extra:"No verão = летом"}
+      ,
+      {ru:"Осень.",pt:"O outono.",pron:"У оутону",key:"outono",extra:"No outono = осенью"}
+      ,
+      {ru:"Зима.",pt:"O inverno.",pron:"У инверну",key:"inverno",extra:"No inverno = зимой"}
+      ,
+      {ru:"Весна.",pt:"A primavera.",pron:"А примавера",key:"primavera",extra:"Na primavera = весной"}
+      ,
+      {ru:"Выходные.",pt:"O fim de semana.",pron:"У фин жи семана",key:"fim de semana",extra:"No fim de semana = в выходные"}
+      ,
+      {ru:"Ночью.",pt:"À noite / De noite.",pron:"А нойчи",key:"à noite",extra:"De madrugada = глубокой ночью"}
+      ,
+      {ru:"Вечером.",pt:"À tarde / À noite.",pron:"А таржи",key:"tarde",extra:"À tarde = днём/вечером"}
+      ,
+      {ru:"Утром.",pt:"De manhã.",pron:"Жи манья",key:"de manhã",extra:"Cedo de manhã = рано утром"}
+      ,
+      {ru:"Этим летом.",pt:"Neste verão.",pron:"Несчи вэрау",key:"neste verão",extra:""}
+      ,
+      {ru:"В следующем месяце.",pt:"No próximo mês.",pron:"Ну проксиму мес",key:"próximo mês",extra:""}
+    ]
   },
   {
     id: "adjectives", linearId: "IGO-105", emoji: "🎨", title: "13. Прилагательные и цвета", desc: "Описание, сравнение, антонимы", dueDate: "08.05",
@@ -931,7 +980,18 @@ const TOPICS = [
       {ru:"Богатый / бедный.",pt:"Rico / Pobre.",pron:"Хику / Побри",key:"rico/pobre",extra:""},
       {ru:"Чистый / грязный.",pt:"Limpo / Sujo.",pron:"Лимпу / Сужу",key:"limpo/sujo",extra:""},
       {ru:"Лёгкий / тяжёлый.",pt:"Leve / Pesado.",pron:"Леви / Пезаду",key:"leve/pesado",extra:""},
-      {ru:"Простой / сложный.",pt:"Simples / Difícil.",pron:"Симплис / Дифисил",key:"simples/difícil",extra:""}]
+      {ru:"Простой / сложный.",pt:"Simples / Difícil.",pron:"Симплис / Дифисил",key:"simples/difícil",extra:""}
+      ,
+      {ru:"Сладкий / Солёный.",pt:"Doce / Salgado.",pron:"Дос / Салгаду",key:"doce/salgado",extra:"Que doce! = как сладко!"}
+      ,
+      {ru:"Свежий / Несвежий.",pt:"Fresco / Velho.",pron:"Фресу / Велью",key:"fresco",extra:"fresco também = прохладный"}
+      ,
+      {ru:"Одинаковый / Разный.",pt:"Igual / Diferente.",pron:"Игуал / Жиференчи",key:"igual/diferente",extra:"É a mesma coisa = это одно и то же"}
+      ,
+      {ru:"Светлый / Тёмный.",pt:"Claro / Escuro.",pron:"Кларо / Эскуру",key:"claro/escuro",extra:"Cor clara = светлый цвет"}
+      ,
+      {ru:"Комфортный / Неудобный.",pt:"Confortável / Desconfortável.",pron:"Конфортавел / Дескомфортавел",key:"confortável",extra:""}
+    ]
   },
   {
     id: "states", linearId: "IGO-106", emoji: "😊", title: "14. Состояния и эмоции", desc: "Как ты себя чувствуешь?", dueDate: "11.05",
@@ -954,7 +1014,10 @@ const TOPICS = [
       {ru:"Я встревожен / беспокоюсь.",pt:"Estou preocupado.",pron:"Эстоу преокупаду",key:"preocupado",extra:"preocupada (жен.)"},
       {ru:"Я злой / в гневе.",pt:"Estou com raiva.",pron:"Эстоу ком хайва",key:"com raiva",extra:"bravo(a) = злой"},
       {ru:"Я стесняюсь.",pt:"Estou com vergonha.",pron:"Эстоу ком вергонья",key:"com vergonha",extra:""},
-      {ru:"Мне тепло.",pt:"Estou com calor.",pron:"Эстоу ком калор",key:"com calor",extra:""}]
+      {ru:"Мне тепло.",pt:"Estou com calor.",pron:"Эстоу ком калор",key:"com calor",extra:""}
+      ,
+      {ru:"Мне жарко.",pt:"Estou com muito calor.",pron:"Эстоу ком муйту калор",key:"muito calor",extra:"Que calor! = ну и жара!"}
+    ]
   },
   {
     id: "mesmo", linearId: "IGO-107", emoji: "🪞", title: "15. Сам / Mesmo / Próprio", desc: "Сам, именно, самый, сам по себе", dueDate: "13.05",
@@ -975,7 +1038,12 @@ const TOPICS = [
       {ru:"Он сам.",pt:"Ele mesmo.",pron:"Эли мезму",key:"ele mesmo",extra:"ele mesma для жен.: ela mesma"},
       {ru:"Мы сами.",pt:"Nós mesmos.",pron:"Нос мезмус",key:"nós mesmos",extra:""},
       {ru:"Вы сами.",pt:"Vocês mesmos.",pron:"Восэйс мезмус",key:"vocês mesmos",extra:""},
-      {ru:"Они сами.",pt:"Eles mesmos.",pron:"Элис мезмус",key:"eles mesmos",extra:"elas mesmas (жен.)"}]
+      {ru:"Они сами.",pt:"Eles mesmos.",pron:"Элис мезмус",key:"eles mesmos",extra:"elas mesmas (жен.)"}
+      ,
+      {ru:"Ты сам.",pt:"Você mesmo.",pron:"Восэ мезму",key:"você mesmo",extra:"você mesma (жен.)"}
+      ,
+      {ru:"Она сама.",pt:"Ela mesma.",pron:"Эла мезма",key:"ela mesma",extra:""}
+    ]
   },
   {
     id: "everything", linearId: "IGO-108", emoji: "🌐", title: "16. Всё, что-то, ничего", desc: "Неопределённые местоимения", dueDate: "16.05",
@@ -992,7 +1060,12 @@ const TOPICS = [
       {ru:"Кто-то здесь.",pt:"Alguém está aqui.",pron:"Алгейн эста аки",key:"alguém",extra:"кто-то"},
       {ru:"Никто не знает.",pt:"Ninguém sabe.",pron:"Нингейн саби",key:"ninguém",extra:"никто"},
       {ru:"Нигде нет места.",pt:"Não há lugar em lugar nenhum.",pron:"Нау а лугар эм лугар ненюн",key:"lugar nenhum",extra:"нигде"},
-      {ru:"Иногда я работаю дома.",pt:"Às vezes eu trabalho em casa.",pron:"Ас везис эу трабалью эм каза",key:"às vezes",extra:"иногда"}]
+      {ru:"Иногда я работаю дома.",pt:"Às vezes eu trabalho em casa.",pron:"Ас везис эу трабалью эм каза",key:"às vezes",extra:"иногда"}
+      ,
+      {ru:"Везде.",pt:"Em todo lugar / Por toda parte.",pron:"Эм тоду лугар",key:"em todo lugar",extra:"Em todo lugar = везде"}
+      ,
+      {ru:"Где-то.",pt:"Em algum lugar.",pron:"Эм алгун лугар",key:"algum lugar",extra:"Está em algum lugar = где-то есть"}
+    ]
   },
   {
     id: "location", linearId: "IGO-109", emoji: "📍", title: "17. Направления и расстояния", desc: "Как добраться, описать путь", dueDate: "20.05",
