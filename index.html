@@ -1717,6 +1717,11 @@ function showModeUI(m) {
 }
 
 function loadCard() {
+  if (!S.queue || S.queue.length === 0) { 
+    const topic = TOPICS.find(t => t.id === S.currentTopic);
+    if (topic) S.queue = shuffle(topic.items.map(function(_,i){return i;}));
+    S.cur = 0;
+  }
   if (S.cur >= S.queue.length) { showResults(); return; }
   updateTrainerProgress();
   if (S.mode === 'flashcard') loadFlash();
@@ -1741,7 +1746,14 @@ function updateTrainerProgress() {
 function loadFlash() {
   showModeUI('flashcard');
   const topic = TOPICS.find(t => t.id === S.currentTopic);
+  if (!topic) return;
+  // Safety: if queue empty or index out of bounds, reset and use all items
+  if (!S.queue || S.queue.length === 0 || S.cur >= S.queue.length) {
+    S.queue = shuffle(topic.items.map(function(_,i){return i;}));
+    S.cur = 0;
+  }
   const item = topic.items[S.queue[S.cur]];
+  if (!item) { showResults(); return; }
   S.revealed = false; S.currentPt = item.pt;
 
   document.getElementById('fcCtx').textContent = topic.emoji + ' ' + topic.title.split('. ')[1];
