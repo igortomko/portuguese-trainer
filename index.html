@@ -1511,7 +1511,7 @@ function setMode(mode) {
 }
 
 function showModeUI(m) {
-  ['modeFlashcard','modeQuiz','modeList','modeResults'].forEach(id => {
+  ['modeFlashcard','modeQuiz','modeList','modeTheory','modeResults'].forEach(id => {
     document.getElementById(id).style.display = 'none';
   });
   const map = {flashcard:'modeFlashcard',quiz:'modeQuiz',list:'modeList',theory:'modeTheory',results:'modeResults'};
