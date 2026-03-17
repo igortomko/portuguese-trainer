@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📚 Библиотека Игоря</title>
+<style>
+  :root {
+    --bg:#0f0f13;--surface:#1a1a22;--surface2:#22222e;--border:rgba(255,255,255,0.07);
+    --text:#f0f0f4;--muted:#8888aa;--accent:#6366f1;--purple:#a78bfa;--green:#34d399;
+    --yellow:#fbbf24;--orange:#fb923c;--red:#f87171;--gray:#4a4a6a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;font-family:-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);}
+  
+  .header{padding:24px 20px 12px;max-width:700px;margin:0 auto;}
+  .title{font-size:26px;font-weight:800;margin-bottom:4px;}
+  .subtitle{font-size:13px;color:var(--muted);margin-bottom:20px;}
+  
+  .tabs{display:flex;gap:6px;padding:0 20px 16px;max-width:700px;margin:0 auto;overflow-x:auto;scrollbar-width:none;}
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .15s;}
+  .tab.active{background:var(--accent);border-color:var(--accent);color:white;}
+  
+  .content{max-width:700px;margin:0 auto;padding:0 16px 40px;}
+  
+  .reading-card{background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(167,139,250,.1));border:1px solid rgba(99,102,241,.3);border-radius:16px;padding:18px;margin-bottom:16px;}
+  .reading-label{font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px;}
+  .reading-title{font-size:18px;font-weight:700;margin-bottom:3px;}
+  .reading-author{font-size:12px;color:var(--muted);}
+  .reading-started{font-size:11px;color:var(--purple);margin-top:6px;}
+  
+  .section{margin-bottom:8px;}
+  .section-header{display:flex;align-items:center;gap:8px;padding:10px 0 8px;cursor:pointer;}
+  .section-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+  .section-title{font-size:13px;font-weight:700;flex:1;}
+  .section-count{font-size:11px;color:var(--muted);background:var(--surface2);padding:2px 8px;border-radius:99px;}
+  .section-chevron{font-size:12px;color:var(--muted);transition:transform .2s;}
+  .section-chevron.open{transform:rotate(90deg);}
+  .section-body{display:none;}
+  .section-body.open{display:block;}
+  
+  .book-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:6px;display:flex;gap:12px;align-items:flex-start;transition:border-color .15s;cursor:default;}
+  .book-card:hover{border-color:rgba(99,102,241,.3);}
+  .book-num{font-size:11px;color:var(--muted);min-width:22px;padding-top:2px;}
+  .book-info{flex:1;}
+  .book-title{font-size:14px;font-weight:600;margin-bottom:2px;line-height:1.4;}
+  .book-author{font-size:11px;color:var(--muted);margin-bottom:4px;}
+  .book-why{font-size:11px;color:var(--muted);line-height:1.4;}
+  .tier-badge{font-size:10px;padding:2px 8px;border-radius:99px;font-weight:700;flex-shrink:0;margin-top:2px;}
+
+  .done-card{background:var(--surface);border:1px solid rgba(52,211,153,.15);border-radius:12px;padding:12px 16px;margin-bottom:6px;}
+  .done-title{font-size:13px;font-weight:600;}
+  .done-meta{font-size:11px;color:var(--muted);margin-top:2px;}
+  .done-insight{font-size:11px;color:var(--green);margin-top:6px;padding-top:6px;border-top:1px solid rgba(52,211,153,.1);}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+  .stat{background:var(--surface);border-radius:12px;padding:14px 12px;text-align:center;}
+  .stat-val{font-size:22px;font-weight:800;margin-bottom:2px;}
+  .stat-label{font-size:10px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="title">📚 Библиотека Игоря</div>
+  <div class="subtitle">Система: 1 книга в неделю · обновлено 17.03.2026</div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('all')">Все книги</button>
+  <button class="tab" onclick="showTab('reading')">Читаю</button>
+  <button class="tab" onclick="showTab('queue')">Очередь</button>
+  <button class="tab" onclick="showTab('done')">Прочитано</button>
+</div>
+
+<div class="content">
+
+  <!-- STATS -->
+  <div class="stats" id="statsBlock">
+    <div class="stat"><div class="stat-val" style="color:var(--accent)">1</div><div class="stat-label">Читаю сейчас</div></div>
+    <div class="stat"><div class="stat-val" style="color:var(--yellow)">36</div><div class="stat-label">В очереди</div></div>
+    <div class="stat"><div class="stat-val" style="color:var(--green)">0</div><div class="stat-label">Прочитано</div></div>
+  </div>
+
+  <!-- READING NOW -->
+  <div id="readingBlock">
+    <div class="reading-card">
+      <div class="reading-label">📖 Читает сейчас</div>
+      <div class="reading-title">Obviously Awesome</div>
+      <div class="reading-author">April Dunford · 2019</div>
+      <div class="reading-started">Начал: 09.03.2026 · Позиционирование Longevity для B2B</div>
+    </div>
+  </div>
+
+  <!-- TIER 1 -->
+  <div class="section" id="queueBlock">
+    <div class="section-header" onclick="toggleSection('t1')">
+      <div class="section-dot" style="background:#ef4444"></div>
+      <div class="section-title">🔴 Tier 1 — Читай сейчас</div>
+      <div class="section-count">2</div>
+      <div class="section-chevron open" id="chevron-t1">›</div>
+    </div>
+    <div class="section-body open" id="body-t1">
+      <div class="book-card">
+        <div class="book-num">1</div>
+        <div class="book-info">
+          <div class="book-title">Continuous Discovery Habits</div>
+          <div class="book-author">Teresa Torres · 2021</div>
+          <div class="book-why">Как строить правильный продукт в соло. MVP = главный риск сделать не то</div>
+        </div>
+        <div class="tier-badge" style="background:rgba(239,68,68,.15);color:#ef4444">T1</div>
+      </div>
+      <div class="book-card">
+        <div class="book-num">2</div>
+        <div class="book-info">
+          <div class="book-title">Founding Sales</div>
+          <div class="book-author">Pete Kazanjy · 2020</div>
+          <div class="book-why">Первые B2B продажи без команды. Будет нужна через 2–3 месяца</div>
+        </div>
+        <div class="tier-badge" style="background:rgba(239,68,68,.15);color:#ef4444">T1</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER 2 -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection('t2')">
+      <div class="section-dot" style="background:#f97316"></div>
+      <div class="section-title">🟠 Tier 2 — Стратегически важно</div>
+      <div class="section-count">5</div>
+      <div class="section-chevron open" id="chevron-t2">›</div>
+    </div>
+    <div class="section-body open" id="body-t2">
+      <div class="book-card">
+        <div class="book-num">3</div>
+        <div class="book-info">
+          <div class="book-title">Суверенная личность</div>
+          <div class="book-author">Дэвидсон, Рис-Могг · 1997</div>
+          <div class="book-why">Теория Флагов, суверенитет — прямо про твой жизненный путь</div>
+        </div>
+        <div class="tier-badge" style="background:rgba(249,115,22,.15);color:#f97316">T2</div>
+      </div>
+      <div class="book-card">
+        <div class="book-num">4</div>
+        <div class="book-info">
+          <div class="book-title">Луншоты (Loonshots)</div>
+          <div class="book-author">Сэфи Бакал · 2019</div>
+          <div class="book-why">Как breakthrough идеи получают деньги и строятся. Для Longevity fundraising</div>
+        </div>
+        <div class="tier-badge" style="background:rgba(249,115,22,.15);color:#f97316">T2</div>
+      </div>
+      <div class="book-card">
+        <div class="book-num">5</div>
+        <div class="book-info">
+          <div class="book-title">Конечные и бесконечные игры</div>
+          <div class="book-author">Джеймс Карс · 1986</div>
+          <div class="book-why">Строишь актив, а не играешь в конечную игру. Меняет фрейм</div>
+        </div>
+        <div class="tier-badge" style="background:rgba(249,115,22,.15);color:#f97316">T2</div>
+      </div>
+      <div class="book-card">
+        <div class="book-num">6</div>
+        <div class="book-info">
+          <div class="book-title">Вдохновители (Multipliers)</div>
+          <div class="book-author">Лиз Уайзман · 2010</div>
+          <div class="book-why">Когда начнёшь нанимать A-Players в Longevity</div>
+        </div>
+        <div class="tier-badge" style="background:rgba(249,115,22,.15);color:#f97316">T2</div>
+      </div>
+      <div class="book-card">
+        <div class="book-num">7</div>
+        <div class="book-info">
+          <div class="book-title">Масштаб (Scale)</div>
+          <div class="book-author">Джеффри Уэст · 2017</div>
+          <div class="book-why">Принципы роста систем. Для думающего фаундера</div>
+        </div>
+        <div class="tier-badge" style="background:rgba(249,115,22,.15);color:#f97316">T2</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER 3 -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection('t3')">
+      <div class="section-dot" style="background:#eab308"></div>
+      <div class="section-title">🟡 Tier 3 — Важно, не срочно</div>
+      <div class="section-count">7</div>
+      <div class="section-chevron" id="chevron-t3">›</div>
+    </div>
+    <div class="section-body" id="body-t3">
+      <div class="book-card"><div class="book-num">8</div><div class="book-info"><div class="book-title">Принципы (Principles)</div><div class="book-author">Рэй Далио · 2017</div><div class="book-why">Системы принятия решений. Хорошая, но не тактическая сейчас</div></div><div class="tier-badge" style="background:rgba(234,179,8,.15);color:#eab308">T3</div></div>
+      <div class="book-card"><div class="book-num">9</div><div class="book-info"><div class="book-title">Принцип ставок (Thinking in Bets)</div><div class="book-author">Энни Дьюк · 2018</div><div class="book-why">Решения в условиях неопределённости. Для инвестиций и ставок</div></div><div class="tier-badge" style="background:rgba(234,179,8,.15);color:#eab308">T3</div></div>
+      <div class="book-card"><div class="book-num">10</div><div class="book-info"><div class="book-title">Азбука системного мышления</div><div class="book-author">Донелла Медоуз · 2008</div><div class="book-why">Системное мышление — для дизайна продукта и жизни</div></div><div class="tier-badge" style="background:rgba(234,179,8,.15);color:#eab308">T3</div></div>
+      <div class="book-card"><div class="book-num">11</div><div class="book-info"><div class="book-title">Биология добра и зла</div><div class="book-author">Роберт Сапольски · 2017</div><div class="book-why">Поведенческая биология — полезно для Longevity product</div></div><div class="tier-badge" style="background:rgba(234,179,8,.15);color:#eab308">T3</div></div>
+      <div class="book-card"><div class="book-num">12</div><div class="book-info"><div class="book-title">Справочник диктатора</div><div class="book-author">Буэно де Мескита · 2011</div><div class="book-why">Понять как работают системы власти и инвесторы</div></div><div class="tier-badge" style="background:rgba(234,179,8,.15);color:#eab308">T3</div></div>
+      <div class="book-card"><div class="book-num">13</div><div class="book-info"><div class="book-title">Thinking in Systems</div><div class="book-author">Донелла Медоуз · 2008</div><div class="book-why">Полная системная теория — основа World3 модели</div></div><div class="tier-badge" style="background:rgba(234,179,8,.15);color:#eab308">T3</div></div>
+      <div class="book-card"><div class="book-num">14</div><div class="book-info"><div class="book-title">Technofeudalism: What Killed Capitalism</div><div class="book-author">Янис Варуфакис · 2023</div><div class="book-why">Как платформы превратились в феодальные системы. Контекст для tech-продуктов</div></div><div class="tier-badge" style="background:rgba(234,179,8,.15);color:#eab308">T3</div></div>
+    </div>
+  </div>
+
+  <!-- TIER 4 -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection('t4')">
+      <div class="section-dot" style="background:#6b7280"></div>
+      <div class="section-title">⚪ Tier 4 — Интеллектуальное обогащение</div>
+      <div class="section-count">12</div>
+      <div class="section-chevron" id="chevron-t4">›</div>
+    </div>
+    <div class="section-body" id="body-t4">
+      <div class="book-card"><div class="book-num">15</div><div class="book-info"><div class="book-title">Праведный разум</div><div class="book-author">Джонатан Хайдт · 2012</div><div class="book-why">Моральная психология. Почему люди расходятся во взглядах</div></div><div class="tier-badge" style="background:rgba(107,114,128,.15);color:#9ca3af">T4</div></div>
+      <div class="book-card"><div class="book-num">16</div><div class="book-info"><div class="book-title">Эгоистичный ген</div><div class="book-author">Ричард Докинз · 1976</div><div class="book-why">Эволюционная биология. Основа понимания человека</div></div><div class="tier-badge" style="background:rgba(107,114,128,.15);color:#9ca3af">T4</div></div>
+      <div class="book-card"><div class="book-num">17</div><div class="book-info"><div class="book-title">Эпоха надзорного капитализма</div><div class="book-author">Шошана Зубофф · 2019</div><div class="book-why">Данные как власть. Контекст для tech-продуктов</div></div><div class="tier-badge" style="background:rgba(107,114,128,.15);color:#9ca3af">T4</div></div>
+      <div class="book-card"><div class="book-num">18</div><div class="book-info"><div class="book-title">The Limits to Growth</div><div class="book-author">Медоуз и др. · 1972</div><div class="book-why">Оригинальная World3 модель. Данные 2020-х подтверждают прогноз</div></div><div class="tier-badge" style="background:rgba(107,114,128,.15);color:#9ca3af">T4</div></div>
+      <div class="book-card"><div class="book-num">19</div><div class="book-info"><div class="book-title">Limits to Growth: The 30-Year Update</div><div class="book-author">Медоуз и др. · 2004</div><div class="book-why">Актуальный сценарный анализ. BAU2 сценарий = реальность 2026</div></div><div class="tier-badge" style="background:rgba(107,114,128,.15);color:#9ca3af">T4</div></div>
+      <div class="book-card"><div class="book-num">20</div><div class="book-info"><div class="book-title">Capital in the Twenty-First Century</div><div class="book-author">Тома Пикетти · 2013</div><div class="book-why">Неравенство капитала и почему r > g. Контекст для инвестиционных решений</div></div><div class="tier-badge" style="background:rgba(107,114,128,.15);color:#9ca3af">T4</div></div>
+      <div class="book-card"><div class="book-num">21</div><div class="book-info"><div class="book-title">Platform Capitalism</div><div class="book-author">Ник Срничек · 2017</div><div class="book-why">Короткая, точная. Как платформы монополизируют данные и рынки</div></div><div class="tier-badge" style="background:rgba(107,114,128,.15);color:#9ca3af">T4</div></div>
+      <div class="book-card"><div class="book-num">22</div><div class="book-info"><div class="book-title">Cloudmoney</div><div class="book-author">Бретт Скотт · 2022</div><div class="book-why">Война наличных vs цифровых денег. Финансовый суверенитет</div></div><div class="tier-badge" style="background:rgba(107,114,128,.15);color:#9ca3af">T4</div></div>
+      <div class="book-card"><div class="book-num">23</div><div class="book-info"><div class="book-title">Less Is More</div><div class="book-author">Джейсон Хикель · 2020</div><div class="book-why">Degrowth экономика. Альтернативный взгляд на рост</div></div><div class="tier-badge" style="background:rgba(107,114,128,.15);color:#9ca3af">T4</div></div>
+      <div class="book-card"><div class="book-num">24</div><div class="book-info"><div class="book-title">Уроки истории</div><div class="book-author">Уилл и Ариэль Дюрант · 1968</div><div class="book-why">Сжатая мудрость истории. Быстрое чтение</div></div><div class="tier-badge" style="background:rgba(107,114,128,.15);color:#9ca3af">T4</div></div>
+      <div class="book-card"><div class="book-num">25</div><div class="book-info"><div class="book-title">Rentier Capitalism</div><div class="book-author">Бретт Кристоферс · 2020</div><div class="book-why">Как рента заменила производство. Для понимания активов и монополий</div></div><div class="tier-badge" style="background:rgba(107,114,128,.15);color:#9ca3af">T4</div></div>
+      <div class="book-card"><div class="book-num">26</div><div class="book-info"><div class="book-title">Prosperity Without Growth</div><div class="book-author">Тим Джексон · 2009</div><div class="book-why">Экономика без роста — альтернативная макро-рамка</div></div><div class="tier-badge" style="background:rgba(107,114,128,.15);color:#9ca3af">T4</div></div>
+    </div>
+  </div>
+
+  <!-- TIER 5 -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection('t5')">
+      <div class="section-dot" style="background:#374151"></div>
+      <div class="section-title">⚫ Tier 5 — Долгосрочный интеллект</div>
+      <div class="section-count">8</div>
+      <div class="section-chevron" id="chevron-t5">›</div>
+    </div>
+    <div class="section-body" id="body-t5">
+      <div class="book-card"><div class="book-num">27</div><div class="book-info"><div class="book-title">Начало бесконечности</div><div class="book-author">Дэвид Дойч · 2011</div><div class="book-why">Эпистемология. Глубоко. Медленно</div></div><div class="tier-badge" style="background:rgba(55,65,81,.3);color:#6b7280">T5</div></div>
+      <div class="book-card"><div class="book-num">28</div><div class="book-info"><div class="book-title">Гёдель, Эшер, Бах</div><div class="book-author">Дуглас Хофштадтер · 1979</div><div class="book-why">Гений книга. Читать когда много ментальной энергии</div></div><div class="tier-badge" style="background:rgba(55,65,81,.3);color:#6b7280">T5</div></div>
+      <div class="book-card"><div class="book-num">29</div><div class="book-info"><div class="book-title">COVID-19: The Great Reset</div><div class="book-author">Клаус Шваб · 2020</div><div class="book-why">Официальная повестка WEF. Полезно знать первоисточник</div></div><div class="tier-badge" style="background:rgba(55,65,81,.3);color:#6b7280">T5</div></div>
+      <div class="book-card"><div class="book-num">30</div><div class="book-info"><div class="book-title">Stakeholder Capitalism</div><div class="book-author">Клаус Шваб · 2021</div><div class="book-why">Корпоративная идеология WEF. Контекст для понимания ESG-повестки</div></div><div class="tier-badge" style="background:rgba(55,65,81,.3);color:#6b7280">T5</div></div>
+      <div class="book-card"><div class="book-num">31</div><div class="book-info"><div class="book-title">The Great Narrative</div><div class="book-author">Клаус Шваб · 2022</div><div class="book-why">Глобальный нарратив WEF о будущем. Читать критически</div></div><div class="tier-badge" style="background:rgba(55,65,81,.3);color:#6b7280">T5</div></div>
+      <div class="book-card"><div class="book-num">32</div><div class="book-info"><div class="book-title">Against the Great Reset</div><div class="book-author">Ред. Майкл Уолш · 2022</div><div class="book-why">Критика WEF-повестки. Альтернативный взгляд</div></div><div class="tier-badge" style="background:rgba(55,65,81,.3);color:#6b7280">T5</div></div>
+      <div class="book-card"><div class="book-num">33</div><div class="book-info"><div class="book-title">Beyond the Limits</div><div class="book-author">Медоуз и др. · 1992</div><div class="book-why">20-летний апдейт World3. Пропусти, если читал оригинал и 30-year update</div></div><div class="tier-badge" style="background:rgba(55,65,81,.3);color:#6b7280">T5</div></div>
+      <div class="book-card"><div class="book-num">34</div><div class="book-info"><div class="book-title">Degrowth: A Vocabulary for a New Era</div><div class="book-author">Д'Ализа, Демария, Каллис · 2014</div><div class="book-why">Академический словарь degrowth-движения. Тяжело читается</div></div><div class="tier-badge" style="background:rgba(55,65,81,.3);color:#6b7280">T5</div></div>
+    </div>
+  </div>
+
+  <!-- READ -->
+  <div class="section" id="doneBlock" style="display:none">
+    <div style="padding:40px;text-align:center;color:var(--muted);font-size:13px;">
+      Пока пусто. Первая книга появится здесь после завершения Obviously Awesome.
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  const blocks = {
+    'all': ['statsBlock','readingBlock','queueBlock'],
+    'reading': ['readingBlock'],
+    'queue': ['queueBlock'],
+    'done': ['doneBlock']
+  };
+  
+  // Скрываем всё
+  ['statsBlock','readingBlock','queueBlock','doneBlock'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.style.display = 'none';
+  });
+  // Также скрываем секции очереди
+  document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+  
+  if (tab === 'all' || tab === 'queue') {
+    document.querySelectorAll('.section').forEach(s => s.style.display = 'block');
+  }
+  if (tab === 'all') {
+    document.getElementById('statsBlock').style.display = 'grid';
+    document.getElementById('readingBlock').style.display = 'block';
+  }
+  if (tab === 'reading') {
+    document.getElementById('readingBlock').style.display = 'block';
+  }
+  if (tab === 'done') {
+    document.getElementById('doneBlock').style.display = 'block';
+  }
+}
+
+function toggleSection(id) {
+  const body = document.getElementById('body-' + id);
+  const chevron = document.getElementById('chevron-' + id);
+  body.classList.toggle('open');
+  chevron.classList.toggle('open');
+}
+
+// Init - show all sections
+document.querySelectorAll('.section').forEach(s => s.style.display = 'block');
+</script>
+</body>
+</html>
