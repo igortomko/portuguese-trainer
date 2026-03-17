@@ -713,6 +713,34 @@ const TOPICS = [
       {ru:"Мне плохо / Нехорошо",pt:"Estou passando mal",pron:"Эс-тоу па-сан-ду мал",key:"passando mal",extra:""},
       {ru:"Не знаю",pt:"Não sei",pron:"Наун сей",key:"Não sei",extra:""},
       {ru:"Посмотрим",pt:"A gente vê",pron:"А жен-чи ве",key:"A gente vê",extra:""}
+    ,
+      {ru:'Угол (улиц).',pt:'A esquina.',pron:'А эс-ки-на',key:'esquina',extra:'na esquina = на углу'},
+      {ru:'Квартал.',pt:'O quarteirão.',pron:'У куар-тей-ран',key:'quarteirão',extra:''},
+      {ru:'Светофор.',pt:'O semáforo.',pron:'У се-ма-фо-ру',key:'semáforo',extra:'o sinal = светофор (разг.)'},
+      {ru:'Напротив.',pt:'Em frente a.',pron:'Эй френ-чи а',key:'em frente a',extra:''},
+      {ru:'В сторону пляжа.',pt:'Sentido praia.',pron:'Сен-чи-ду прая',key:'sentido',extra:''},
+      {ru:'Прямо до конца.',pt:'Direto até o fim.',pron:'Джи-ре-ту а-те у фин',key:'até o fim',extra:''},
+      {ru:'Я русский.',pt:'Sou russo.',pron:'Соу хус-су',key:'russo',extra:'russa = женщина'},
+      {ru:'Я бразилец.',pt:'Sou brasileiro.',pron:'Соу бра-зи-лей-ру',key:'brasileiro',extra:''},
+      {ru:'Привет! / Здравствуйте!',pt:'Oi! / Olá!',pron:'Ой! / О-ла!',key:'oi/olá',extra:''},
+      {ru:'Здорово! Отлично!',pt:'Que bom! / Ótimo!',pron:'Ки бон! / О-чи-му!',key:'ótimo',extra:''},
+      {ru:'Не за что.',pt:'De nada.',pron:'Джи на-да',key:'de nada',extra:''},
+      {ru:'Простите.',pt:'Desculpe.',pron:'Дис-кул-пи',key:'desculpe',extra:'Com licença = разрешите пройти'},
+      {ru:'К сожалению.',pt:'Infelizmente.',pron:'Ин-фе-лис-мен-чи',key:'infelizmente',extra:'felizmente = к счастью'},
+      {ru:'Наверное.',pt:'Talvez.',pron:'Тал-вэс',key:'talvez',extra:'provavelmente = вероятно'},
+      {ru:'Конечно.',pt:'Com certeza.',pron:'Кон сер-те-за',key:'com certeza',extra:'claro = конечно (неформ.)'},
+      {ru:'Кстати.',pt:'A propósito.',pron:'А про-по-зи-ту',key:'a propósito',extra:''},
+      {ru:'Ты прав.',pt:'Você tem razão.',pron:'Во-сэ тэй ха-зан',key:'ter razão',extra:'ter razão = быть правым'},
+      {ru:'Мне тоже.',pt:'O prazer é meu.',pron:'У пра-зер э мэу',key:'o prazer é meu',extra:''},
+      {ru:'Пока / До свидания.',pt:'Tchau / Adeus.',pron:'Чау / А-де-ус',key:'tchau',extra:''},
+      {ru:'До скорого.',pt:'Até logo.',pron:'А-те ло-гу',key:'até logo',extra:''},
+      {ru:'Я учу португальский.',pt:'Estudo português.',pron:'Эс-ту-ду пор-ту-гес',key:'estudo',extra:''},
+      {ru:'Я говорю немного.',pt:'Falo um pouco.',pron:'Фа-лу ум по-уку',key:'um pouco',extra:''},
+      {ru:'Правда? Серьёзно?',pt:'Sério? / Verdade?',pron:'Се-ри-у? / Вер-да-джи?',key:'sério/verdade',extra:''},
+      {ru:'Я из России.',pt:'Sou da Rússia.',pron:'Соу да Хус-си-а',key:'sou da',extra:'de onde você é? = откуда ты?'},
+      {ru:'Я из Москвы.',pt:'Sou de Moscou.',pron:'Соу джи Мос-коу',key:'sou de',extra:''},
+      {ru:'Мне пора идти.',pt:'Tenho que ir.',pron:'Тен-ью ки ир',key:'tenho que ir',extra:''},
+      {ru:'Уже поздно.',pt:'Já está tarde.',pron:'Жа эс-та тар-джи',key:'já está tarde',extra:''}
     ]
   },
   {
@@ -771,7 +799,12 @@ const TOPICS = [
     ,
       {ru:"Я был учителем.",pt:"Eu fui professor.",pron:"Эу фуи професор",key:"fui",extra:"Прошедшее от ser/ir: fui"},
       {ru:"Я буду учителем.",pt:"Eu vou ser professor.",pron:"Эу воу сер професор",key:"vou ser",extra:"Будущее через ir + infinitivo"},
-      {ru:"Почему вы не были здесь?",pt:"Por que vocês não estavam aqui?",pron:"Пор кэ восэйс нау эставам аки?",key:"estavam",extra:"Прошедшее состояние / местонахождение"}]
+      {ru:"Почему вы не были здесь?",pt:"Por que vocês não estavam aqui?",pron:"Пор кэ восэйс нау эставам аки?",key:"estavam",extra:"Прошедшее состояние / местонахождение"},
+      {ru:'Я не учитель.',pt:'Eu não sou professor.',pron:'Эу нэу соу про-фес-сор',key:'ser отрицание',extra:'Отрицание: não sou'},
+      {ru:'Где ты работаешь?',pt:'Onde você trabalha?',pron:'Он-джи во-сэ тра-ба-лья',key:'onde trabalha',extra:''},
+      {ru:'Я был там.',pt:'Eu estava lá.',pron:'Эу эс-та-ва ла',key:'estar прошедшее',extra:'estava = был (временное)'},
+      {ru:'Я буду врачом.',pt:'Eu vou ser médico.',pron:'Эу воу сер ме-джи-ку',key:'ser будущее',extra:'Профессия = ser'}
+    ]
   },
   {
     id: "verbs_all", linearId: "IGO-100", emoji: "🏋️", title: "8. Всё о глаголах", desc: "Времена, сочетания, повелительное", dueDate: "19.04",
@@ -791,7 +824,26 @@ const TOPICS = [
       {ru:"Я хочу, чтобы ты купил еду.",pt:"Quero que você compre comida.",pron:"Кэру ки восэ компри комида",key:"Quero que",extra:"Структура ʼхочу, чтобыʼ"},
       {ru:"Если ты пойдёшь в магазин, я приготовлю еду.",pt:"Se você for ao mercado, eu preparo a comida.",pron:"Си восэ фор ау меркаду, эу препару а комида",key:"Se",extra:"Условие: если"},
       {ru:"Не приходи!",pt:"Não venha!",pron:"Нау веня!",key:"Não venha",extra:"Отрицательный императив"},
-      {ru:"Давай потанцуем.",pt:"Vamos dançar.",pron:"Вамус дансар",key:"Vamos",extra:"Призыв / давай"}]
+      {ru:"Давай потанцуем.",pt:"Vamos dançar.",pron:"Вамус дансар",key:"Vamos",extra:"Призыв / давай"},
+      {ru:'Мне не нравится работать.',pt:'Eu não gosto de trabalhar.',pron:'Эу нэу гос-ту джи тра-ба-льяр',key:'não gostar de',extra:''},
+      {ru:'Я люблю есть.',pt:'Eu adoro comer.',pron:'Эу а-до-ру ко-мер',key:'adorar',extra:'adorar = сильное нравится'},
+      {ru:'Я хочу спать.',pt:'Eu quero dormir.',pron:'Эу кэ-ру дор-мир',key:'querer + inf',extra:'querer + infinitivo'},
+      {ru:'Я хотел гулять, но решил поспать.',pt:'Queria passear, mas decidi dormir.',pron:'Ке-ри-а па-се-ар мас де-си-джи дор-мир',key:'queria',extra:'queria = хотел (прошлое неоконч.)'},
+      {ru:'Мы начинаем бегать.',pt:'A gente começa a correr.',pron:'А жен-чи ко-ме-са а ко-хер',key:'começar a',extra:'começar a + inf'},
+      {ru:'Я планирую поехать в Китай.',pt:'Eu planejo ir para a China.',pron:'Эу пла-не-жу ир па-ра а Ши-на',key:'planejar',extra:''},
+      {ru:'Я хочу, чтобы было так.',pt:'Eu quero que seja assim.',pron:'Эу кэ-ру ки сей-жа а-си',key:'que + subj',extra:'seja = сослаг. от ser'},
+      {ru:'Я хочу, чтобы вы были счастливы.',pt:'Eu quero que vocês sejam felizes.',pron:'Эу кэ-ру ки во-сэйс сей-жан фе-ли-зис',key:'sejam felizes',extra:''},
+      {ru:'Когда она приедет, мы пойдём гулять.',pt:'Quando ela chegar, a gente vai passear.',pron:'Куан-ду эла ше-гар а жен-чи вай па-се-ар',key:'quando + inf',extra:'quando = когда'},
+      {ru:'Беги!',pt:'Corre!',pron:'Ко-хи',key:'imperativo',extra:'Повелительная форма'},
+      {ru:'Садись!',pt:'Senta!',pron:'Сен-та',key:'imperativo',extra:''},
+      {ru:'Уходи!',pt:'Vai embora!',pron:'Вай эм-бо-ра',key:'vai embora',extra:''},
+      {ru:'Работайте!',pt:'Trabalhem!',pron:'Тра-ба-льейн',key:'imperativo мн.ч.',extra:''},
+      {ru:'Не садись!',pt:'Não senta!',pron:'Нэу сен-та',key:'não imperativo',extra:''},
+      {ru:'Мыться.',pt:'Se lavar.',pron:'Си ла-вар',key:'возвратный',extra:'lavar-se'},
+      {ru:'Наслаждаться.',pt:'Se divertir.',pron:'Си джи-вер-чир',key:'возвратный',extra:'divertir-se'},
+      {ru:'Давай поиграем.',pt:'Vamos jogar.',pron:'Ва-муш жо-гар',key:'vamos',extra:'Давай = vamos'},
+      {ru:'Тебе лучше уехать.',pt:'É melhor você ir embora.',pron:'Э мель-ор во-сэ ир эм-бо-ра',key:'é melhor',extra:''}
+    ]
   },
   {
     id: "nouns", linearId: "IGO-101", emoji: "📦", title: "9. Существительные", desc: "Род, число, артикли", dueDate: "23.04",
@@ -830,6 +882,17 @@ const TOPICS = [
       {ru:"Путешествие.",pt:"A viagem.",pron:"А виажей",key:"viagem",extra:"Boa viagem! = хорошей поездки!"}
       ,
       {ru:"Ключи.",pt:"As chaves.",pron:"Ас шавис",key:"chaves",extra:"Cadê as chaves? = где ключи?"}
+    ,
+      {ru:'Учебник.',pt:'O livro didático.',pron:'У ли-вру джи-да-чи-ку',key:'livro didático',extra:''},
+      {ru:'Компьютер.',pt:'O computador.',pron:'У ком-пу-та-дор',key:'computador',extra:''},
+      {ru:'Имя.',pt:'O nome.',pron:'У но-ми',key:'nome',extra:''},
+      {ru:'Комната / Спальня.',pt:'O quarto / A sala.',pron:'У куар-ту / А са-ла',key:'quarto',extra:'quarto = спальня, sala = гостиная'},
+      {ru:'Оба.',pt:'Ambos.',pron:'Ан-бус',key:'ambos',extra:'ambas = обе (жен.)'},
+      {ru:'Каждый.',pt:'Cada um.',pron:'Ка-да ун',key:'cada',extra:'todo mundo = все'},
+      {ru:'Проблема.',pt:'O problema.',pron:'У про-бле-ма',key:'problema',extra:''},
+      {ru:'Адрес.',pt:'O endereço.',pron:'У эн-де-ре-су',key:'endereço',extra:''},
+      {ru:'Номер телефона.',pt:'O número de telefone.',pron:'У ну-ме-ру джи те-ле-фо-ни',key:'número',extra:''},
+      {ru:'Самолёт.',pt:'O avião.',pron:'У а-ви-ан',key:'avião',extra:''}
     ]
   },
   {
@@ -849,7 +912,12 @@ const TOPICS = [
       {ru:"Это моя машина.",pt:"Este é o meu carro.",pron:"Эсти э у мэу карру",key:"meu",extra:"мой / моя / мои зависят от рода предмета"},
       {ru:"Это наш дом.",pt:"Esta é a nossa casa.",pron:"Эста э а носса каза",key:"nossa",extra:"наш / наша"},
       {ru:"Это твой компьютер?",pt:"Este é o seu computador?",pron:"Эсти э у сэу компьютадор?",key:"seu",extra:"твой / ваш"},
-      {ru:"Это их планы.",pt:"Estes são os planos deles.",pron:"Эстис саун уш планус делис",key:"deles",extra:"их (муж./смеш.)"}]
+      {ru:"Это их планы.",pt:"Estes são os planos deles.",pron:"Эстис саун уш планус делис",key:"deles",extra:"их (муж./смеш.)"},
+      {ru:'Мои / Мои (мн.ч.).',pt:'Meus / Minhas.',pron:'Мэуш / Ми-ньяш',key:'meus/minhas',extra:'meus = мн.ч. муж., minhas = мн.ч. жен.'},
+      {ru:'Это чья сумка?',pt:'De quem é essa bolsa?',pron:'Джи кейн э эса бол-са',key:'de quem é',extra:'de quem = чья/чей?'},
+      {ru:'Это Сашина книга.',pt:'É o livro do Sasha.',pron:'Э у ли-вру ду Са-ша',key:'do + имя',extra:'do = принадлежность'},
+      {ru:'Наши друзья.',pt:'Nossos amigos.',pron:'Нос-суш а-ми-гуш',key:'nossos',extra:''}
+    ]
   },
   {
     id: "numbers", linearId: "IGO-103", emoji: "🔢", title: "11. Числительные, возраст, даты", desc: "Числа, дни рождения, время", dueDate: "30.04",
@@ -889,6 +957,17 @@ const TOPICS = [
       {ru:"Десять тысяч.",pt:"Dez mil.",pron:"Дэс мил",key:"dez mil",extra:""}
       ,
       {ru:"Миллион.",pt:"Um milhão.",pron:"Ун мильяун",key:"milhão",extra:"dois milhões = два миллиона"}
+    ,
+      {ru:'Четыре / Пять.',pt:'Quatro / Cinco.',pron:'Куа-тру / Си-нку',key:'quatro/cinco',extra:''},
+      {ru:'Шесть / Семь.',pt:'Seis / Sete.',pron:'Сейс / Се-чи',key:'seis/sete',extra:'Meia = 6 в разговоре'},
+      {ru:'Восемь / Девять.',pt:'Oito / Nove.',pron:'Ой-ту / Но-ви',key:'oito/nove',extra:''},
+      {ru:'Одиннадцать — Пятнадцать.',pt:'Onze, Doze, Treze, Quatorze, Quinze.',pron:'Он-зи, До-зи, Тре-зи, Куа-тор-зи, Кин-зи',key:'onze-quinze',extra:''},
+      {ru:'Двадцать.',pt:'Vinte.',pron:'Вин-чи',key:'vinte',extra:''},
+      {ru:'Тридцать / Сорок.',pt:'Trinta / Quarenta.',pron:'Трин-та / Куа-рен-та',key:'trinta/quarenta',extra:''},
+      {ru:'Пятьдесят / Шестьдесят.',pt:'Cinquenta / Sessenta.',pron:'Синку-эн-та / Сес-сен-та',key:'cinquenta/sessenta',extra:''},
+      {ru:'Сто тысяч.',pt:'Cem mil.',pron:'Сейн мил',key:'cem mil',extra:''},
+      {ru:'15-го сентября.',pt:'No dia quinze de setembro.',pron:'Ну джи-а кин-зи джи се-тем-бру',key:'no dia ... de',extra:'Дата = no dia + число + de + месяц'},
+      {ru:'Четвёртый, Пятый, Десятый.',pt:'Quarto, Quinto, Décimo.',pron:'Куар-ту, Кин-ту, Де-си-му',key:'ordinals 4-10',extra:''}
     ]
   },
   {
@@ -944,6 +1023,18 @@ const TOPICS = [
       {ru:"Этим летом.",pt:"Neste verão.",pron:"Несчи вэрау",key:"neste verão",extra:""}
       ,
       {ru:"В следующем месяце.",pt:"No próximo mês.",pron:"Ну проксиму мес",key:"próximo mês",extra:""}
+    ,
+      {ru:'Позавчера.',pt:'Anteontem.',pron:'Ан-чи-он-тейн',key:'anteontem',extra:''},
+      {ru:'Послезавтра.',pt:'Depois de amanhã.',pron:'Де-пойс джи а-ма-нья',key:'depois de amanhã',extra:''},
+      {ru:'Рано / Поздно / Вовремя.',pt:'Cedo / Tarde / Na hora certa.',pron:'Се-ду / Тар-джи / На о-ра сер-та',key:'cedo/tarde',extra:''},
+      {ru:'Раз в неделю.',pt:'Uma vez por semana.',pron:'У-ма вес пор се-ма-на',key:'uma vez por',extra:'раз = vez'},
+      {ru:'Полдня / Полчаса.',pt:'Meio dia / Meia hora.',pron:'Мей-у джи-а / Мей-а о-ра',key:'meio/meia',extra:''},
+      {ru:'Через 2 недели.',pt:'Em duas semanas.',pron:'Эй ду-ас се-ма-нас',key:'em + período',extra:''},
+      {ru:'5 лет назад.',pt:'Há cinco anos.',pron:'А си-нку а-нус',key:'há + período',extra:'há = назад'},
+      {ru:'С утра до вечера.',pt:'De manhã até a noite.',pron:'Джи ма-нья а-те а ной-чи',key:'de ... até',extra:''},
+      {ru:'В следующий раз.',pt:'Na próxima vez.',pron:'На про-кси-ма вес',key:'próxima vez',extra:''},
+      {ru:'В шесть вечера.',pt:'Às seis da tarde.',pron:'Аш сейш да тар-джи',key:'às da tarde',extra:'da manhã = утра, da noite = ночи'},
+      {ru:'Каждый день.',pt:'Todo dia / Todos os dias.',pron:'То-ду джи-а',key:'todo dia',extra:''}
     ]
   },
   {
@@ -991,6 +1082,29 @@ const TOPICS = [
       {ru:"Светлый / Тёмный.",pt:"Claro / Escuro.",pron:"Кларо / Эскуру",key:"claro/escuro",extra:"Cor clara = светлый цвет"}
       ,
       {ru:"Комфортный / Неудобный.",pt:"Confortável / Desconfortável.",pron:"Конфортавел / Дескомфортавел",key:"confortável",extra:""}
+    ,
+      {ru:'Хороший / Плохой.',pt:'Bom / Mau.',pron:'Бон / Мау',key:'bom/mau',extra:'boa/má — жен.р.'},
+      {ru:'Большой / Маленький.',pt:'Grande / Pequeno.',pron:'Гран-джи / Пе-ке-ну',key:'grande/pequeno',extra:''},
+      {ru:'Новый / Старый.',pt:'Novo / Velho.',pron:'Но-ву / Вель-ю',key:'novo/velho',extra:''},
+      {ru:'Молодой.',pt:'Jovem.',pron:'Жо-вен',key:'jovem',extra:'не меняется по роду'},
+      {ru:'Дорогой / Дешёвый.',pt:'Caro / Barato.',pron:'Ка-ру / Ба-ра-ту',key:'caro/barato',extra:''},
+      {ru:'Быстрый / Медленный.',pt:'Rápido / Lento.',pron:'Ха-пи-ду / Лен-ту',key:'rápido/lento',extra:''},
+      {ru:'Умный / Глупый.',pt:'Inteligente / Burro.',pron:'Ин-те-ли-жен-чи / Бу-ху',key:'inteligente',extra:''},
+      {ru:'Смешной / Серьёзный.',pt:'Engraçado / Sério.',pron:'Эн-гра-са-ду / Се-ри-у',key:'engraçado/sério',extra:''},
+      {ru:'Богатый / Бедный.',pt:'Rico / Pobre.',pron:'Хи-ку / По-бри',key:'rico/pobre',extra:''},
+      {ru:'Чистый / Грязный.',pt:'Limpo / Sujo.',pron:'Лим-пу / Су-жу',key:'limpo/sujo',extra:''},
+      {ru:'Лучше / Хуже.',pt:'Melhor / Pior.',pron:'Мель-ор / Пи-ор',key:'melhor/pior',extra:'нерегулярная сравнит. ст.'},
+      {ru:'Красивее, чем...',pt:'Mais bonito do que...',pron:'Майш бо-ни-ту ду ки...',key:'mais ... do que',extra:'сравнение: mais ... do que'},
+      {ru:'Самый лучший.',pt:'O melhor.',pron:'У мель-ор',key:'o melhor',extra:'превосходная: o mais... / o melhor'},
+      {ru:'Такой же, как...',pt:'Tão ... quanto...',pron:'Тан ... куан-ту...',key:'tão ... quanto',extra:'одинаковое сравнение'},
+      {ru:'Белый / Чёрный / Красный.',pt:'Branco / Preto / Vermelho.',pron:'Бран-ку / Пре-ту / Вер-мель-ю',key:'cores',extra:''},
+      {ru:'Синий / Зелёный / Жёлтый.',pt:'Azul / Verde / Amarelo.',pron:'А-зул / Вер-джи / А-ма-ре-лу',key:'cores',extra:''},
+      {ru:'Серый / Оранжевый / Розовый.',pt:'Cinza / Laranja / Rosa.',pron:'Син-за / Ла-ран-жа / Хо-за',key:'cores',extra:''},
+      {ru:'Длинный / Короткий.',pt:'Longo / Curto.',pron:'Лон-гу / Кур-ту',key:'longo/curto',extra:''},
+      {ru:'Высокий / Низкий.',pt:'Alto / Baixo.',pron:'Ал-ту / Бай-шу',key:'alto/baixo',extra:''},
+      {ru:'Лёгкий / Тяжёлый.',pt:'Leve / Pesado.',pron:'Ле-ви / Пе-за-ду',key:'leve/pesado',extra:''},
+      {ru:'Простой / Сложный.',pt:'Simples / Difícil.',pron:'Сим-плис / Джи-фи-сил',key:'simples/difícil',extra:''},
+      {ru:'Пустой / Полный.',pt:'Vazio / Cheio.',pron:'Ва-зи-у / Шей-у',key:'vazio/cheio',extra:''}
     ]
   },
   {
@@ -1017,6 +1131,8 @@ const TOPICS = [
       {ru:"Мне тепло.",pt:"Estou com calor.",pron:"Эстоу ком калор",key:"com calor",extra:""}
       ,
       {ru:"Мне жарко.",pt:"Estou com muito calor.",pron:"Эстоу ком муйту калор",key:"muito calor",extra:"Que calor! = ну и жара!"}
+    ,
+      {ru:'Я встревожен.',pt:'Estou preocupado.',pron:'Эс-тоу пре-о-ку-па-ду',key:'preocupado',extra:''}
     ]
   },
   {
@@ -1043,6 +1159,8 @@ const TOPICS = [
       {ru:"Ты сам.",pt:"Você mesmo.",pron:"Восэ мезму",key:"você mesmo",extra:"você mesma (жен.)"}
       ,
       {ru:"Она сама.",pt:"Ela mesma.",pron:"Эла мезма",key:"ela mesma",extra:""}
+    ,
+      {ru:'Я сам.',pt:'Eu mesmo.',pron:'Эу мэс-му',key:'mesmo',extra:'para mulheres: eu mesma'}
     ]
   },
   {
@@ -1065,6 +1183,15 @@ const TOPICS = [
       {ru:"Везде.",pt:"Em todo lugar / Por toda parte.",pron:"Эм тоду лугар",key:"em todo lugar",extra:"Em todo lugar = везде"}
       ,
       {ru:"Где-то.",pt:"Em algum lugar.",pron:"Эм алгун лугар",key:"algum lugar",extra:"Está em algum lugar = где-то есть"}
+    ,
+      {ru:'Всё.',pt:'Tudo.',pron:'Ту-ду',key:'tudo',extra:'Tudo bem = всё хорошо'},
+      {ru:'Что-то.',pt:'Algo.',pron:'Ал-гу',key:'algo',extra:'alguma coisa = что-то'},
+      {ru:'Все (люди).',pt:'Todo mundo.',pron:'То-ду мун-ду',key:'todo mundo',extra:'todos = все (прил.)'},
+      {ru:'Кто-то.',pt:'Alguém.',pron:'Ал-гейн',key:'alguém',extra:''},
+      {ru:'Никто.',pt:'Ninguém.',pron:'Нин-гейн',key:'ninguém',extra:'Ninguém sabe = никто не знает'},
+      {ru:'Нигде.',pt:'Em nenhum lugar.',pron:'Эй не-ньун лу-гар',key:'nenhum lugar',extra:''},
+      {ru:'Всегда.',pt:'Sempre.',pron:'Сем-при',key:'sempre',extra:''},
+      {ru:'Никогда.',pt:'Nunca.',pron:'Нун-ка',key:'nunca',extra:'Nunca mais = больше никогда'}
     ]
   },
   {
@@ -1088,7 +1215,24 @@ const TOPICS = [
       ,
       {ru:"Назад / обратно.",pt:"Para trás / De volta.",pron:"Пара трас / Джи вол-та",key:"para trás",extra:""},
       {ru:"На юге / на севере.",pt:"No sul / no norte.",pron:"Ну сул / ну нор-чи",key:"no sul/no norte",extra:""},
-      {ru:"На западе / на востоке.",pt:"No oeste / no leste.",pron:"Ну оэсти / ну лести",key:"no oeste/no leste",extra:""}]
+      {ru:"На западе / на востоке.",pt:"No oeste / no leste.",pron:"Ну оэсти / ну лести",key:"no oeste/no leste",extra:""},
+      {ru:'Далеко.',pt:'Longe.',pron:'Лон-жи',key:'longe',extra:'longe de = далеко от'},
+      {ru:'Близко / Рядом.',pt:'Perto.',pron:'Пер-ту',key:'perto',extra:'perto de = рядом с'},
+      {ru:'Налево.',pt:'À esquerda.',pron:'А эс-кер-да',key:'esquerda',extra:'Vire à esquerda = поверни налево'},
+      {ru:'Направо.',pt:'À direita.',pron:'А джи-рей-та',key:'direita',extra:'Vire à direita = поверни направо'},
+      {ru:'Прямо.',pt:'Em frente / Direto.',pron:'Эй френ-чи / Джи-ре-ту',key:'direto',extra:'Vai direto = иди прямо'},
+      {ru:'Назад.',pt:'Para trás.',pron:'Па-ра трас',key:'para trás',extra:''},
+      {ru:'Север / Юг.',pt:'Norte / Sul.',pron:'Нор-чи / Сул',key:'norte/sul',extra:''},
+      {ru:'Восток / Запад.',pt:'Leste / Oeste.',pron:'Лес-чи / О-эс-чи',key:'leste/oeste',extra:''},
+      {ru:'На севере.',pt:'No norte.',pron:'Ну нор-чи',key:'no norte',extra:'na sul = на юге'},
+      {ru:'Спереди / Сзади.',pt:'Na frente / Atrás.',pron:'На френ-чи / А-трас',key:'frente/atrás',extra:''},
+      {ru:'Сбоку.',pt:'Do lado.',pron:'Ду ла-ду',key:'do lado',extra:'ao lado de = рядом с'},
+      {ru:'Угол улицы.',pt:'A esquina.',pron:'А эс-ки-на',key:'esquina',extra:'na esquina = на углу'},
+      {ru:'Напротив.',pt:'Em frente a.',pron:'Эй френ-чи а',key:'em frente a',extra:''},
+      {ru:'Между.',pt:'Entre.',pron:'Эн-три',key:'entre',extra:'entre A e B = между A и B'},
+      {ru:'Там наверху / внизу.',pt:'Lá em cima / em baixo.',pron:'Ла эй си-ма / эй бай-шу',key:'em cima/baixo',extra:''},
+      {ru:'Вверх / Вниз по улице.',pt:'Subindo / Descendo a rua.',pron:'Су-бин-ду / Де-сен-ду а ху-а',key:'subindo/descendo',extra:''}
+    ]
   },
   {
     id: "weather", linearId: "IGO-110", emoji: "🌤️", title: "18. Погода", desc: "Как описать погоду", dueDate: "23.05",
@@ -1114,7 +1258,14 @@ const TOPICS = [
       {ru:"Солнце (сущ.).",pt:"Sol.",pron:"Сол",key:"sol",extra:"Tem sol hoje — сегодня солнечно"},
       {ru:"Дождь (сущ.).",pt:"Chuva.",pron:"Шува",key:"chuva",extra:"Vai ter chuva — будет дождь"},
       {ru:"Жара.",pt:"Calor.",pron:"Калор",key:"calor",extra:"Que calor! — Какая жара!"},
-      {ru:"Холод.",pt:"Frio.",pron:"Фриу",key:"frio",extra:"Que frio! — Как холодно!"}]
+      {ru:"Холод.",pt:"Frio.",pron:"Фриу",key:"frio",extra:"Que frio! — Как холодно!"},
+      {ru:'Жарко / Холодно.',pt:'Está quente / Está frio.',pron:'Эс-та кен-чи / Эс-та фри-у',key:'quente/frio',extra:''},
+      {ru:'Солнечно. Светит солнце.',pt:'Está ensolarado. Tem sol.',pron:'Эс-та эн-со-ла-ра-ду',key:'ensolarado/sol',extra:''},
+      {ru:'Пасмурно / Облачно.',pt:'Está nublado.',pron:'Эс-та ну-бла-ду',key:'nublado',extra:''},
+      {ru:'Мороз / Жара.',pt:'Frio intenso / Calor.',pron:'Фри-у ин-тен-су / Ка-лор',key:'frio/calor',extra:''},
+      {ru:'Погода.',pt:'O tempo / O clima.',pron:'У тем-пу / У кли-ма',key:'tempo/clima',extra:'tempo = сейчас; clima = климат'},
+      {ru:'Прогноз погоды.',pt:'A previsão do tempo.',pron:'А пре-ви-зан ду тем-пу',key:'previsão do tempo',extra:''}
+    ]
   },
   {
     id: "vocabulary", linearId: "IGO-111", emoji: "📖", title: "19. Спектр новых слов", desc: "Тематический словарный запас", dueDate: "27.05",
@@ -1235,6 +1386,45 @@ const TOPICS = [
       {ru:"Позвонить",pt:"Ligar",pron:"Ли-гар",key:"ligar",extra:"Vou te ligar = позвоню тебе"},
       {ru:"Отправить сообщение",pt:"Mandar mensagem",pron:"Ман-дар мен-са-жейн",key:"mensagem",extra:"Manda mensagem = напиши в мессенджер"},
       {ru:"Номер телефона",pt:"O número de telefone",pron:"У ну-ме-ру джи те-ле-фо-ни",key:"número",extra:"Qual é o seu número? = какой твой номер?"}
+    ,
+      {ru:'Стена.',pt:'A parede.',pron:'А па-ре-джи',key:'parede',extra:''},
+      {ru:'Пол.',pt:'O chão.',pron:'У шан',key:'chão',extra:'o piso = пол (покрытие)'},
+      {ru:'Потолок.',pt:'O teto.',pron:'У те-ту',key:'teto',extra:''},
+      {ru:'Стул.',pt:'A cadeira.',pron:'А ка-дей-ра',key:'cadeira',extra:''},
+      {ru:'Чемодан.',pt:'A mala.',pron:'А ма-ла',key:'mala',extra:''},
+      {ru:'Билет.',pt:'O bilhete / A passagem.',pron:'У би-лье-чи',key:'bilhete',extra:'passagem = проездной'},
+      {ru:'Камера.',pt:'A câmera.',pron:'А кам-ра',key:'câmera',extra:''},
+      {ru:'Улица.',pt:'A rua.',pron:'А ху-а',key:'rua',extra:''},
+      {ru:'Тротуар.',pt:'A calçada.',pron:'А кал-са-да',key:'calçada',extra:''},
+      {ru:'Дерево.',pt:'A árvore.',pron:'А ар-во-ри',key:'árvore',extra:''},
+      {ru:'Семья.',pt:'A família.',pron:'А фа-ми-ли-а',key:'família',extra:''},
+      {ru:'Муж / Жена.',pt:'O marido / A esposa.',pron:'У ма-ри-ду / А эс-по-за',key:'marido/esposa',extra:''},
+      {ru:'Сын / Дочь.',pt:'O filho / A filha.',pron:'У фи-лью / А фи-лья',key:'filho/filha',extra:''},
+      {ru:'Брат / Сестра.',pt:'O irmão / A irmã.',pron:'У ир-ман / А ир-ма',key:'irmão/irmã',extra:''},
+      {ru:'Родители.',pt:'Os pais.',pron:'Уш пайш',key:'pais',extra:'pai = отец, mãe = мать'},
+      {ru:'Дедушка / Бабушка.',pt:'O avô / A avó.',pron:'У а-во / А а-во',key:'avô/avó',extra:'vovô/vovó = дедуля/бабуля'},
+      {ru:'Одежда.',pt:'A roupa.',pron:'А хо-упа',key:'roupa',extra:''},
+      {ru:'Рубашка.',pt:'A camisa.',pron:'А ка-ми-за',key:'camisa',extra:''},
+      {ru:'Брюки.',pt:'A calça.',pron:'А кал-са',key:'calça',extra:''},
+      {ru:'Обувь / Туфли.',pt:'O sapato.',pron:'У са-па-ту',key:'sapato',extra:'tênis = кроссовки'},
+      {ru:'Спорт.',pt:'O esporte.',pron:'У эс-пор-чи',key:'esporte',extra:''},
+      {ru:'Пляж.',pt:'A praia.',pron:'А пра-я',key:'praia',extra:''},
+      {ru:'Тренажёрный зал.',pt:'A academia.',pron:'А а-ка-де-ми-а',key:'academia',extra:''},
+      {ru:'Здоровье.',pt:'A saúde.',pron:'А са-у-джи',key:'saúde',extra:''},
+      {ru:'Врач.',pt:'O médico.',pron:'У ме-джи-ку',key:'médico',extra:'médica = женщина-врач'},
+      {ru:'Аптека.',pt:'A farmácia.',pron:'А фар-ма-си-а',key:'farmácia',extra:''},
+      {ru:'Позвонить.',pt:'Ligar.',pron:'Ли-гар',key:'ligar',extra:'me liga = позвони мне'},
+      {ru:'Отель.',pt:'O hotel.',pron:'У о-тел',key:'hotel',extra:'reserva = бронь'},
+      {ru:'Интернет.',pt:'A internet.',pron:'А ин-тер-не-чи',key:'internet',extra:''},
+      {ru:'Россия.',pt:'A Rússia.',pron:'А Хус-си-а',key:'Rússia',extra:''},
+      {ru:'Бразилия.',pt:'O Brasil.',pron:'У Бра-зил',key:'Brasil',extra:''},
+      {ru:'Португалия.',pt:'Portugal.',pron:'Пор-ту-гал',key:'Portugal',extra:'без артикля!'},
+      {ru:'Германия.',pt:'A Alemanha.',pron:'А А-ле-ма-нья',key:'Alemanha',extra:''},
+      {ru:'Франция.',pt:'A França.',pron:'А Фран-са',key:'França',extra:''},
+      {ru:'Испания.',pt:'A Espanha.',pron:'А Эс-па-нья',key:'Espanha',extra:''},
+      {ru:'Китай.',pt:'A China.',pron:'А Ши-на',key:'China',extra:''},
+      {ru:'Япония.',pt:'O Japão.',pron:'У Жа-пан',key:'Japão',extra:''},
+      {ru:'США.',pt:'Os Estados Unidos.',pron:'Уш Эс-та-душ У-ни-душ',key:'Estados Unidos',extra:''}
     ]
   }
 ];
