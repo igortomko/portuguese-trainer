@@ -212,7 +212,6 @@
     <button class="mode-tab" onclick="setMode('quiz')" id="tab-quiz">🎯 Квиз</button>
     <button class="mode-tab" onclick="setMode('list')" id="tab-list">📋 Список</button>
     <button class="mode-tab" onclick="setMode('theory')" id="tab-theory">📖 Теория</button>
-    <button class="mode-tab" onclick="setMode('theory')" id="tab-theory">📖 Теория</button>
   </div>
   <div class="trainer-body" id="trainerBody">
     <!-- FLASHCARD -->
@@ -1701,7 +1700,9 @@ function startRound() {
   const sc = S.scores[S.currentTopic];
   // SRS: show due cards first, then new/unknown
   const dueCards = topic.items.map((v,i)=>i).filter(i => isDue(S.currentTopic, topic.items[i].pt));
-  S.queue = shuffle(dueCards.length > 0 ? dueCards : topic.items.map((_,i)=>i));
+  const allCards = topic.items.map((_,i)=>i);
+  S.queue = shuffle(dueCards.length > 0 ? dueCards : allCards);
+  if (S.queue.length === 0) S.queue = shuffle(allCards);
   S.cur = 0; S.rOk = S.rHard = S.rWrong = 0;
   setMode(S.mode);
 }
@@ -1731,7 +1732,6 @@ function loadCard() {
   else if (S.mode === 'quiz') loadQuiz();
   else if (S.mode === 'list') loadListMode();
   else if (S.mode === 'theory') loadTheory();
-  else if (S.mode === 'theory') loadTheory();
 }
 
 function updateTrainerProgress() {
@@ -1749,7 +1749,9 @@ function updateTrainerProgress() {
 function loadFlash() {
   showModeUI('flashcard');
   const topic = TOPICS.find(t => t.id === S.currentTopic);
+  if (!topic || S.queue.length === 0) { showResults(); return; }
   const item = topic.items[S.queue[S.cur]];
+  if (!item) { showResults(); return; }
   S.revealed = false; S.currentPt = item.pt;
 
   document.getElementById('fcCtx').textContent = topic.emoji + ' ' + topic.title.split('. ')[1];
@@ -1996,13 +1998,6 @@ function loadTheme() {
   }
 }
 
-
-// ===================== THEORY =====================
-function loadTheory() {
-  showModeUI('theory');
-  const el = document.getElementById('theory-data-' + S.currentTopic);
-  document.getElementById('theoryContent').innerHTML = el ? el.innerHTML : '<div class="th-empty">Для этой темы объяснений пока нет. Карточки доступны в других режимах.</div>';
-}
 
 // ===================== THEME =====================
 function toggleTheme() {
