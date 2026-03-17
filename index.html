@@ -12,8 +12,6 @@
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html,body{height:100%;font-family:-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);}
-  .app-wrap{max-width:560px;margin:0 auto;min-height:100vh;background:var(--bg);}
-  @media(min-width:600px){body{background:#0a0a10;}}
   
   .app-wrap{max-width:560px;margin:0 auto;min-height:100vh;background:var(--bg);}
   @media(min-width:600px){body{background:#0a0a10;}}
@@ -150,11 +148,11 @@
   .theme-toggle{background:none;border:none;font-size:18px;cursor:pointer;padding:4px 6px;border-radius:8px;transition:background .15s;color:var(--muted);}
   .theme-toggle:hover{background:var(--surface2);}
 
+  .app-wrap{max-width:560px;margin:0 auto;min-height:100vh;background:var(--bg);}
+  @media(min-width:600px){body{background:#0a0a10;}}
   body.light{--bg:#f5f5f7;--surface:#fff;--surface2:#f0f0f5;--border:rgba(0,0,0,.08);--text:#1a1a2e;--muted:#6b6b8a;--green:#16a34a;--red:#dc2626;--yellow:#d97706;--purple:#7c3aed;--accent:#4f46e5;--orange:#ea580c;}
   body.light .app-wrap{background:#f5f5f7;}
-  .theme-toggle{background:none;border:none;font-size:18px;cursor:pointer;padding:4px 6px;border-radius:8px;color:var(--muted);}
-
-  /* THEORY */
+  .theme-btn{background:none;border:none;font-size:18px;cursor:pointer;padding:4px 6px;border-radius:8px;color:var(--muted);}
   .th-h3{font-size:15px;font-weight:700;color:var(--purple);margin:14px 0 6px;}
   .th-h4{font-size:13px;font-weight:700;color:var(--accent);margin:10px 0 4px;}
   .th-p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:6px;}
@@ -286,12 +284,12 @@
 
 </div><!-- /.app-wrap -->
 
-<div id="theory-data-verbs" style="display:none"><h3 class="th-h3">Нет рода у глаголов</h3><p class="th-p">Eu trabalho = я работаю (одинаково для мужчин и женщин).</p><h3 class="th-h3">Три группы глаголов</h3><table class="th-table"><tr><th>Группа</th><th>Пример</th></tr><tr><td><strong>-AR</strong> (90% глаголов)</td><td>falar - говорить</td></tr><tr><td><strong>-ER</strong></td><td>comer - есть</td></tr><tr><td><strong>-IR</strong></td><td>partir - уходить</td></tr></table><h3 class="th-h3">Настоящее время</h3><table class="th-table"><tr><th>Кто</th><th>-AR (falar)</th><th>-ER (comer)</th><th>-IR (partir)</th></tr><tr><td>Eu (я)</td><td>fal<strong>o</strong></td><td>com<strong>o</strong></td><td>part<strong>o</strong></td></tr><tr><td>Voce (ты)</td><td>fal<strong>a</strong></td><td>com<strong>e</strong></td><td>part<strong>e</strong></td></tr><tr><td>A gente (мы)</td><td>fal<strong>a</strong></td><td>com<strong>e</strong></td><td>part<strong>e</strong></td></tr><tr><td>Eles/Elas (они)</td><td>fal<strong>am</strong></td><td>com<strong>em</strong></td><td>part<strong>em</strong></td></tr></table><p class="th-p"><strong>Лайфхак:</strong> "a gente" (мы) спрягается как voce - проще запомнить!</p><h3 class="th-h3">Неправильные глаголы - самые нужные</h3><table class="th-table"><tr><th>Глагол</th><th>Eu</th><th>Voce</th><th>Eles</th></tr><tr><td>ser (быть постоянно)</td><td>sou</td><td>e</td><td>sao</td></tr><tr><td>estar (быть временно)</td><td>estou</td><td>esta</td><td>estao</td></tr><tr><td>ter (иметь)</td><td>tenho</td><td>tem</td><td>tem</td></tr><tr><td>ir (идти)</td><td>vou</td><td>vai</td><td>vao</td></tr><tr><td>fazer (делать)</td><td>faco</td><td>faz</td><td>fazem</td></tr></table><h3 class="th-h3">Будущее время - просто!</h3><p class="th-p">Бразильцы не используют будущее из учебников. Просто: <strong>vou + инфинитив</strong></p><ul><li class="th-li">Vou comer - поем</li><li class="th-li">Vou te ligar - позвоню тебе</li></ul><h3 class="th-h3">Прошедшее время</h3><table class="th-table"><tr><th>Группа</th><th>Eu</th><th>Voce</th></tr><tr><td>-AR (falar)</td><td>fal<strong>ei</strong></td><td>fal<strong>ou</strong></td></tr><tr><td>-ER (comer)</td><td>com<strong>i</strong></td><td>com<strong>eu</strong></td></tr><tr><td>-IR (partir)</td><td>part<strong>i</strong></td><td>part<strong>iu</strong></td></tr></table></div>
-<div id="theory-data-accusative" style="display:none"><h3 class="th-h3">Главный инсайт: бразильцы упрощают!</h3><p class="th-p">В учебниках сложные формы. В реальном разговоре бразильцы используют обычные местоимения:</p><table class="th-table"><tr><th>Вопрос</th><th>Книжно</th><th>Разговорно (используй!)</th></tr><tr><td>Меня</td><td>me</td><td><strong>mim</strong> (после предлога)</td></tr><tr><td>Тебя</td><td>te</td><td><strong>voce</strong></td></tr><tr><td>Его</td><td>o / lo</td><td><strong>ele</strong></td></tr><tr><td>Её</td><td>a / la</td><td><strong>ela</strong></td></tr><tr><td>Нас</td><td>nos</td><td><strong>a gente</strong></td></tr><tr><td>Их</td><td>os / as</td><td><strong>eles / elas</strong></td></tr></table><h3 class="th-h3">Примеры как говорят реально</h3><table class="th-table"><tr><th>Книжно</th><th>Разговорно</th><th>Перевод</th></tr><tr><td>Eu o vi.</td><td><strong>Eu vi ele.</strong></td><td>Я его видел.</td></tr><tr><td>Eu a amo.</td><td><strong>Eu amo ela.</strong></td><td>Я её люблю.</td></tr><tr><td>Ele me ligou.</td><td><strong>Ele ligou pra mim.</strong></td><td>Он мне позвонил.</td></tr></table><p class="th-p"><strong>Правило:</strong> Просто ставь нормальное местоимение после глагола.</p><h3 class="th-h3">После предлогов - mim, nao me</h3><ul><li class="th-li">Isso e <strong>para mim</strong>. - Это для меня.</li><li class="th-li">Ele pensa em <strong>mim</strong>. - Он думает обо мне.</li><li class="th-li"><strong>Comigo / Contigo</strong> - со мной / с тобой</li></ul></div>
-<div id="theory-data-questions" style="display:none"><h3 class="th-h3">8 вопросительных слов - всё что нужно</h3><table class="th-table"><tr><th>Русский</th><th>Португальский</th><th>Пример</th></tr><tr><td>Что?</td><td><strong>O que?</strong></td><td>O que voce quer? - Что хочешь?</td></tr><tr><td>Кто?</td><td><strong>Quem?</strong></td><td>Quem e ele? - Кто он?</td></tr><tr><td>Где?</td><td><strong>Onde?</strong></td><td>Onde voce mora? - Где живёшь?</td></tr><tr><td>Когда?</td><td><strong>Quando?</strong></td><td>Quando voce chega? - Когда придёшь?</td></tr><tr><td>Почему?</td><td><strong>Por que?</strong></td><td>Por que nao? - Почему нет?</td></tr><tr><td>Как?</td><td><strong>Como?</strong></td><td>Como voce esta? - Как ты?</td></tr><tr><td>Сколько?</td><td><strong>Quanto?</strong></td><td>Quanto custa? - Сколько стоит?</td></tr><tr><td>Который?</td><td><strong>Qual?</strong></td><td>Qual e o seu nome? - Как тебя зовут?</td></tr></table><h3 class="th-h3">Бразильские нюансы</h3><p class="th-p"><strong>Порядок слов - как в русском!</strong> Вопросительное слово в начало.</p><p class="th-p"><strong>Por que vs Porque:</strong></p><ul><li class="th-li">Por que voce veio? - Почему пришёл? (раздельно = вопрос)</li><li class="th-li">Porque quero. - Потому что хочу. (слитно = ответ)</li></ul><p class="th-p"><strong>"O que e que" - звучит по-бразильски:</strong></p><ul><li class="th-li">O que voce quer? -> O que e que voce quer? (оба правильны)</li></ul></div>
-<div id="theory-data-directions" style="display:none"><h3 class="th-h3">Главное: предлоги "слипаются" с артиклями</h3><table class="th-table"><tr><th>Предлог</th><th>Значение</th><th>+ o (муж.)</th><th>+ a (жен.)</th><th>Пример</th></tr><tr><td><strong>em</strong></td><td>в / на / где?</td><td><strong>no</strong></td><td><strong>na</strong></td><td>no Brasil, na praia</td></tr><tr><td><strong>de</strong></td><td>из / от</td><td><strong>do</strong></td><td><strong>da</strong></td><td>do Brasil, da Russia</td></tr><tr><td><strong>para</strong></td><td>куда / для</td><td>para o</td><td>para a</td><td>para a praia</td></tr></table><h3 class="th-h3">Три вопроса - три предлога</h3><table class="th-table"><tr><th>Вопрос</th><th>Предлог</th><th>Пример</th></tr><tr><td>Где? (место)</td><td><strong>em -> no/na</strong></td><td>Estou no trabalho.</td></tr><tr><td>Куда? (движение)</td><td><strong>para</strong></td><td>Vou para a praia.</td></tr><tr><td>Откуда?</td><td><strong>de -> do/da</strong></td><td>Sou da Russia.</td></tr></table><h3 class="th-h3">Чей? - de + местоимение</h3><table class="th-table"><tr><th>Русский</th><th>Португальский</th><th>Пример</th></tr><tr><td>его</td><td><strong>dele</strong></td><td>O carro dele.</td></tr><tr><td>её</td><td><strong>dela</strong></td><td>A casa dela.</td></tr></table><h3 class="th-h3">Направления - минимум</h3><table class="th-table"><tr><th>Русский</th><th>Português</th></tr><tr><td>Прямо</td><td><strong>Reto / Em frente</strong></td></tr><tr><td>Направо</td><td><strong>A direita</strong></td></tr><tr><td>Налево</td><td><strong>A esquerda</strong></td></tr><tr><td>Рядом</td><td><strong>Perto</strong></td></tr><tr><td>Далеко</td><td><strong>Longe</strong></td></tr></table><p class="th-p"><strong>Жизненная фраза:</strong> "Onde fica...?" = Где находится...?</p></div>
-<div id="theory-data-phrases" style="display:none"><h3 class="th-h3">5 суперконструкций - 80% разговора</h3><h4 class="th-h4">1. Хочу / Собираюсь</h4><p class="th-p"><strong>Quero / Vou + инфинитив</strong></p><ul><li class="th-li">Quero comer pizza. - Хочу поесть пиццу.</li><li class="th-li">Vou trabalhar amanha. - Буду работать завтра.</li></ul><h4 class="th-h4">2. Мне нужно</h4><p class="th-p"><strong>Preciso + инфинитив</strong></p><ul><li class="th-li">Preciso ir. - Мне нужно идти.</li></ul><h4 class="th-h4">3. Давай сделаем</h4><p class="th-p"><strong>Vamos + инфинитив</strong> или <strong>Bora!</strong></p><ul><li class="th-li">Vamos comer! - Пойдём поедим!</li><li class="th-li">Bora! - Погнали! (самое разговорное)</li></ul><h4 class="th-h4">4. Нравится / не нравится</h4><p class="th-p"><strong>Gosto de / Nao gosto de</strong></p><ul><li class="th-li">Gosto de musica. - Люблю музыку.</li></ul><h4 class="th-h4">5. Я думаю (самое частое!)</h4><p class="th-p"><strong>Eu acho que...</strong></p><ul><li class="th-li">Eu acho que e bom. - Думаю, что хорошо.</li><li class="th-li">Eu acho que nao. - Думаю, нет.</li></ul><h3 class="th-h3">Бразильский разговорный стиль</h3><p class="th-p"><strong>Ta bom / Ta</strong> - самое универсальное. OK, понял, договорились.</p><p class="th-p"><strong>Ne? / Nao e?</strong> - как "правда?" или "да?" в конце фразы:</p><ul><li class="th-li">E bom, ne? - Хорошо же, правда?</li></ul><p class="th-p"><strong>Saudade</strong> - тоска по кому-то с теплотой:</p><ul><li class="th-li">Estou com saudade de voce. - Я по тебе скучаю.</li></ul></div>
 </div>
+<div id="theory-data-verbs" style="display:none"><h3 class="th-h3">Нет рода у глаголов</h3><p class="th-p">Eu trabalho = я работаю (одинаково для мужчин и женщин).</p><h3 class="th-h3">Три группы глаголов</h3><table class="th-table"><tr><th>Группа</th><th>Пример</th></tr><tr><td><strong>-AR</strong> (90%)</td><td>falar - говорить</td></tr><tr><td><strong>-ER</strong></td><td>comer - есть</td></tr><tr><td><strong>-IR</strong></td><td>partir - уходить</td></tr></table><h3 class="th-h3">Настоящее время</h3><table class="th-table"><tr><th>Кто</th><th>-AR (falar)</th><th>-ER (comer)</th><th>-IR (partir)</th></tr><tr><td>Eu (я)</td><td>fal<strong>o</strong></td><td>com<strong>o</strong></td><td>part<strong>o</strong></td></tr><tr><td>Voce (ты)</td><td>fal<strong>a</strong></td><td>com<strong>e</strong></td><td>part<strong>e</strong></td></tr><tr><td>A gente (мы)</td><td>fal<strong>a</strong></td><td>com<strong>e</strong></td><td>part<strong>e</strong></td></tr><tr><td>Eles/Elas (они)</td><td>fal<strong>am</strong></td><td>com<strong>em</strong></td><td>part<strong>em</strong></td></tr></table><p class="th-p"><strong>Лайфхак:</strong> "a gente" (мы) спрягается как voce.</p><h3 class="th-h3">Неправильные глаголы</h3><table class="th-table"><tr><th>Глагол</th><th>Eu</th><th>Voce</th><th>Eles</th></tr><tr><td>ser (быть постоянно)</td><td>sou</td><td>e</td><td>sao</td></tr><tr><td>estar (быть временно)</td><td>estou</td><td>esta</td><td>estao</td></tr><tr><td>ter (иметь)</td><td>tenho</td><td>tem</td><td>tem</td></tr><tr><td>ir (идти)</td><td>vou</td><td>vai</td><td>vao</td></tr><tr><td>fazer (делать)</td><td>faco</td><td>faz</td><td>fazem</td></tr></table><h3 class="th-h3">Будущее: vou + инфинитив</h3><ul><li class="th-li">Vou comer - поем</li><li class="th-li">Vou te ligar - позвоню тебе</li></ul><h3 class="th-h3">Прошедшее</h3><table class="th-table"><tr><th>Группа</th><th>Eu</th><th>Voce</th></tr><tr><td>-AR</td><td>falei</td><td>falou</td></tr><tr><td>-ER</td><td>comi</td><td>comeu</td></tr><tr><td>-IR</td><td>parti</td><td>partiu</td></tr></table></div>
+<div id="theory-data-accusative" style="display:none"><h3 class="th-h3">Бразильцы упрощают!</h3><p class="th-p">В реальном разговоре используют обычные местоимения:</p><table class="th-table"><tr><th>Вопрос</th><th>Книжно</th><th>Разговорно</th></tr><tr><td>Меня</td><td>me</td><td><strong>mim</strong> (после предлога)</td></tr><tr><td>Тебя</td><td>te</td><td><strong>voce</strong></td></tr><tr><td>Его</td><td>o/lo</td><td><strong>ele</strong></td></tr><tr><td>Её</td><td>a/la</td><td><strong>ela</strong></td></tr><tr><td>Нас</td><td>nos</td><td><strong>a gente</strong></td></tr><tr><td>Их</td><td>os/as</td><td><strong>eles/elas</strong></td></tr></table><h3 class="th-h3">Примеры реального разговора</h3><table class="th-table"><tr><th>Книжно</th><th>Разговорно</th><th>Перевод</th></tr><tr><td>Eu o vi.</td><td><strong>Eu vi ele.</strong></td><td>Я его видел.</td></tr><tr><td>Eu a amo.</td><td><strong>Eu amo ela.</strong></td><td>Я её люблю.</td></tr><tr><td>Ele me ligou.</td><td><strong>Ele ligou pra mim.</strong></td><td>Он мне позвонил.</td></tr></table><h3 class="th-h3">После предлогов - mim, не me</h3><ul><li class="th-li">Para <strong>mim</strong>. - Для меня.</li><li class="th-li">Comigo / Contigo - со мной / с тобой</li></ul></div>
+<div id="theory-data-questions" style="display:none"><h3 class="th-h3">8 главных вопросительных слов</h3><table class="th-table"><tr><th>Русский</th><th>Português</th><th>Пример</th></tr><tr><td>Что?</td><td><strong>O que?</strong></td><td>O que voce quer?</td></tr><tr><td>Кто?</td><td><strong>Quem?</strong></td><td>Quem e ele?</td></tr><tr><td>Где?</td><td><strong>Onde?</strong></td><td>Onde voce mora?</td></tr><tr><td>Когда?</td><td><strong>Quando?</strong></td><td>Quando voce chega?</td></tr><tr><td>Почему?</td><td><strong>Por que?</strong></td><td>Por que nao?</td></tr><tr><td>Как?</td><td><strong>Como?</strong></td><td>Como voce esta?</td></tr><tr><td>Сколько?</td><td><strong>Quanto?</strong></td><td>Quanto custa?</td></tr><tr><td>Который?</td><td><strong>Qual?</strong></td><td>Qual e o seu nome?</td></tr></table><h3 class="th-h3">Нюансы бразильского</h3><p class="th-p"><strong>Por que vs Porque:</strong><br>Por que voce veio? (почему? - раздельно = вопрос)<br>Porque quero. (потому что - слитно = ответ)</p><p class="th-p"><strong>Порядок слов - как в русском!</strong> Вопросительное слово в начало предложения.</p></div>
+<div id="theory-data-directions" style="display:none"><h3 class="th-h3">Предлоги "слипаются" с артиклями</h3><table class="th-table"><tr><th>Предлог</th><th>Значение</th><th>+ o (муж.)</th><th>+ a (жен.)</th><th>Пример</th></tr><tr><td><strong>em</strong></td><td>где? / в</td><td><strong>no</strong></td><td><strong>na</strong></td><td>no Brasil, na praia</td></tr><tr><td><strong>de</strong></td><td>откуда? / из</td><td><strong>do</strong></td><td><strong>da</strong></td><td>do Brasil, da Russia</td></tr><tr><td><strong>para</strong></td><td>куда? / для</td><td>para o</td><td>para a</td><td>para a praia</td></tr></table><h3 class="th-h3">Три вопроса - три предлога</h3><table class="th-table"><tr><th>Вопрос</th><th>Предлог</th><th>Пример</th></tr><tr><td>Где?</td><td><strong>em->no/na</strong></td><td>Estou no trabalho.</td></tr><tr><td>Куда?</td><td><strong>para</strong></td><td>Vou para a praia.</td></tr><tr><td>Откуда?</td><td><strong>de->do/da</strong></td><td>Sou da Russia.</td></tr></table><h3 class="th-h3">Чей? — dele / dela</h3><ul><li class="th-li">O carro <strong>dele</strong>. - Его машина.</li><li class="th-li">A casa <strong>dela</strong>. - Её дом.</li></ul><h3 class="th-h3">Направления</h3><table class="th-table"><tr><th>Русский</th><th>Português</th></tr><tr><td>Прямо</td><td><strong>Reto</strong></td></tr><tr><td>Направо</td><td><strong>A direita</strong></td></tr><tr><td>Налево</td><td><strong>A esquerda</strong></td></tr><tr><td>Рядом</td><td><strong>Perto</strong></td></tr><tr><td>Далеко</td><td><strong>Longe</strong></td></tr></table><p class="th-p"><strong>Жизненная фраза:</strong> Onde fica...? = Где находится...?</p></div>
+<div id="theory-data-phrases" style="display:none"><h3 class="th-h3">5 главных конструкций</h3><h4 class="th-h4">1. Quero/Vou + инфинитив (хочу/буду)</h4><ul><li class="th-li">Quero comer. - Хочу поесть.</li><li class="th-li">Vou trabalhar. - Буду работать.</li></ul><h4 class="th-h4">2. Preciso + инфинитив (нужно)</h4><ul><li class="th-li">Preciso ir. - Мне нужно идти.</li></ul><h4 class="th-h4">3. Vamos + инфинитив / Bora! (давай)</h4><ul><li class="th-li">Vamos comer! - Пойдём поедим!</li><li class="th-li">Bora! - Погнали!</li></ul><h4 class="th-h4">4. Gosto de (нравится)</h4><ul><li class="th-li">Gosto de musica. - Люблю музыку.</li></ul><h4 class="th-h4">5. Eu acho que... (я думаю)</h4><ul><li class="th-li">Eu acho que e bom. - Думаю, хорошо.</li><li class="th-li">Eu acho que nao. - Думаю, нет.</li></ul><h3 class="th-h3">Разговорный бразильский</h3><p class="th-p"><strong>Ta bom / Ta</strong> — универсальное OK/понял.</p><p class="th-p"><strong>Ne?</strong> — "правда?" / "да?" в конце фразы: E bom, ne?</p><p class="th-p"><strong>Saudade</strong> — тоска с теплотой: Estou com saudade de voce.</p></div>
 <script>
 // DATA
 const TOPICS = [
@@ -1498,36 +1496,34 @@ const THEORY = {
 };
 
 // ===================== SRS =====================
-const SRS_INTERVALS = [1, 3, 7, 14, 30, 60, 120]; // days
+const SRS_INT = [1,3,7,14,30,60,120]; // интервалы в днях
 const MS_DAY = 86400000;
-
-function getSRS(topicId, pt) {
-  const d = S.scores[topicId] ? S.scores[topicId][pt] : undefined;
-  if (!d && d !== 0) return {s:-1, n:0, c:0};
-  if (typeof d === 'number') return {s:d, n:0, c:0};
+function getSRS(tid, pt) {
+  var sc = S.scores[tid];
+  var d = sc ? sc[pt] : undefined;
+  if (d === undefined || d === null) return {s:-1,n:0,c:0};
+  if (typeof d === 'number') return {s:d,n:0,c:0};
   return d;
 }
-function isDue(topicId, pt) {
-  const d = getSRS(topicId, pt);
+function isDue(tid, pt) {
+  var d = getSRS(tid, pt);
   if (d.s < 2) return true;
   if (!d.n) return true;
   return Date.now() >= d.n;
 }
-function getScore(topicId, pt) {
-  const d = getSRS(topicId, pt);
-  return typeof d === 'number' ? d : (d.s !== undefined ? d.s : -1);
+function getScore(tid, pt) {
+  var d = getSRS(tid, pt);
+  if (typeof d === 'number') return d;
+  return (d.s !== undefined) ? d.s : -1;
 }
-function setSRS(topicId, pt, score) {
-  if (!S.scores[topicId]) S.scores[topicId] = {};
-  const prev = getSRS(topicId, pt);
-  const count = prev.c || 0;
-  let nextMs = 0;
-  if (score === 2) {
-    nextMs = Date.now() + SRS_INTERVALS[Math.min(count, SRS_INTERVALS.length-1)] * MS_DAY;
-  } else if (score === 1) {
-    nextMs = Date.now() + MS_DAY;
-  }
-  S.scores[topicId][pt] = {s: score, n: nextMs, c: score === 2 ? count+1 : Math.max(0, count-1)};
+function setSRS(tid, pt, score) {
+  if (!S.scores[tid]) S.scores[tid] = {};
+  var prev = getSRS(tid, pt);
+  var c = prev.c || 0;
+  var n = 0;
+  if (score === 2) n = Date.now() + SRS_INT[Math.min(c, SRS_INT.length-1)] * MS_DAY;
+  else if (score === 1) n = Date.now() + MS_DAY;
+  S.scores[tid][pt] = {s:score, n:n, c:score===2 ? c+1 : Math.max(0,c-1)};
 }
 
 // ===================== STATE =====================
@@ -1618,7 +1614,7 @@ function getTopicProgress(topicId) {
   const sc = S.scores[topicId] || {};
   const topic = TOPICS.find(t => t.id === topicId);
   if (!topic) return 0;
-  const learned = topic.items.filter(item => getScore(topicId, item.pt) === 2).length;
+  var learned = topic.items.filter(function(item){return getScore(topicId, item.pt)===2;}).length;
   return Math.round(learned / topic.items.length * 100);
 }
 
@@ -1627,7 +1623,7 @@ function getTotalStats() {
   TOPICS.forEach(t => {
     totalItems += t.items.length;
     const sc = S.scores[t.id] || {};
-    const learned = t.items.filter(item => getScore(t.id, item.pt) === 2).length;
+    var learned = t.items.filter(function(item){return getScore(t.id, item.pt)===2;}).length;
     learnedItems += learned;
     if (learned === t.items.length) doneTopic++;
   });
@@ -1653,12 +1649,9 @@ function renderTopics() {
     card.onclick = () => openTopic(t.id);
 
     const fillColor = done ? 'var(--green)' : pct > 0 ? 'var(--accent)' : 'var(--surface2)';
-    const dueCnt = t.items.filter(it => isDue(t.id, it.pt)).length;
-    const badge = done ? '✅' : dueCnt > 0 ? `${dueCnt} due` : pct > 0 ? `${pct}%` : t.dueDate;
-    const badgeStyle = done ? 'background:rgba(52,211,153,.15);color:var(--green)' :
-                       dueCnt > 0 ? 'background:rgba(251,191,36,.2);color:var(--yellow);font-weight:800' :
-                       pct > 0 ? 'background:rgba(99,102,241,.15);color:var(--accent)' :
-                       'background:var(--surface2);color:var(--muted)';
+    var dueCnt = t.items.filter(function(it){return isDue(t.id,it.pt);}).length;
+    var badge = done ? '✅' : dueCnt > 0 ? (dueCnt+' due') : pct > 0 ? (pct+'%') : t.dueDate;
+    var badgeStyle = done ? 'background:rgba(52,211,153,.15);color:var(--green)' : dueCnt > 0 ? 'background:rgba(251,191,36,.2);color:var(--yellow);font-weight:800' : pct > 0 ? 'background:rgba(99,102,241,.15);color:var(--accent)' : 'background:var(--surface2);color:var(--muted)';
 
     card.innerHTML = `
       <div class="tc-emoji">${t.emoji}</div>
@@ -1682,7 +1675,7 @@ function openTopic(topicId) {
   document.getElementById('topicScreen').style.display = 'none';
   const trainer = document.getElementById('trainerScreen');
   trainer.style.display = 'flex';
-  document.getElementById('trainerTitle').textContent = topic.emoji + ' ' + (topic.title.split('. ')[1] || topic.title);
+  document.getElementById('trainerTitle').textContent = topic.emoji + ' ' + topic.title.split('. ')[1];
 
   startRound();
 }
@@ -1698,11 +1691,9 @@ function goBack() {
 function startRound() {
   const topic = TOPICS.find(t => t.id === S.currentTopic);
   const sc = S.scores[S.currentTopic];
-  // SRS: show due cards first, then new/unknown
-  const dueCards = topic.items.map((v,i)=>i).filter(i => isDue(S.currentTopic, topic.items[i].pt));
-  const allCards = topic.items.map((_,i)=>i);
-  S.queue = shuffle(dueCards.length > 0 ? dueCards : allCards);
-  if (S.queue.length === 0) S.queue = shuffle(allCards);
+  var all = topic.items.map(function(_,i){return i;});
+  var due = all.filter(function(i){return isDue(S.currentTopic, topic.items[i].pt);});
+  S.queue = shuffle(due.length > 0 ? due : all);
   S.cur = 0; S.rOk = S.rHard = S.rWrong = 0;
   setMode(S.mode);
 }
@@ -1732,12 +1723,13 @@ function loadCard() {
   else if (S.mode === 'quiz') loadQuiz();
   else if (S.mode === 'list') loadListMode();
   else if (S.mode === 'theory') loadTheory();
+  else if (S.mode === 'theory') loadTheory();
 }
 
 function updateTrainerProgress() {
   const topic = TOPICS.find(t => t.id === S.currentTopic);
   const sc = S.scores[S.currentTopic];
-  const learned = topic.items.filter(item => getScore(topicId, item.pt) === 2).length;
+  var learned = topic.items.filter(function(item){return getScore(topicId, item.pt)===2;}).length;
   const pct = Math.round(learned / topic.items.length * 100);
   document.getElementById('progFill').style.width = pct + '%';
   document.getElementById('trainerProgress').textContent = `${learned}/${topic.items.length}`;
@@ -1749,12 +1741,10 @@ function updateTrainerProgress() {
 function loadFlash() {
   showModeUI('flashcard');
   const topic = TOPICS.find(t => t.id === S.currentTopic);
-  if (!topic || S.queue.length === 0) { showResults(); return; }
   const item = topic.items[S.queue[S.cur]];
-  if (!item) { showResults(); return; }
   S.revealed = false; S.currentPt = item.pt;
 
-  document.getElementById('fcCtx').textContent = topic.emoji + ' ' + (topic.title.split('. ')[1] || topic.title);
+  document.getElementById('fcCtx').textContent = topic.emoji + ' ' + topic.title.split('. ')[1];
   document.getElementById('fcEmoji').textContent = item.key ? '🔑' : '💬';
   document.getElementById('fcFront').textContent = item.ru;
   document.getElementById('fcTap').style.display = 'block';
@@ -1809,7 +1799,7 @@ function loadQuiz() {
   const item = topic.items[S.queue[S.cur]];
   S.currentPt = item.pt;
 
-  document.getElementById('quizCtx').textContent = topic.emoji + ' ' + (topic.title.split('. ')[1] || topic.title);
+  document.getElementById('quizCtx').textContent = topic.emoji + ' ' + topic.title.split('. ')[1];
   document.getElementById('quizEmoji').textContent = '🔤';
   document.getElementById('quizPhrase').textContent = item.ru;
   document.getElementById('quizFb').textContent = '';
@@ -1875,7 +1865,7 @@ function renderModeList() {
   
   document.getElementById('modeListContainer').innerHTML = currentModeList.map(i => {
     const v = topic.items[i];
-    const s = getScore(S.currentTopic, v.pt);
+    var s = getScore(S.currentTopic, v.pt);
     const cls = s===2?'s2':s===0?'s0':s===1?'s1':'';
     const bc = s===2?'background:rgba(52,211,153,.15);color:var(--green)':s===0?'background:rgba(248,113,113,.15);color:var(--red)':s===1?'background:rgba(251,191,36,.15);color:var(--yellow)':'background:var(--surface2);color:var(--muted)';
     const bl = s===2?'✅ Знаю':s===0?'❌ Сложно':s===1?'😅 Трудно':'🆕 Новый';
@@ -1937,7 +1927,7 @@ function nextRound() {
 function checkTopicComplete() {
   const topic = TOPICS.find(t => t.id === S.currentTopic);
   const sc = S.scores[S.currentTopic];
-  const learned = topic.items.filter(item => getScore(topicId, item.pt) === 2).length;
+  var learned = topic.items.filter(function(item){return getScore(topicId, item.pt)===2;}).length;
   if (learned === topic.items.length && topic.linearId) {
     markLinearDone(topic.linearId);
   }
@@ -1951,18 +1941,6 @@ function markLinearDone(linearId) {
     headers: {'Content-Type':'application/json'},
     body: JSON.stringify({issueId, stateId: DONE_STATE})
   }).catch(() => {});
-}
-
-// ===================== THEORY =====================
-function loadTheory() {
-  showModeUI('theory');
-  const content = THEORY[S.currentTopic];
-  const container = document.getElementById('theoryContent');
-  if (content) {
-    container.innerHTML = content;
-  } else {
-    container.innerHTML = '<div class="th-empty">📝 Для этой темы теоретических объяснений пока нет.<br><br>Карточки и квиз доступны в других режимах.</div>';
-  }
 }
 
 // ===================== UTILS =====================
@@ -1999,16 +1977,27 @@ function loadTheme() {
 }
 
 
+// ===================== THEORY =====================
+function loadTheory() {
+  showModeUI('theory');
+  var el = document.getElementById('theory-data-' + S.currentTopic);
+  var c = document.getElementById('theoryContent');
+  if (el) { c.innerHTML = el.innerHTML; }
+  else { c.innerHTML = '<div class="th-empty">Для этой темы объяснений пока нет.</div>'; }
+}
+
 // ===================== THEME =====================
 function toggleTheme() {
-  const isLight = document.body.classList.toggle('light');
-  document.querySelectorAll('.theme-toggle').forEach(b => b.textContent = isLight ? '☀️' : '🌙');
+  var isLight = document.body.classList.toggle('light');
+  var btns = document.querySelectorAll('.theme-btn');
+  for (var i=0;i<btns.length;i++) btns[i].textContent = isLight ? '☀️' : '🌙';
   localStorage.setItem('pt_theme', isLight ? 'light' : 'dark');
 }
 function loadTheme() {
   if (localStorage.getItem('pt_theme') === 'light') {
     document.body.classList.add('light');
-    document.querySelectorAll('.theme-toggle').forEach(b => b.textContent = '☀️');
+    var btns = document.querySelectorAll('.theme-btn');
+    for (var i=0;i<btns.length;i++) btns[i].textContent = '☀️';
   }
 }
 
